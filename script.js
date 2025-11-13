@@ -60,21 +60,36 @@ const flashcardData = {
             { word: 'Thank you', translation: 'Terima kasih', pronunciation: 'θæŋk juː', example: 'Thank you very much!' },
             { word: 'Good', translation: 'Bagus', pronunciation: 'ɡʊd', example: 'This is good!' },
             { word: 'Yes', translation: 'Ya', pronunciation: 'jes', example: 'Yes, I agree.' },
-            { word: 'No', translation: 'Tidak', pronunciation: 'noʊ', example: 'No, thank you.' }
+            { word: 'No', translation: 'Tidak', pronunciation: 'noʊ', example: 'No, thank you.' },
+            { word: 'Please', translation: 'Tolong', pronunciation: 'pliːz', example: 'Please help me.' },
+            { word: 'Welcome', translation: 'Selamat datang', pronunciation: 'ˈwel.kəm', example: 'Welcome to my home!' },
+            { word: 'Goodbye', translation: 'Selamat tinggal', pronunciation: 'ɡʊdˈbaɪ', example: 'Goodbye, see you!' },
+            { word: 'Sorry', translation: 'Maaf', pronunciation: 'ˈsɒr.i', example: 'Sorry for being late.' },
+            { word: 'Love', translation: 'Cinta', pronunciation: 'lʌv', example: 'I love you!' }
         ],
         2: [
             { word: 'Beautiful', translation: 'Indah', pronunciation: 'ˈbjuː.tɪ.fəl', example: 'What a beautiful day!' },
             { word: 'Friend', translation: 'Teman', pronunciation: 'frend', example: 'She is my best friend.' },
             { word: 'Learn', translation: 'Belajar', pronunciation: 'lɜːrn', example: 'I learn English every day.' },
             { word: 'Happy', translation: 'Bahagia', pronunciation: 'ˈhæp.i', example: 'I am so happy today!' },
-            { word: 'Important', translation: 'Penting', pronunciation: 'ɪmˈpɔːr.tənt', example: 'This is very important.' }
+            { word: 'Important', translation: 'Penting', pronunciation: 'ɪmˈpɔːr.tənt', example: 'This is very important.' },
+            { word: 'Wonderful', translation: 'Menakjubkan', pronunciation: 'ˈwʌn.də.fəl', example: 'What a wonderful surprise!' },
+            { word: 'Knowledge', translation: 'Pengetahuan', pronunciation: 'ˈnɒl.ɪdʒ', example: 'Knowledge is power.' },
+            { word: 'Journey', translation: 'Perjalanan', pronunciation: 'ˈdʒɜː.ni', example: 'Life is a journey.' },
+            { word: 'Success', translation: 'Kesuksesan', pronunciation: 'səkˈses', example: 'Success requires hard work.' },
+            { word: 'Dream', translation: 'Mimpi', pronunciation: 'driːm', example: 'Follow your dreams!' }
         ],
         3: [
             { word: 'Magnificent', translation: 'Luar biasa', pronunciation: 'mæɡˈnɪf.ɪ.sənt', example: 'A magnificent view!' },
             { word: 'Enthusiastic', translation: 'Antusias', pronunciation: 'ɪnˌθuː.ziˈæs.tɪk', example: 'She was enthusiastic!' },
             { word: 'Achievement', translation: 'Pencapaian', pronunciation: 'əˈtʃiːv.mənt', example: 'Great achievement.' },
             { word: 'Perseverance', translation: 'Ketekunan', pronunciation: 'ˌpɜː.sɪˈvɪə.rəns', example: 'Success needs perseverance.' },
-            { word: 'Extraordinary', translation: 'Luar biasa', pronunciation: 'ɪkˈstrɔːr.dɪ.ner.i', example: 'Extraordinary performance!' }
+            { word: 'Extraordinary', translation: 'Luar biasa', pronunciation: 'ɪkˈstrɔːr.dɪ.ner.i', example: 'Extraordinary performance!' },
+            { word: 'Determination', translation: 'Tekad', pronunciation: 'dɪˌtɜː.mɪˈneɪ.ʃən', example: 'His determination is inspiring.' },
+            { word: 'Philosophical', translation: 'Filosofis', pronunciation: 'ˌfɪl.əˈsɒf.ɪ.kəl', example: 'A philosophical discussion.' },
+            { word: 'Remarkable', translation: 'Luar biasa', pronunciation: 'rɪˈmɑː.kə.bəl', example: 'Remarkable progress!' },
+            { word: 'Sophisticated', translation: 'Canggih', pronunciation: 'səˈfɪs.tɪ.keɪ.tɪd', example: 'Sophisticated technology.' },
+            { word: 'Unprecedented', translation: 'Belum pernah terjadi', pronunciation: 'ʌnˈpres.ɪ.den.tɪd', example: 'Unprecedented success!' }
         ]
     },
     japanese: {
@@ -83,21 +98,36 @@ const flashcardData = {
             { word: 'ありがとう', translation: 'Terima kasih', pronunciation: 'a-ri-ga-to-u', example: 'ありがとうございます' },
             { word: 'はい', translation: 'Ya', pronunciation: 'hai', example: 'はい、そうです' },
             { word: 'いいえ', translation: 'Tidak', pronunciation: 'i-i-e', example: 'いいえ、違います' },
-            { word: 'おはよう', translation: 'Selamat pagi', pronunciation: 'o-ha-yo-u', example: 'おはようございます' }
+            { word: 'おはよう', translation: 'Selamat pagi', pronunciation: 'o-ha-yo-u', example: 'おはようございます' },
+            { word: 'さようなら', translation: 'Selamat tinggal', pronunciation: 'sa-yo-u-na-ra', example: 'さようなら、また明日' },
+            { word: 'おやすみ', translation: 'Selamat tidur', pronunciation: 'o-ya-su-mi', example: 'おやすみなさい' },
+            { word: 'ごめんなさい', translation: 'Maaf', pronunciation: 'go-me-n-na-sai', example: 'ごめんなさい' },
+            { word: 'どういたしまして', translation: 'Sama-sama', pronunciation: 'do-u-i-ta-shi-ma-shi-te', example: 'どういたしまして' },
+            { word: '愛', translation: 'Cinta', pronunciation: 'ai', example: '愛してる' }
         ],
         2: [
             { word: '美しい', translation: 'Indah', pronunciation: 'u-tsu-ku-shi-i', example: '美しい景色' },
             { word: '友達', translation: 'Teman', pronunciation: 'to-mo-da-chi', example: '彼は私の友達です' },
             { word: '勉強', translation: 'Belajar', pronunciation: 'ben-kyou', example: '毎日勉強します' },
             { word: '幸せ', translation: 'Bahagia', pronunciation: 'shi-a-wa-se', example: '幸せな気持ち' },
-            { word: '大切', translation: 'Penting', pronunciation: 'tai-se-tsu', example: '大切な友達' }
+            { word: '大切', translation: 'Penting', pronunciation: 'tai-se-tsu', example: '大切な友達' },
+            { word: '楽しい', translation: 'Menyenangkan', pronunciation: 'ta-no-shi-i', example: '楽しい時間' },
+            { word: '元気', translation: 'Semangat', pronunciation: 'gen-ki', example: '元気ですか？' },
+            { word: '頑張る', translation: 'Berusaha keras', pronunciation: 'gan-ba-ru', example: '頑張ってください' },
+            { word: '夢', translation: 'Mimpi', pronunciation: 'yu-me', example: '夢を追いかける' },
+            { word: '希望', translation: 'Harapan', pronunciation: 'ki-bou', example: '希望を持つ' }
         ],
         3: [
             { word: '素晴らしい', translation: 'Luar biasa', pronunciation: 'su-ba-ra-shi-i', example: '素晴らしい経験' },
             { word: '感動的', translation: 'Mengharukan', pronunciation: 'kan-dou-te-ki', example: '感動的な映画' },
             { word: '挑戦', translation: 'Tantangan', pronunciation: 'chou-sen', example: '新しい挑戦' },
             { word: '努力', translation: 'Usaha', pronunciation: 'do-ryo-ku', example: '努力が大切' },
-            { word: '成功', translation: 'Sukses', pronunciation: 'sei-kou', example: '成功への道' }
+            { word: '成功', translation: 'Sukses', pronunciation: 'sei-kou', example: '成功への道' },
+            { word: '情熱', translation: 'Gairah', pronunciation: 'jou-ne-tsu', example: '情熱を持って' },
+            { word: '完璧', translation: 'Sempurna', pronunciation: 'kan-pe-ki', example: '完璧な計画' },
+            { word: '不思議', translation: 'Ajaib', pronunciation: 'fu-shi-gi', example: '不思議な出来事' },
+            { word: '驚異的', translation: 'Menakjubkan', pronunciation: 'kyou-i-te-ki', example: '驚異的な能力' },
+            { word: '革新的', translation: 'Inovatif', pronunciation: 'ka-ku-shin-te-ki', example: '革新的なアイデア' }
         ]
     }
 };
@@ -108,35 +138,75 @@ const quizData = {
             { question: 'Apa arti "Hello" dalam Bahasa Indonesia?', options: ['Selamat tinggal', 'Halo', 'Tolong', 'Maaf'], correct: 1 },
             { question: 'Terjemahkan "Terima kasih" ke Bahasa Inggris', options: ['Hello', 'Thank you', 'Goodbye', 'Please'], correct: 1 },
             { question: 'Apa arti dari "Good"?', options: ['Jelek', 'Bagus', 'Besar', 'Kecil'], correct: 1 },
-            { question: 'Pilih terjemahan "Ya" dalam Bahasa Inggris', options: ['No', 'Maybe', 'Yes', 'Can'], correct: 2 }
+            { question: 'Pilih terjemahan "Ya" dalam Bahasa Inggris', options: ['No', 'Maybe', 'Yes', 'Can'], correct: 2 },
+            { question: 'Apa arti "Please"?', options: ['Maaf', 'Tolong', 'Terima kasih', 'Ya'], correct: 1 },
+            { question: 'Terjemahkan "Selamat datang"', options: ['Goodbye', 'Welcome', 'Hello', 'Sorry'], correct: 1 },
+            { question: 'Apa bahasa Inggris dari "Selamat tinggal"?', options: ['Hello', 'Welcome', 'Goodbye', 'Thanks'], correct: 2 },
+            { question: 'Pilih arti "Sorry"', options: ['Senang', 'Maaf', 'Bagus', 'Tolong'], correct: 1 },
+            { question: 'Apa arti "Love"?', options: ['Benci', 'Suka', 'Cinta', 'Teman'], correct: 2 },
+            { question: 'Terjemahkan "Tidak" ke Bahasa Inggris', options: ['Yes', 'No', 'Maybe', 'Never'], correct: 1 }
         ],
         2: [
             { question: 'Apa arti "Beautiful"?', options: ['Jelek', 'Indah', 'Besar', 'Kecil'], correct: 1 },
             { question: 'Terjemahkan "Belajar" ke Bahasa Inggris', options: ['Play', 'Work', 'Learn', 'Sleep'], correct: 2 },
             { question: 'Apa arti dari "Friend"?', options: ['Musuh', 'Teman', 'Keluarga', 'Guru'], correct: 1 },
-            { question: 'Pilih arti "Happy"', options: ['Sedih', 'Marah', 'Bahagia', 'Lelah'], correct: 2 }
+            { question: 'Pilih arti "Happy"', options: ['Sedih', 'Marah', 'Bahagia', 'Lelah'], correct: 2 },
+            { question: 'Apa arti "Important"?', options: ['Biasa', 'Penting', 'Kecil', 'Besar'], correct: 1 },
+            { question: 'Terjemahkan "Menakjubkan"', options: ['Boring', 'Wonderful', 'Terrible', 'Simple'], correct: 1 },
+            { question: 'Apa arti "Knowledge"?', options: ['Kebodohan', 'Pengetahuan', 'Pengalaman', 'Pekerjaan'], correct: 1 },
+            { question: 'Pilih arti "Journey"', options: ['Tujuan', 'Rumah', 'Perjalanan', 'Kendaraan'], correct: 2 },
+            { question: 'Apa arti "Success"?', options: ['Kegagalan', 'Kesuksesan', 'Masalah', 'Keberuntungan'], correct: 1 },
+            { question: 'Terjemahkan "Mimpi"', options: ['Reality', 'Dream', 'Sleep', 'Night'], correct: 1 }
         ],
         3: [
             { question: 'Apa arti "Magnificent"?', options: ['Sederhana', 'Luar biasa', 'Biasa', 'Jelek'], correct: 1 },
             { question: 'Terjemahkan "Ketekunan" ke Bahasa Inggris', options: ['Laziness', 'Perseverance', 'Happiness', 'Sadness'], correct: 1 },
             { question: 'Apa arti "Enthusiastic"?', options: ['Malas', 'Lelah', 'Antusias', 'Bosan'], correct: 2 },
-            { question: 'Pilih arti "Achievement"', options: ['Kegagalan', 'Pencapaian', 'Masalah', 'Pertanyaan'], correct: 1 }
+            { question: 'Pilih arti "Achievement"', options: ['Kegagalan', 'Pencapaian', 'Masalah', 'Pertanyaan'], correct: 1 },
+            { question: 'Apa arti "Extraordinary"?', options: ['Biasa', 'Luar biasa', 'Sederhana', 'Normal'], correct: 1 },
+            { question: 'Terjemahkan "Tekad"', options: ['Doubt', 'Fear', 'Determination', 'Confusion'], correct: 2 },
+            { question: 'Apa arti "Philosophical"?', options: ['Praktis', 'Filosofis', 'Sederhana', 'Konkret'], correct: 1 },
+            { question: 'Pilih arti "Remarkable"', options: ['Biasa saja', 'Luar biasa', 'Jelek', 'Membosankan'], correct: 1 },
+            { question: 'Apa arti "Sophisticated"?', options: ['Sederhana', 'Kuno', 'Canggih', 'Rusak'], correct: 2 },
+            { question: 'Terjemahkan "Belum pernah terjadi"', options: ['Common', 'Unprecedented', 'Usual', 'Regular'], correct: 1 }
         ]
     },
     japanese: {
         1: [
             { question: 'Apa arti "ありがとう"?', options: ['Halo', 'Selamat tinggal', 'Terima kasih', 'Maaf'], correct: 2 },
             { question: 'Pilih terjemahan "はい"', options: ['Tidak', 'Ya', 'Mungkin', 'Tolong'], correct: 1 },
-            { question: 'Apa bahasa Jepang dari "Halo"?', options: ['さようなら', 'こんにちは', 'おやすみ', 'ありがとう'], correct: 1 }
+            { question: 'Apa bahasa Jepang dari "Halo"?', options: ['さようなら', 'こんにちは', 'おやすみ', 'ありがとう'], correct: 1 },
+            { question: 'Apa arti "いいえ"?', options: ['Ya', 'Tolong', 'Tidak', 'Maaf'], correct: 2 },
+            { question: 'Terjemahkan "おはよう"', options: ['Selamat malam', 'Selamat siang', 'Selamat tinggal', 'Selamat pagi'], correct: 3 },
+            { question: 'Apa arti "さようなら"?', options: ['Halo', 'Terima kasih', 'Selamat tinggal', 'Maaf'], correct: 2 },
+            { question: 'Pilih arti "おやすみ"', options: ['Selamat pagi', 'Selamat siang', 'Selamat tidur', 'Selamat datang'], correct: 2 },
+            { question: 'Apa arti "ごめんなさい"?', options: ['Terima kasih', 'Maaf', 'Tolong', 'Ya'], correct: 1 },
+            { question: 'Terjemahkan "どういたしまして"', options: ['Terima kasih', 'Sama-sama', 'Halo', 'Maaf'], correct: 1 },
+            { question: 'Apa arti "愛"?', options: ['Benci', 'Suka', 'Cinta', 'Teman'], correct: 2 }
         ],
         2: [
             { question: 'Apa arti "勉強"?', options: ['Bermain', 'Bekerja', 'Belajar', 'Tidur'], correct: 2 },
             { question: 'Pilih arti "美しい"', options: ['Jelek', 'Besar', 'Indah', 'Kecil'], correct: 2 },
-            { question: 'Terjemahkan "友達"', options: ['Musuh', 'Keluarga', 'Teman', 'Guru'], correct: 2 }
+            { question: 'Terjemahkan "友達"', options: ['Musuh', 'Keluarga', 'Teman', 'Guru'], correct: 2 },
+            { question: 'Apa arti "幸せ"?', options: ['Sedih', 'Marah', 'Bahagia', 'Takut'], correct: 2 },
+            { question: 'Pilih arti "大切"', options: ['Tidak penting', 'Penting', 'Besar', 'Kecil'], correct: 1 },
+            { question: 'Apa arti "楽しい"?', options: ['Membosankan', 'Sedih', 'Menyenangkan', 'Susah'], correct: 2 },
+            { question: 'Terjemahkan "元気"', options: ['Lelah', 'Sakit', 'Semangat', 'Lemah'], correct: 2 },
+            { question: 'Apa arti "頑張る"?', options: ['Menyerah', 'Berusaha keras', 'Berhenti', 'Istirahat'], correct: 1 },
+            { question: 'Pilih arti "夢"', options: ['Kenyataan', 'Mimpi', 'Tidur', 'Malam'], correct: 1 },
+            { question: 'Apa arti "希望"?', options: ['Putus asa', 'Harapan', 'Ketakutan', 'Kesedihan'], correct: 1 }
         ],
         3: [
             { question: 'Apa arti "素晴らしい"?', options: ['Biasa', 'Jelek', 'Luar biasa', 'Sederhana'], correct: 2 },
-            { question: 'Pilih arti "努力"', options: ['Kemalasan', 'Usaha', 'Kegagalan', 'Keberuntungan'], correct: 1 }
+            { question: 'Pilih arti "努力"', options: ['Kemalasan', 'Usaha', 'Kegagalan', 'Keberuntungan'], correct: 1 },
+            { question: 'Apa arti "感動的"?', options: ['Membosankan', 'Mengharukan', 'Biasa', 'Menyeramkan'], correct: 1 },
+            { question: 'Terjemahkan "挑戦"', options: ['Menyerah', 'Tantangan', 'Kegagalan', 'Kemalasan'], correct: 1 },
+            { question: 'Apa arti "成功"?', options: ['Kegagalan', 'Sukses', 'Masalah', 'Keraguan'], correct: 1 },
+            { question: 'Pilih arti "情熱"', options: ['Kemalasan', 'Kebosanan', 'Gairah', 'Ketakutan'], correct: 2 },
+            { question: 'Apa arti "完璧"?', options: ['Cacat', 'Rusak', 'Sempurna', 'Buruk'], correct: 2 },
+            { question: 'Terjemahkan "不思議"', options: ['Biasa', 'Normal', 'Ajaib', 'Sederhana'], correct: 2 },
+            { question: 'Apa arti "驚異的"?', options: ['Biasa', 'Menakjubkan', 'Membosankan', 'Sederhana'], correct: 1 },
+            { question: 'Pilih arti "革新的"', options: ['Kuno', 'Tradisional', 'Inovatif', 'Usang'], correct: 2 }
         ]
     }
 };
@@ -357,11 +427,16 @@ function startQuiz() {
 function renderQuestion() {
     const questions = quizData[state.selectedLanguage]?.[state.quizLevel];
     const question = questions[state.currentQuestion];
+    const progress = ((state.currentQuestion + 1) / questions.length) * 100;
     
     document.getElementById('question-number').textContent = 
         `Pertanyaan ${state.currentQuestion + 1} / ${questions.length}`;
     document.getElementById('quiz-score').textContent = state.quizScore;
     document.getElementById('question-text').textContent = question.question;
+    
+    // Update progress bar
+    const quizHeader = document.querySelector('.quiz-header');
+    quizHeader.style.setProperty('--progress-width', `${progress}%`);
     
     updateLevelBadge('quiz-level-badge-game', state.quizLevel);
     
@@ -379,20 +454,29 @@ function selectAnswer(index) {
     const question = questions[state.currentQuestion];
     const isCorrect = question.correct === index;
     
-    if (isCorrect) {
-        state.quizScore++;
-        updateScore(state.quizLevel * 20);
-    }
-    
     const buttons = document.querySelectorAll('.option-btn');
     buttons.forEach((btn, i) => {
         btn.disabled = true;
         if (i === question.correct) {
             btn.classList.add('correct');
+            if (isCorrect) {
+                // Efek partisipal untuk jawaban benar
+                btn.innerHTML += ' ✨';
+            }
         } else if (i === index && !isCorrect) {
             btn.classList.add('wrong');
+            btn.innerHTML += ' ❌';
         }
     });
+    
+    if (isCorrect) {
+        state.quizScore++;
+        updateScore(state.quizLevel * 20);
+        // Efek suara atau animasi bisa ditambahkan di sini
+        setTimeout(() => {
+            document.getElementById('quiz-score').textContent = state.quizScore;
+        }, 200);
+    }
     
     document.getElementById('quiz-score').textContent = state.quizScore;
     document.getElementById('next-question-btn').style.display = 'block';
@@ -413,6 +497,7 @@ function nextQuestion() {
 
 function showQuizResult() {
     const questions = quizData[state.selectedLanguage]?.[state.quizLevel];
+    const percentage = (state.quizScore / questions.length) * 100;
     
     document.getElementById('quiz-question').style.display = 'none';
     document.getElementById('quiz-result').style.display = 'block';
@@ -421,23 +506,39 @@ function showQuizResult() {
         `${state.quizScore} / ${questions.length}`;
     
     let message = '';
-    if (state.quizScore === questions.length) {
-        message = 'Sempurna! Anda menguasai level ini! 🎉';
-    } else if (state.quizScore >= questions.length * 0.8) {
-        message = 'Luar biasa! Anda siap ke level berikutnya! 👍';
-        if (state.quizLevel < 3) {
-            setTimeout(() => {
-                alert(`Luar biasa! Anda naik ke Level ${state.quizLevel + 1}! 🎉`);
-                state.quizLevel++;
-            }, 1000);
-        }
-    } else if (state.quizScore >= questions.length * 0.5) {
-        message = 'Bagus! Terus belajar! 📚';
+    let shouldLevelUp = false;
+    
+    if (percentage === 100) {
+        message = '🎉 SEMPURNA! Anda Master Level Ini! 🏆';
+        shouldLevelUp = true;
+    } else if (percentage >= 80) {
+        message = '⭐ LUAR BIASA! Anda Menguasai Materi! 🚀';
+        shouldLevelUp = true;
+    } else if (percentage >= 60) {
+        message = '👍 BAGUS! Sudah Cukup Baik! 💪';
+        shouldLevelUp = true;
+    } else if (percentage >= 40) {
+        message = '📚 TERUS BELAJAR! Hampir Sampai! 🔥';
     } else {
-        message = 'Tetap semangat! Coba lagi! 💪';
+        message = '💪 JANGAN MENYERAH! Coba Lagi! 🌟';
     }
     
     document.getElementById('result-message').textContent = message;
+    
+    // Auto level up jika score >= 60% dan masih ada level berikutnya
+    if (shouldLevelUp && state.quizLevel < 3) {
+        setTimeout(() => {
+            state.quizLevel++;
+            const confetti = `
+                🎊 SELAMAT! NAIK KE LEVEL ${state.quizLevel}! 🎊
+                
+                ${state.quizLevel === 2 ? '🌟 Kini Anda Intermediate!' : '🏆 Kini Anda Advanced!'}
+                
+                Siap tantangan yang lebih seru?
+            `;
+            alert(confetti);
+        }, 1000);
+    }
 }
 
 function resetQuiz() {
@@ -633,16 +734,19 @@ function endGame() {
     if (state.gameTimer) clearInterval(state.gameTimer);
     state.gameStarted = false;
     
-    const requiredScore = state.gameLevel * 10;
-    let message = `Game Selesai!\n\nSkor Anda: ${state.gameScore}\n\n`;
+    const requiredScore = 7; // Perlu 7 dari 10 untuk naik level
+    let message = `🎮 GAME SELESAI! 🎮\n\nSkor Anda: ${state.gameScore}\n\n`;
     
     if (state.gameScore >= requiredScore && state.gameLevel < 3) {
-        message += `Hebat! Anda naik ke Level ${state.gameLevel + 1}! 🎮`;
+        message += `🎉 HEBAT! Anda naik ke Level ${state.gameLevel + 1}! 🚀\n\n`;
+        message += state.gameLevel === 1 ? '🌟 Sekarang Intermediate!' : '🏆 Sekarang Advanced!';
         state.gameLevel++;
-    } else if (state.gameScore >= requiredScore / 2) {
-        message += 'Bagus! Terus berlatih! 💪';
+    } else if (state.gameScore >= requiredScore) {
+        message += '🏆 MANTAP! Anda sudah di level tertinggi! 👑';
+    } else if (state.gameScore >= 5) {
+        message += '💪 BAGUS! Terus berlatih untuk naik level! 🔥';
     } else {
-        message += 'Jangan menyerah! Coba lagi! 🔥';
+        message += '🌟 JANGAN MENYERAH! Practice makes perfect! 💫';
     }
     
     alert(message);
