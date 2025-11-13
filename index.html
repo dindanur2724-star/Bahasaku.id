@@ -1,1001 +1,256 @@
-import React, { useState, useEffect } from 'react';
-import { BookOpen, MessageCircle, Gamepad2, Sparkles, Award, Brain, Globe, Star, ChevronRight, Play, RotateCw, Check, X, Trophy, TrendingUp, Zap, Target, Heart, Clock, Volume2, Upload } from 'lucide-react';
-
-const LangLearnApp = () => {
-  const [activeTab, setActiveTab] = useState('home');
-  const [selectedLanguage, setSelectedLanguage] = useState('english');
-  const [score, setScore] = useState(0);
-  const [streak, setStreak] = useState(0);
-  const [userLevel, setUserLevel] = useState(1);
-  const [logoUrl, setLogoUrl] = useState('https://via.placeholder.com/150/9333ea/ffffff?text=Logo');
-  
-  const [currentCard, setCurrentCard] = useState(0);
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [learnedCards, setLearnedCards] = useState([]);
-  const [flashcardLevel, setFlashcardLevel] = useState(1);
-  
-  const [quizStarted, setQuizStarted] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [quizScore, setQuizScore] = useState(0);
-  const [showResult, setShowResult] = useState(false);
-  const [quizLevel, setQuizLevel] = useState(1);
-  
-  const [selectedGame, setSelectedGame] = useState(null);
-  const [gameScore, setGameScore] = useState(0);
-  const [gameTime, setGameTime] = useState(60);
-  const [gameStarted, setGameStarted] = useState(false);
-  const [currentWord, setCurrentWord] = useState('');
-  const [userInput, setUserInput] = useState('');
-  const [gameLevel, setGameLevel] = useState(1);
-  const [lives, setLives] = useState(3);
-  const [gameOptions, setGameOptions] = useState([]);
-  const [correctAnswer, setCorrectAnswer] = useState('');
-  
-  const [messages, setMessages] = useState([
-    { role: 'bot', text: 'Halo! Saya asisten belajar bahasa Anda. Tanyakan apa saja tentang bahasa, kosakata, atau cara membaca kata! 👋' }
-  ]);
-  const [chatInput, setChatInput] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-
-  const languages = [
-    { id: 'english', name: 'English', flag: '🇬🇧' },
-    { id: 'indonesian', name: 'Indonesia', flag: '🇮🇩' },
-    { id: 'japanese', name: '日本語', flag: '🇯🇵' },
-    { id: 'korean', name: '한국어', flag: '🇰🇷' },
-    { id: 'chinese', name: '中文', flag: '🇨🇳' },
-    { id: 'malay', name: 'Melayu', flag: '🇲🇾' },
-    { id: 'singapore', name: 'Singlish', flag: '🇸🇬' },
-    { id: 'spanish', name: 'Español', flag: '🇪🇸' },
-    { id: 'french', name: 'Français', flag: '🇫🇷' }
-  ];
-
-  const flashcardData = {
-    english: {
-      1: [
-        { word: 'Hello', translation: 'Halo', pronunciation: 'hə-ˈlō', example: 'Hello, how are you?' },
-        { word: 'Thank you', translation: 'Terima kasih', pronunciation: 'θæŋk juː', example: 'Thank you very much!' },
-        { word: 'Good', translation: 'Bagus', pronunciation: 'ɡʊd', example: 'This is good!' },
-        { word: 'Yes', translation: 'Ya', pronunciation: 'jes', example: 'Yes, I agree.' },
-        { word: 'No', translation: 'Tidak', pronunciation: 'noʊ', example: 'No, thank you.' }
-      ],
-      2: [
-        { word: 'Beautiful', translation: 'Indah', pronunciation: 'ˈbjuː.tɪ.fəl', example: 'What a beautiful day!' },
-        { word: 'Friend', translation: 'Teman', pronunciation: 'frend', example: 'She is my best friend.' },
-        { word: 'Learn', translation: 'Belajar', pronunciation: 'lɜːrn', example: 'I learn English every day.' },
-        { word: 'Happy', translation: 'Bahagia', pronunciation: 'ˈhæp.i', example: 'I am so happy today!' },
-        { word: 'Important', translation: 'Penting', pronunciation: 'ɪmˈpɔːr.tənt', example: 'This is very important.' }
-      ],
-      3: [
-        { word: 'Magnificent', translation: 'Luar biasa', pronunciation: 'mæɡˈnɪf.ɪ.sənt', example: 'A magnificent view!' },
-        { word: 'Enthusiastic', translation: 'Antusias', pronunciation: 'ɪnˌθuː.ziˈæs.tɪk', example: 'She was enthusiastic!' },
-        { word: 'Achievement', translation: 'Pencapaian', pronunciation: 'əˈtʃiːv.mənt', example: 'Great achievement.' },
-        { word: 'Perseverance', translation: 'Ketekunan', pronunciation: 'ˌpɜː.sɪˈvɪə.rəns', example: 'Success needs perseverance.' },
-        { word: 'Extraordinary', translation: 'Luar biasa', pronunciation: 'ɪkˈstrɔːr.dɪ.ner.i', example: 'Extraordinary performance!' }
-      ]
-    },
-    japanese: {
-      1: [
-        { word: 'こんにちは', translation: 'Halo', pronunciation: 'kon-ni-chi-wa', example: 'こんにちは、元気ですか？' },
-        { word: 'ありがとう', translation: 'Terima kasih', pronunciation: 'a-ri-ga-to-u', example: 'ありがとうございます' },
-        { word: 'はい', translation: 'Ya', pronunciation: 'hai', example: 'はい、そうです' },
-        { word: 'いいえ', translation: 'Tidak', pronunciation: 'i-i-e', example: 'いいえ、違います' },
-        { word: 'おはよう', translation: 'Selamat pagi', pronunciation: 'o-ha-yo-u', example: 'おはようございます' }
-      ],
-      2: [
-        { word: '美しい', translation: 'Indah', pronunciation: 'u-tsu-ku-shi-i', example: '美しい景色' },
-        { word: '友達', translation: 'Teman', pronunciation: 'to-mo-da-chi', example: '彼は私の友達です' },
-        { word: '勉強', translation: 'Belajar', pronunciation: 'ben-kyou', example: '毎日勉強します' },
-        { word: '幸せ', translation: 'Bahagia', pronunciation: 'shi-a-wa-se', example: '幸せな気持ち' },
-        { word: '大切', translation: 'Penting', pronunciation: 'tai-se-tsu', example: '大切な友達' }
-      ],
-      3: [
-        { word: '素晴らしい', translation: 'Luar biasa', pronunciation: 'su-ba-ra-shi-i', example: '素晴らしい経験' },
-        { word: '感動的', translation: 'Mengharukan', pronunciation: 'kan-dou-te-ki', example: '感動的な映画' },
-        { word: '挑戦', translation: 'Tantangan', pronunciation: 'chou-sen', example: '新しい挑戦' },
-        { word: '努力', translation: 'Usaha', pronunciation: 'do-ryo-ku', example: '努力が大切' },
-        { word: '成功', translation: 'Sukses', pronunciation: 'sei-kou', example: '成功への道' }
-      ]
-    }
-  };
-
-  const quizData = {
-    english: {
-      1: [
-        { question: 'Apa arti "Hello" dalam Bahasa Indonesia?', options: ['Selamat tinggal', 'Halo', 'Tolong', 'Maaf'], correct: 1 },
-        { question: 'Terjemahkan "Terima kasih" ke Bahasa Inggris', options: ['Hello', 'Thank you', 'Goodbye', 'Please'], correct: 1 },
-        { question: 'Apa arti dari "Good"?', options: ['Jelek', 'Bagus', 'Besar', 'Kecil'], correct: 1 },
-        { question: 'Pilih terjemahan "Ya" dalam Bahasa Inggris', options: ['No', 'Maybe', 'Yes', 'Can'], correct: 2 }
-      ],
-      2: [
-        { question: 'Apa arti "Beautiful"?', options: ['Jelek', 'Indah', 'Besar', 'Kecil'], correct: 1 },
-        { question: 'Terjemahkan "Belajar" ke Bahasa Inggris', options: ['Play', 'Work', 'Learn', 'Sleep'], correct: 2 },
-        { question: 'Apa arti dari "Friend"?', options: ['Musuh', 'Teman', 'Keluarga', 'Guru'], correct: 1 },
-        { question: 'Pilih arti "Happy"', options: ['Sedih', 'Marah', 'Bahagia', 'Lelah'], correct: 2 }
-      ],
-      3: [
-        { question: 'Apa arti "Magnificent"?', options: ['Sederhana', 'Luar biasa', 'Biasa', 'Jelek'], correct: 1 },
-        { question: 'Terjemahkan "Ketekunan" ke Bahasa Inggris', options: ['Laziness', 'Perseverance', 'Happiness', 'Sadness'], correct: 1 },
-        { question: 'Apa arti "Enthusiastic"?', options: ['Malas', 'Lelah', 'Antusias', 'Bosan'], correct: 2 },
-        { question: 'Pilih arti "Achievement"', options: ['Kegagalan', 'Pencapaian', 'Masalah', 'Pertanyaan'], correct: 1 }
-      ]
-    },
-    japanese: {
-      1: [
-        { question: 'Apa arti "ありがとう"?', options: ['Halo', 'Selamat tinggal', 'Terima kasih', 'Maaf'], correct: 2 },
-        { question: 'Pilih terjemahan "はい"', options: ['Tidak', 'Ya', 'Mungkin', 'Tolong'], correct: 1 },
-        { question: 'Apa bahasa Jepang dari "Halo"?', options: ['さようなら', 'こんにちは', 'おやすみ', 'ありがとう'], correct: 1 }
-      ],
-      2: [
-        { question: 'Apa arti "勉強"?', options: ['Bermain', 'Bekerja', 'Belajar', 'Tidur'], correct: 2 },
-        { question: 'Pilih arti "美しい"', options: ['Jelek', 'Besar', 'Indah', 'Kecil'], correct: 2 },
-        { question: 'Terjemahkan "友達"', options: ['Musuh', 'Keluarga', 'Teman', 'Guru'], correct: 2 }
-      ],
-      3: [
-        { question: 'Apa arti "素晴らしい"?', options: ['Biasa', 'Jelek', 'Luar biasa', 'Sederhana'], correct: 2 },
-        { question: 'Pilih arti "努力"', options: ['Kemalasan', 'Usaha', 'Kegagalan', 'Keberuntungan'], correct: 1 }
-      ]
-    }
-  };
-
-  const games = [
-    { 
-      id: 'speed-typing', 
-      name: 'Speed Typing', 
-      icon: Zap, 
-      color: 'from-yellow-500 to-orange-500',
-      description: 'Ketik kata secepat mungkin!',
-      maxTime: 60
-    },
-    { 
-      id: 'word-match', 
-      name: 'Word Match', 
-      icon: Target, 
-      color: 'from-blue-500 to-cyan-500',
-      description: 'Cocokkan kata dengan artinya!',
-      maxTime: 90
-    },
-    { 
-      id: 'guess-word', 
-      name: 'Guess the Word', 
-      icon: Brain, 
-      color: 'from-purple-500 to-pink-500',
-      description: 'Tebak kata dari terjemahannya!',
-      maxTime: 120
-    },
-    { 
-      id: 'reverse-translate', 
-      name: 'Reverse Translate', 
-      icon: RotateCw, 
-      color: 'from-green-500 to-teal-500',
-      description: 'Terjemahkan Indonesia ke bahasa asing!',
-      maxTime: 90
-    },
-    { 
-      id: 'rapid-fire', 
-      name: 'Rapid Fire', 
-      icon: Trophy, 
-      color: 'from-red-500 to-pink-500',
-      description: 'Jawab cepat sebanyak mungkin!',
-      maxTime: 45
-    }
-  ];
-
-  const gameWords = {
-    english: {
-      1: [
-        { word: 'hello', translation: 'halo' },
-        { word: 'good', translation: 'bagus' },
-        { word: 'yes', translation: 'ya' },
-        { word: 'no', translation: 'tidak' },
-        { word: 'thank', translation: 'terima kasih' }
-      ],
-      2: [
-        { word: 'friend', translation: 'teman' },
-        { word: 'learn', translation: 'belajar' },
-        { word: 'happy', translation: 'bahagia' },
-        { word: 'beautiful', translation: 'indah' },
-        { word: 'important', translation: 'penting' }
-      ],
-      3: [
-        { word: 'magnificent', translation: 'luar biasa' },
-        { word: 'achievement', translation: 'pencapaian' },
-        { word: 'perseverance', translation: 'ketekunan' },
-        { word: 'enthusiastic', translation: 'antusias' },
-        { word: 'extraordinary', translation: 'luar biasa' }
-      ]
-    },
-    japanese: {
-      1: [
-        { word: 'こんにちは', translation: 'halo' },
-        { word: 'ありがとう', translation: 'terima kasih' },
-        { word: 'はい', translation: 'ya' },
-        { word: 'いいえ', translation: 'tidak' },
-        { word: 'おはよう', translation: 'selamat pagi' }
-      ],
-      2: [
-        { word: '友達', translation: 'teman' },
-        { word: '勉強', translation: 'belajar' },
-        { word: '美しい', translation: 'indah' },
-        { word: '幸せ', translation: 'bahagia' },
-        { word: '大切', translation: 'penting' }
-      ],
-      3: [
-        { word: '素晴らしい', translation: 'luar biasa' },
-        { word: '感動的', translation: 'mengharukan' },
-        { word: '挑戦', translation: 'tantangan' },
-        { word: '努力', translation: 'usaha' },
-        { word: '成功', translation: 'sukses' }
-      ]
-    }
-  };
-
-  useEffect(() => {
-    if (gameStarted && gameTime > 0) {
-      const timer = setTimeout(() => setGameTime(gameTime - 1), 1000);
-      return () => clearTimeout(timer);
-    } else if (gameStarted && gameTime === 0) {
-      endGame();
-    }
-  }, [gameTime, gameStarted]);
-
-  const handleLogoUpload = (e) => {
-    const file = e.target.files[0];
-    if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setLogoUrl(event.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const nextCard = () => {
-    const cards = flashcardData[selectedLanguage]?.[flashcardLevel] || [];
-    setIsFlipped(false);
-    setCurrentCard((prev) => (prev + 1) % cards.length);
-  };
-
-  const markAsLearned = () => {
-    if (!learnedCards.includes(currentCard)) {
-      setLearnedCards([...learnedCards, currentCard]);
-      const points = flashcardLevel * 10;
-      setScore(score + points);
-      setStreak(streak + 1);
-      
-      const cards = flashcardData[selectedLanguage]?.[flashcardLevel] || [];
-      if (learnedCards.length + 1 >= cards.length && flashcardLevel < 3) {
-        setTimeout(() => {
-          alert(`Selamat! Anda naik ke Level ${flashcardLevel + 1}! 🎉`);
-          setFlashcardLevel(flashcardLevel + 1);
-          setLearnedCards([]);
-          setCurrentCard(0);
-        }, 500);
-      }
-    }
-    nextCard();
-  };
-
-  const startQuiz = () => {
-    setQuizStarted(true);
-    setCurrentQuestion(0);
-    setQuizScore(0);
-    setShowResult(false);
-    setSelectedAnswer(null);
-  };
-
-  const selectAnswer = (index) => {
-    if (selectedAnswer !== null) return;
-    setSelectedAnswer(index);
-    const questions = quizData[selectedLanguage]?.[quizLevel] || [];
-    const isCorrect = questions[currentQuestion].correct === index;
-    if (isCorrect) {
-      setQuizScore(quizScore + 1);
-      const points = quizLevel * 20;
-      setScore(score + points);
-    }
-  };
-
-  const nextQuestion = () => {
-    const questions = quizData[selectedLanguage]?.[quizLevel] || [];
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-      setSelectedAnswer(null);
-    } else {
-      setShowResult(true);
-      if (quizScore >= questions.length * 0.8 && quizLevel < 3) {
-        setTimeout(() => {
-          alert(`Luar biasa! Anda naik ke Level ${quizLevel + 1}! 🎉`);
-          setQuizLevel(quizLevel + 1);
-        }, 1000);
-      }
-    }
-  };
-
-  const startGame = (gameId) => {
-    setSelectedGame(gameId);
-    setGameStarted(true);
-    const game = games.find(g => g.id === gameId);
-    setGameTime(game.maxTime);
-    setGameScore(0);
-    setUserInput('');
-    setLives(3);
-    
-    const words = gameWords[selectedLanguage]?.[gameLevel] || gameWords[selectedLanguage]?.[1] || [];
-    
-    if (gameId === 'speed-typing') {
-      const randomWord = words[Math.floor(Math.random() * words.length)];
-      setCurrentWord(randomWord.word);
-    } else {
-      generateQuestion(gameId);
-    }
-  };
-
-  const generateQuestion = (gameId) => {
-    const cards = flashcardData[selectedLanguage]?.[gameLevel] || flashcardData[selectedLanguage]?.[1] || [];
-    if (cards.length === 0) return;
-    
-    const randomCard = cards[Math.floor(Math.random() * cards.length)];
-    
-    if (gameId === 'reverse-translate') {
-      setCurrentWord(randomCard.translation);
-      setCorrectAnswer(randomCard.word);
-      
-      const wrongAnswers = cards
-        .filter(c => c.word !== randomCard.word)
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 3)
-        .map(c => c.word);
-      
-      const allOptions = [randomCard.word, ...wrongAnswers].sort(() => 0.5 - Math.random());
-      setGameOptions(allOptions);
-    } else {
-      setCurrentWord(randomCard.word);
-      setCorrectAnswer(randomCard.translation);
-      
-      const wrongAnswers = cards
-        .filter(c => c.translation !== randomCard.translation)
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 3)
-        .map(c => c.translation);
-      
-      const allOptions = [randomCard.translation, ...wrongAnswers].sort(() => 0.5 - Math.random());
-      setGameOptions(allOptions);
-    }
-  };
-
-  const checkWord = () => {
-    const words = gameWords[selectedLanguage]?.[gameLevel] || gameWords[selectedLanguage]?.[1] || [];
-    if (userInput.toLowerCase().trim() === currentWord.toLowerCase().trim()) {
-      setGameScore(gameScore + 1);
-      const points = gameLevel * 15;
-      setScore(score + points);
-      const randomWord = words[Math.floor(Math.random() * words.length)];
-      setCurrentWord(randomWord.word);
-      setUserInput('');
-    } else if (userInput.trim() !== '') {
-      setLives(lives - 1);
-      setUserInput('');
-      if (lives - 1 <= 0) {
-        endGame();
-      }
-    }
-  };
-
-  const checkAnswer = (answer) => {
-    if (answer === correctAnswer) {
-      setGameScore(gameScore + 1);
-      const points = gameLevel * 15;
-      setScore(score + points);
-      generateQuestion(selectedGame);
-    } else {
-      setLives(lives - 1);
-      if (lives - 1 <= 0) {
-        endGame();
-      } else {
-        generateQuestion(selectedGame);
-      }
-    }
-  };
-
-  const endGame = () => {
-    setGameStarted(false);
-    const requiredScore = gameLevel * 10;
-    if (gameScore >= requiredScore && gameLevel < 3) {
-      setTimeout(() => {
-        alert(`Hebat! Anda naik ke Level ${gameLevel + 1}! 🎮`);
-        setGameLevel(gameLevel + 1);
-      }, 500);
-    }
-  };
-
-  const sendMessage = () => {
-    if (chatInput.trim()) {
-      const userMessage = chatInput;
-      setMessages([...messages, { role: 'user', text: userMessage }]);
-      setChatInput('');
-      setIsTyping(true);
-      
-      setTimeout(() => {
-        let botResponse = '';
-        const lowerMessage = userMessage.toLowerCase();
-        
-        if (lowerMessage.includes('cara baca') || lowerMessage.includes('pronunciation') || lowerMessage.includes('bagaimana membaca')) {
-          if (lowerMessage.includes('hello')) {
-            botResponse = 'Kata "hello" dibaca: hə-ˈlō (he-LO) dengan penekanan pada suku kata kedua. 🔊';
-          } else if (lowerMessage.includes('beautiful')) {
-            botResponse = 'Kata "beautiful" dibaca: ˈbjuː.tɪ.fəl (BYOO-ti-ful) dengan 3 suku kata. 🔊';
-          } else if (lowerMessage.includes('こんにちは')) {
-            botResponse = '"こんにちは" dibaca: kon-ni-chi-wa. Sapaan formal dalam bahasa Jepang. 🔊';
-          } else {
-            botResponse = 'Untuk mengetahui cara membaca, tanyakan: "Bagaimana cara membaca [kata]?" 😊';
-          }
-        } else if (lowerMessage.includes('arti') || lowerMessage.includes('meaning')) {
-          if (lowerMessage.includes('hello')) {
-            botResponse = '"Hello" = "Halo". Kata sapaan umum. Contoh: "Hello, how are you?" 👋';
-          } else if (lowerMessage.includes('thank you')) {
-            botResponse = '"Thank you" = "Terima kasih". Ungkapan rasa terima kasih. 🙏';
-          } else if (lowerMessage.includes('beautiful')) {
-            botResponse = '"Beautiful" = "Indah/Cantik". Menggambarkan sesuatu yang menarik. 🌸';
-          } else {
-            botResponse = 'Tanyakan: "Apa arti [kata]?" dan saya akan jelaskan! 📚';
-          }
-        } else if (lowerMessage.includes('tips') || lowerMessage.includes('cara belajar')) {
-          botResponse = 'Tips: 1) Konsisten 15-30 menit/hari, 2) Praktik dengan native speaker, 3) Tonton film dengan subtitle, 4) Gunakan flashcard, 5) Jangan takut salah! 💪';
-        } else if (lowerMessage.includes('level')) {
-          botResponse = `Anda di Level ${userLevel}! Terus berlatih untuk naik level. Keep going! 🎯`;
-        } else if (lowerMessage.includes('halo') || lowerMessage.includes('hi')) {
-          botResponse = 'Halo! Senang berbincang! Apa yang ingin dipelajari hari ini? 😊';
-        } else if (lowerMessage.includes('terima kasih') || lowerMessage.includes('thanks')) {
-          botResponse = 'Sama-sama! Senang membantu. Tanya lagi kapan saja! 🌟';
-        } else {
-          const responses = [
-            'Pertanyaan menarik! Tanyakan lebih spesifik: "Apa arti X?" atau "Bagaimana cara membaca Y?" 🤔',
-            'Saya siap membantu! Tanyakan arti kata, cara baca, tips belajar, atau grammar. 📖',
-            'Bagus! Terus semangat! Jika ada yang sulit, jangan ragu bertanya! 💡',
-            'Excellent! Belajar bahasa itu journey menyenangkan. Keep practicing! 🚀'
-          ];
-          botResponse = responses[Math.floor(Math.random() * responses.length)];
-        }
-        
-        setMessages(prev => [...prev, { role: 'bot', text: botResponse }]);
-        setIsTyping(false);
-        setScore(score + 5);
-      }, 1500);
-    }
-  };
-
-  const getLevelColor = (level) => {
-    const colors = { 1: 'bg-green-500', 2: 'bg-yellow-500', 3: 'bg-red-500' };
-    return colors[level] || 'bg-gray-500';
-  };
-
-  const getLevelName = (level) => {
-    const names = { 1: 'Beginner', 2: 'Intermediate', 3: 'Advanced' };
-    return names[level] || 'Unknown';
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="relative group">
-                <img 
-                  src={logoUrl} 
-                  alt="Logo" 
-                  className="w-12 h-12 rounded-xl object-cover cursor-pointer hover:opacity-80 transition-opacity"
-                  onClick={() => document.getElementById('logo-upload').click()}
-                />
-                <input 
-                  id="logo-upload"
-                  type="file" 
-                  accept="image/*"
-                  onChange={handleLogoUpload}
-                  className="hidden"
-                />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Upload className="w-5 h-5 text-white drop-shadow-lg" />
-                </div>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  LangLearn.id
-                </h1>
-                <p className="text-xs text-gray-500">Belajar Bahasa Jadi Menyenangkan</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 bg-orange-50 px-4 py-2 rounded-lg">
-                <Star className="w-5 h-5 text-orange-500" />
-                <span className="font-semibold text-orange-600">{score}</span>
-              </div>
-              <div className="flex items-center gap-2 bg-red-50 px-4 py-2 rounded-lg">
-                <Trophy className="w-5 h-5 text-red-500" />
-                <span className="font-semibold text-red-600">{streak}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <nav className="bg-white border-b sticky top-[72px] z-40">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex gap-1 overflow-x-auto">
-            {[
-              { id: 'home', icon: Sparkles, label: 'Beranda' },
-              { id: 'flashcard', icon: BookOpen, label: 'Flashcard' },
-              { id: 'quiz', icon: Brain, label: 'Kuis' },
-              { id: 'game', icon: Gamepad2, label: 'Game' },
-              { id: 'chat', icon: MessageCircle, label: 'Chat' }
-            ].map(tab => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-6 py-4 font-medium transition-all whitespace-nowrap ${
-                  activeTab === tab.id
-                    ? 'text-purple-600 border-b-2 border-purple-600'
-                    : 'text-gray-600 hover:text-purple-600'
-                }`}
-              >
-                <tab.icon className="w-4 h-4" />
-                {tab.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </nav>
-
-      <main className="max-w-7xl mx-auto px-4 py-8">
-        {activeTab === 'home' && (
-          <div className="space-y-8">
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl p-8 text-white">
-              <div className="flex items-center justify-between">
-                <div className="flex-1">
-                  <h2 className="text-3xl font-bold mb-2">Selamat Datang! 🎉</h2>
-                  <p className="text-purple-100 mb-4">
-                    Mulai petualangan belajar bahasa Anda hari ini
-                  </p>
-                  <div className="flex gap-3">
-                    <button 
-                      onClick={() => setActiveTab('flashcard')}
-                      className="bg-white text-purple-600 px-6 py-2 rounded-lg font-semibold hover:bg-purple-50 transition-colors"
-                    >
-                      Mulai Belajar
-                    </button>
-                    <button 
-                      onClick={() => setActiveTab('game')}
-                      className="bg-purple-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-purple-400 transition-colors"
-                    >
-                      Main Game
-                    </button>
-                  </div>
-                </div>
-                <TrendingUp className="w-32 h-32 opacity-20" />
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-4">Pilih Bahasa</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                {languages.map(lang => (
-                  <button
-                    key={lang.id}
-                    onClick={() => setSelectedLanguage(lang.id)}
-                    className={`p-6 rounded-xl border-2 transition-all hover:scale-105 ${
-                      selectedLanguage === lang.id
-                        ? 'border-purple-500 bg-purple-50'
-                        : 'border-gray-200 bg-white'
-                    }`}
-                  >
-                    <div className="text-4xl mb-2">{lang.flag}</div>
-                    <h4 className="font-bold text-sm">{lang.name}</h4>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-4">Fitur Unggulan</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white p-6 rounded-xl border-2 border-gray-100 hover:border-purple-300 transition-all cursor-pointer" onClick={() => setActiveTab('flashcard')}>
-                  <BookOpen className="w-12 h-12 text-purple-500 mb-4" />
-                  <h4 className="font-bold text-lg mb-2">Flashcard Multi-Level</h4>
-                  <p className="text-gray-600 text-sm">Belajar kosakata dari beginner hingga advanced</p>
-                </div>
-                <div className="bg-white p-6 rounded-xl border-2 border-gray-100 hover:border-pink-300 transition-all cursor-pointer" onClick={() => setActiveTab('game')}>
-                  <Gamepad2 className="w-12 h-12 text-pink-500 mb-4" />
-                  <h4 className="font-bold text-lg mb-2">5 Game Seru</h4>
-                  <p className="text-gray-600 text-sm">Belajar sambil bermain dengan game interaktif</p>
-                </div>
-                <div className="bg-white p-6 rounded-xl border-2 border-gray-100 hover:border-blue-300 transition-all cursor-pointer" onClick={() => setActiveTab('chat')}>
-                  <MessageCircle className="w-12 h-12 text-blue-500 mb-4" />
-                  <h4 className="font-bold text-lg mb-2">Chatbot Pintar</h4>
-                  <p className="text-gray-600 text-sm">Tanya jawab dan latihan percakapan real-time</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'flashcard' && flashcardData[selectedLanguage]?.[flashcardLevel] && (
-          <div className="max-w-2xl mx-auto">
-            <div className="mb-6 flex items-center justify-between">
-              <div>
-                <h2 className="text-2xl font-bold mb-2">Flashcard Kosakata</h2>
-                <p className="text-gray-600">Kartu {currentCard + 1} dari {flashcardData[selectedLanguage][flashcardLevel].length}</p>
-              </div>
-              <div className={`px-4 py-2 rounded-lg ${getLevelColor(flashcardLevel)} text-white font-semibold`}>
-                Level {flashcardLevel} - {getLevelName(flashcardLevel)}
-              </div>
-            </div>
-            
-            <div 
-              className="bg-white rounded-2xl shadow-xl p-12 mb-6 cursor-pointer hover:shadow-2xl transition-all min-h-[400px] flex flex-col justify-center"
-              onClick={() => setIsFlipped(!isFlipped)}
-            >
-              <div className="text-center">
-                {!isFlipped ? (
-                  <>
-                    <div className="text-6xl font-bold text-purple-600 mb-4">
-                      {flashcardData[selectedLanguage][flashcardLevel][currentCard].word}
-                    </div>
-                    <p className="text-gray-400 italic">Klik untuk melihat terjemahan</p>
-                  </>
-                ) : (
-                  <>
-                    <div className="text-4xl font-bold text-pink-600 mb-4">
-                      {flashcardData[selectedLanguage][flashcardLevel][currentCard].translation}
-                    </div>
-                    <div className="flex items-center justify-center gap-2 text-blue-600 mb-4">
-                      <Volume2 className="w-5 h-5" />
-                      <p className="text-lg">
-                        {flashcardData[selectedLanguage][flashcardLevel][currentCard].pronunciation}
-                      </p>
-                    </div>
-                    <p className="text-gray-600 text-lg mb-4">
-                      {flashcardData[selectedLanguage][flashcardLevel][currentCard].example}
-                    </p>
-                    <p className="text-gray-400 italic">Klik untuk kembali</p>
-                  </>
-                )}
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <button
-                onClick={nextCard}
-                className="flex-1 bg-gray-100 text-gray-700 py-4 rounded-xl font-semibold hover:bg-gray-200 transition-colors flex items-center justify-center gap-2"
-              >
-                <RotateCw className="w-5 h-5" />
-                Kartu Berikutnya
-              </button>
-              <button
-                onClick={markAsLearned}
-                className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all flex items-center justify-center gap-2"
-              >
-                <Check className="w-5 h-5" />
-                Sudah Paham (+{flashcardLevel * 10}pts)
-              </button>
-            </div>
-
-            <div className="mt-6 bg-purple-50 rounded-xl p-4">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-purple-700">Progress Level {flashcardLevel}</span>
-                <span className="text-sm font-semibold text-purple-700">
-                  {learnedCards.length} / {flashcardData[selectedLanguage][flashcardLevel].length}
-                </span>
-              </div>
-              <div className="bg-purple-200 rounded-full h-2">
-                <div 
-                  className="bg-purple-600 h-2 rounded-full transition-all"
-                  style={{ width: `${(learnedCards.length / flashcardData[selectedLanguage][flashcardLevel].length) * 100}%` }}
-                />
-              </div>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'quiz' && (
-          <div className="max-w-2xl mx-auto">
-            {!quizStarted ? (
-              <div className="bg-white rounded-2xl shadow-xl p-12 text-center">
-                <Brain className="w-24 h-24 text-purple-500 mx-auto mb-6" />
-                <div className={`inline-block px-4 py-2 rounded-lg ${getLevelColor(quizLevel)} text-white font-semibold mb-4`}>
-                  Level {quizLevel} - {getLevelName(quizLevel)}
-                </div>
-                <h2 className="text-3xl font-bold mb-4">Kuis Bahasa</h2>
-                <p className="text-gray-600 mb-8">Uji pemahaman Anda dengan soal pilihan ganda!</p>
-                <button
-                  onClick={startQuiz}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-purple-700 hover:to-pink-700 transition-all inline-flex items-center gap-2"
-                >
-                  <Play className="w-6 h-6" />
-                  Mulai Kuis Level {quizLevel}
-                </button>
-              </div>
-            ) : !showResult ? (
-              <div className="bg-white rounded-2xl shadow-xl p-8">
-                <div className="mb-6">
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-sm text-gray-500">
-                      Pertanyaan {currentQuestion + 1} / {quizData[selectedLanguage][quizLevel].length}
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <span className={`px-3 py-1 rounded-lg ${getLevelColor(quizLevel)} text-white text-sm font-semibold`}>
-                        Level {quizLevel}
-                      </span>
-                      <span className="text-sm font-semibold text-purple-600">
-                        Skor: {quizScore}
-                      </span>
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-bold mb-6">
-                    {quizData[selectedLanguage][quizLevel][currentQuestion].question}
-                  </h3>
-                </div>
-
-                <div className="space-y-3 mb-6">
-                  {quizData[selectedLanguage][quizLevel][currentQuestion].options.map((option, index) => (
-                    <button
-                      key={index}
-                      onClick={() => selectAnswer(index)}
-                      disabled={selectedAnswer !== null}
-                      className={`w-full p-4 rounded-xl font-semibold text-left transition-all ${
-                        selectedAnswer === null
-                          ? 'bg-gray-50 hover:bg-purple-50 border-2 border-gray-200 hover:border-purple-300'
-                          : selectedAnswer === index
-                          ? index === quizData[selectedLanguage][quizLevel][currentQuestion].correct
-                            ? 'bg-green-100 border-2 border-green-500'
-                            : 'bg-red-100 border-2 border-red-500'
-                          : index === quizData[selectedLanguage][quizLevel][currentQuestion].correct
-                          ? 'bg-green-100 border-2 border-green-500'
-                          : 'bg-gray-50 border-2 border-gray-200'
-                      }`}
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </div>
-
-                {selectedAnswer !== null && (
-                  <button
-                    onClick={nextQuestion}
-                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all"
-                  >
-                    {currentQuestion < quizData[selectedLanguage][quizLevel].length - 1 ? 'Pertanyaan Berikutnya' : 'Lihat Hasil'}
-                  </button>
-                )}
-              </div>
-            ) : (
-              <div className="bg-white rounded-2xl shadow-xl p-12 text-center">
-                <Award className="w-24 h-24 text-yellow-500 mx-auto mb-6" />
-                <h2 className="text-3xl font-bold mb-4">Kuis Selesai!</h2>
-                <div className="text-6xl font-bold text-purple-600 mb-4">
-                  {quizScore} / {quizData[selectedLanguage][quizLevel].length}
-                </div>
-                <p className="text-gray-600 mb-8">
-                  {quizScore === quizData[selectedLanguage][quizLevel].length
-                    ? 'Sempurna! Anda menguasai level ini! 🎉'
-                    : quizScore >= quizData[selectedLanguage][quizLevel].length * 0.8
-                    ? 'Luar biasa! Anda siap ke level berikutnya! 👍'
-                    : quizScore >= quizData[selectedLanguage][quizLevel].length * 0.5
-                    ? 'Bagus! Terus belajar! 📚'
-                    : 'Tetap semangat! Coba lagi! 💪'}
-                </p>
-                <button
-                  onClick={() => {
-                    setQuizStarted(false);
-                    setShowResult(false);
-                  }}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all"
-                >
-                  Coba Lagi
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-
-        {activeTab === 'game' && (
-          <div className="max-w-4xl mx-auto">
-            {!selectedGame ? (
-              <div>
-                <div className="text-center mb-8">
-                  <h2 className="text-3xl font-bold mb-2">Pilih Game</h2>
-                  <div className={`inline-block px-4 py-2 rounded-lg ${getLevelColor(gameLevel)} text-white font-semibold`}>
-                    Level {gameLevel} - {getLevelName(gameLevel)}
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {games.map(game => (
-                    <div
-                      key={game.id}
-                      className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer hover:scale-105 transition-all"
-                      onClick={() => startGame(game.id)}
-                    >
-                      <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${game.color} flex items-center justify-center mb-4`}>
-                        <game.icon className="w-8 h-8 text-white" />
-                      </div>
-                      <h3 className="font-bold text-xl mb-2">{game.name}</h3>
-                      <p className="text-gray-600 text-sm mb-4">{game.description}</p>
-                      <div className="flex items-center gap-2 text-sm text-gray-500">
-                        <Clock className="w-4 h-4" />
-                        <span>{game.maxTime} detik</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <div className="bg-white rounded-2xl shadow-xl p-8">
-                <div className="flex justify-between items-center mb-8">
-                  <div className="flex items-center gap-4">
-                    <button
-                      onClick={() => {
-                        setSelectedGame(null);
-                        setGameStarted(false);
-                      }}
-                      className="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
-                    >
-                      ← Kembali
-                    </button>
-                    <h3 className="font-bold text-2xl">{games.find(g => g.id === selectedGame)?.name}</h3>
-                  </div>
-                  <div className="flex gap-4">
-                    <div className="bg-pink-50 px-6 py-3 rounded-lg">
-                      <span className="text-sm text-pink-600">Waktu</span>
-                      <div className="text-3xl font-bold text-pink-600">{gameTime}s</div>
-                    </div>
-                    <div className="bg-purple-50 px-6 py-3 rounded-lg">
-                      <span className="text-sm text-purple-600">Skor</span>
-                      <div className="text-3xl font-bold text-purple-600">{gameScore}</div>
-                    </div>
-                    <div className="bg-red-50 px-6 py-3 rounded-lg">
-                      <span className="text-sm text-red-600">Nyawa</span>
-                      <div className="text-3xl font-bold text-red-600 flex gap-1">
-                        {Array.from({length: lives}).map((_, i) => (
-                          <Heart key={i} className="w-6 h-6 fill-current" />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {selectedGame === 'speed-typing' && gameStarted && (
-                  <div>
-                    <div className="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-xl p-12 mb-6">
-                      <div className="text-center">
-                        <p className="text-sm text-gray-600 mb-4">Ketik kata ini secepat mungkin:</p>
-                        <div className="text-5xl font-bold text-orange-600 mb-8">
-                          {currentWord}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LangLearn.id - Belajar Bahasa Jadi Menyenangkan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-container">
+                        <img id="logo" src="https://via.placeholder.com/150/9333ea/ffffff?text=Logo" alt="Logo">
+                        <input id="logo-upload" type="file" accept="image/*" style="display: none;">
+                        <div class="upload-overlay">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
                         </div>
-                      </div>
                     </div>
+                    <div>
+                        <h1>LangLearn.id</h1>
+                        <p class="subtitle">Belajar Bahasa Jadi Menyenangkan</p>
+                    </div>
+                </div>
+                <div class="stats">
+                    <div class="stat-item score">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <span id="score">0</span>
+                    </div>
+                    <div class="stat-item streak">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+                        <span id="streak">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-                    <input
-                      type="text"
-                      value={userInput}
-                      onChange={(e) => setUserInput(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && checkWord()}
-                      placeholder="Ketik di sini..."
-                      className="w-full p-4 border-2 border-orange-300 rounded-xl text-lg focus:outline-none focus:border-orange-500 mb-4"
-                      autoFocus
-                    />
+    <nav id="nav">
+        <div class="container">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="home">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path><path d="M5 3v4"></path><path d="M19 17v4"></path><path d="M3 5h4"></path><path d="M17 19h4"></path></svg>
+                    Beranda
+                </button>
+                <button class="nav-tab" data-tab="flashcard">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                    Flashcard
+                </button>
+                <button class="nav-tab" data-tab="quiz">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    Kuis
+                </button>
+                <button class="nav-tab" data-tab="game">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"></line><line x1="8" y1="9" x2="8" y2="13"></line><line x1="15" y1="12" x2="15.01" y2="12"></line><line x1="18" y1="10" x2="18.01" y2="10"></line><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"></path></svg>
+                    Game
+                </button>
+                <button class="nav-tab" data-tab="chat">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    Chat
+                </button>
+            </div>
+        </div>
+    </nav>
 
-                    <button
-                      onClick={checkWord}
-                      className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-4 rounded-xl font-semibold hover:from-yellow-600 hover:to-orange-600 transition-all"
-                    >
-                      Cek Jawaban
-                    </button>
-                  </div>
-                )}
-
-                {(selectedGame === 'word-match' || selectedGame === 'guess-word' || selectedGame === 'reverse-translate' || selectedGame === 'rapid-fire') && gameStarted && (
-                  <div>
-                    <div className={`bg-gradient-to-r ${games.find(g => g.id === selectedGame)?.color.replace('from-', 'from-').replace('to-', 'to-')} bg-opacity-20 rounded-xl p-12 mb-6`}>
-                      <div className="text-center">
-                        <p className="text-sm text-gray-600 mb-4">
-                          {selectedGame === 'reverse-translate' ? 'Pilih terjemahan dalam bahasa asing:' : 'Pilih terjemahan yang benar:'}
-                        </p>
-                        <div className="text-5xl font-bold text-purple-600 mb-8">
-                          {currentWord}
+    <main id="main">
+        <div class="container">
+            <div id="home-tab" class="tab-content active">
+                <div class="hero-banner">
+                    <div class="hero-text">
+                        <h2>Selamat Datang! 🎉</h2>
+                        <p>Mulai petualangan belajar bahasa Anda hari ini</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" onclick="switchTab('flashcard')">Mulai Belajar</button>
+                            <button class="btn btn-secondary" onclick="switchTab('game')">Main Game</button>
                         </div>
-                      </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>Pilih Bahasa</h3>
+                    <div id="language-grid" class="language-grid"></div>
+                </div>
+
+                <div class="section">
+                    <h3>Fitur Unggulan</h3>
+                    <div class="features-grid">
+                        <div class="feature-card" onclick="switchTab('flashcard')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                            <h4>Flashcard Multi-Level</h4>
+                            <p>Belajar kosakata dari beginner hingga advanced</p>
+                        </div>
+                        <div class="feature-card" onclick="switchTab('game')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"></line><line x1="8" y1="9" x2="8" y2="13"></line><line x1="15" y1="12" x2="15.01" y2="12"></line><line x1="18" y1="10" x2="18.01" y2="10"></line><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"></path></svg>
+                            <h4>5 Game Seru</h4>
+                            <p>Belajar sambil bermain dengan game interaktif</p>
+                        </div>
+                        <div class="feature-card" onclick="switchTab('chat')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            <h4>Chatbot Pintar</h4>
+                            <p>Tanya jawab dan latihan percakapan real-time</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="flashcard-tab" class="tab-content">
+                <div class="content-wrapper">
+                    <div class="flashcard-header">
+                        <div>
+                            <h2>Flashcard Kosakata</h2>
+                            <p id="card-progress">Kartu 1 dari 5</p>
+                        </div>
+                        <div id="flashcard-level-badge" class="level-badge level-1">Level 1 - Beginner</div>
+                    </div>
+                    
+                    <div id="flashcard" class="flashcard">
+                        <div id="card-front" class="card-side">
+                            <div class="card-word"></div>
+                            <p class="card-hint">Klik untuk melihat terjemahan</p>
+                        </div>
+                        <div id="card-back" class="card-side" style="display: none;">
+                            <div class="card-translation"></div>
+                            <div class="card-pronunciation"></div>
+                            <p class="card-example"></p>
+                            <p class="card-hint">Klik untuk kembali</p>
+                        </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                      {gameOptions.map((option, index) => (
-                        <button
-                          key={index}
-                          onClick={() => checkAnswer(option)}
-                          className={`p-6 rounded-xl font-semibold text-lg border-2 hover:scale-105 transition-all ${
-                            'bg-white border-gray-200 hover:border-purple-400'
-                          }`}
-                        >
-                          {option}
+                    <div class="flashcard-buttons">
+                        <button class="btn btn-secondary" onclick="nextCard()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+                            Kartu Berikutnya
                         </button>
-                      ))}
+                        <button class="btn btn-primary" onclick="markAsLearned()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span id="learned-btn-text">Sudah Paham (+10pts)</span>
+                        </button>
                     </div>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        )}
 
-        {activeTab === 'chat' && (
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-              <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-6 text-white">
-                <h2 className="text-2xl font-bold mb-2">Chatbot Pintar</h2>
-                <p className="text-blue-100">Tanya jawab tentang bahasa dan latih percakapan</p>
-              </div>
-
-              <div className="h-[500px] overflow-y-auto p-6 space-y-4 bg-gray-50">
-                {messages.map((msg, idx) => (
-                  <div
-                    key={idx}
-                    className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                  >
-                    <div
-                      className={`max-w-[80%] p-4 rounded-2xl ${
-                        msg.role === 'user'
-                          ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white'
-                          : 'bg-white border-2 border-gray-200'
-                      }`}
-                    >
-                      {msg.text}
+                    <div class="progress-container">
+                        <div class="progress-text">
+                            <span>Progress Level <span id="progress-level">1</span></span>
+                            <span><span id="learned-count">0</span> / <span id="total-cards">5</span></span>
+                        </div>
+                        <div class="progress-bar">
+                            <div id="progress-fill" class="progress-fill"></div>
+                        </div>
                     </div>
-                  </div>
-                ))}
-                {isTyping && (
-                  <div className="flex justify-start">
-                    <div className="bg-white border-2 border-gray-200 p-4 rounded-2xl">
-                      <div className="flex gap-2">
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.4s'}}></div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              <div className="p-6 bg-white border-t-2 border-gray-100">
-                <div className="flex gap-3">
-                  <input
-                    type="text"
-                    value={chatInput}
-                    onChange={(e) => setChatInput(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-                    placeholder="Tanyakan tentang bahasa, kosakata, atau cara membaca..."
-                    className="flex-1 p-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-purple-500"
-                  />
-                  <button
-                    onClick={sendMessage}
-                    className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-xl font-semibold hover:from-purple-600 hover:to-pink-600 transition-all"
-                  >
-                    Kirim
-                  </button>
                 </div>
-              </div>
             </div>
-          </div>
-        )}
-      </main>
 
-      <footer className="bg-white border-t mt-12 py-8">
-        <div className="max-w-7xl mx-auto px-4 text-center text-gray-600">
-          <p className="font-semibold text-purple-600 mb-2">LangLearn.id</p>
-          <p className="text-sm">Belajar Bahasa Jadi Menyenangkan dan Interaktif</p>
-          <p className="text-xs mt-4">© 2025 LangLearn.id - Platform Pembelajaran Bahasa</p>
+            <div id="quiz-tab" class="tab-content">
+                <div class="content-wrapper">
+                    <div id="quiz-start" class="quiz-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        <div id="quiz-level-badge" class="level-badge level-1">Level 1 - Beginner</div>
+                        <h2>Kuis Bahasa</h2>
+                        <p>Uji pemahaman Anda dengan soal pilihan ganda!</p>
+                        <button class="btn btn-primary btn-lg" onclick="startQuiz()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            Mulai Kuis Level <span id="quiz-start-level">1</span>
+                        </button>
+                    </div>
+
+                    <div id="quiz-question" class="quiz-question" style="display: none;">
+                        <div class="quiz-header">
+                            <span id="question-number">Pertanyaan 1 / 4</span>
+                            <div class="quiz-stats">
+                                <span id="quiz-level-badge-game" class="level-badge level-1">Level 1</span>
+                                <span class="quiz-score">Skor: <span id="quiz-score">0</span></span>
+                            </div>
+                        </div>
+                        <h3 id="question-text"></h3>
+                        <div id="options-container" class="options-container"></div>
+                        <button id="next-question-btn" class="btn btn-primary" style="display: none;" onclick="nextQuestion()">Pertanyaan Berikutnya</button>
+                    </div>
+
+                    <div id="quiz-result" class="quiz-result" style="display: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                        <h2>Kuis Selesai!</h2>
+                        <div id="final-score" class="final-score">0 / 4</div>
+                        <p id="result-message"></p>
+                        <button class="btn btn-primary" onclick="resetQuiz()">Coba Lagi</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="game-tab" class="tab-content">
+                <div id="game-selection" class="content-wrapper">
+                    <div class="game-header">
+                        <h2>Pilih Game</h2>
+                        <div id="game-level-badge" class="level-badge level-1">Level 1 - Beginner</div>
+                    </div>
+                    <div id="games-grid" class="games-grid"></div>
+                </div>
+
+                <div id="game-play" class="content-wrapper" style="display: none;">
+                    <div class="game-play-header">
+                        <div class="game-back-section">
+                            <button class="btn btn-back" onclick="backToGameSelection()">← Kembali</button>
+                            <h3 id="game-title"></h3>
+                        </div>
+                        <div class="game-stats">
+                            <div class="game-stat time">
+                                <span>Waktu</span>
+                                <div id="game-time">60s</div>
+                            </div>
+                            <div class="game-stat score-stat">
+                                <span>Skor</span>
+                                <div id="game-score-display">0</div>
+                            </div>
+                            <div class="game-stat lives">
+                                <span>Nyawa</span>
+                                <div id="game-lives"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="game-content"></div>
+                </div>
+            </div>
+
+            <div id="chat-tab" class="tab-content">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <h2>Chatbot Pintar</h2>
+                        <p>Tanya jawab tentang bahasa dan latih percakapan</p>
+                    </div>
+                    <div id="chat-messages" class="chat-messages"></div>
+                    <div class="chat-input-container">
+                        <input 
+                            id="chat-input" 
+                            type="text" 
+                            placeholder="Tanyakan tentang bahasa, kosakata, atau cara membaca..."
+                            onkeypress="if(event.key === 'Enter') sendMessage()"
+                        >
+                        <button class="btn btn-primary" onclick="sendMessage()">Kirim</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </footer>
-    </div>
-  );
-};
+    </main>
 
-export default LangLearnApp;
+    <footer>
+        <div class="container">
+            <p class="footer-brand">LangLearn.id</p>
+            <p>Belajar Bahasa Jadi Menyenangkan dan Interaktif</p>
+            <p class="footer-copyright">© 2025 LangLearn.id - Platform Pembelajaran Bahasa</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
