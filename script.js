@@ -103,149 +103,26 @@ const flashcardData = {
 };
 
 const quizData = {
-  english: {
-    // 🟢 LEVEL 1 (Basic Greetings & Everyday Words)
-    1: [
-      { question: 'Apa arti "Hello" dalam Bahasa Indonesia?', options: ['Selamat tinggal', 'Halo', 'Tolong', 'Maaf'], correct: 1 },
-      { question: 'Terjemahkan "Terima kasih" ke Bahasa Inggris', options: ['Hello', 'Thank you', 'Goodbye', 'Please'], correct: 1 },
-      { question: 'Apa arti dari "Good"?', options: ['Jelek', 'Bagus', 'Besar', 'Kecil'], correct: 1 },
-      { question: 'Pilih terjemahan "Ya" dalam Bahasa Inggris', options: ['No', 'Maybe', 'Yes', 'Can'], correct: 2 },
-      { question: 'Apa arti "Goodbye"?', options: ['Selamat tinggal', 'Halo', 'Selamat pagi', 'Sampai jumpa lagi'], correct: 0 },
-      { question: 'Terjemahkan "Please" ke Bahasa Indonesia', options: ['Terima kasih', 'Tolong', 'Maaf', 'Selamat'], correct: 1 },
-      { question: 'Apa arti "Thank you"?', options: ['Sama-sama', 'Terima kasih', 'Maaf', 'Selamat datang'], correct: 1 },
-      { question: 'Apa arti dari "Sorry"?', options: ['Maaf', 'Terima kasih', 'Halo', 'Selamat tinggal'], correct: 0 },
-      { question: 'Terjemahkan "Teacher" ke Bahasa Indonesia', options: ['Siswa', 'Guru', 'Teman', 'Dokter'], correct: 1 },
-      { question: 'Apa arti "Book"?', options: ['Buku', 'Meja', 'Kursi', 'Papan'], correct: 0 }
-    ],
-
-    // 🟢 LEVEL 2 (Daily Life & Basic Nouns)
-    2: [
-      { question: 'Apa arti "Beautiful"?', options: ['Jelek', 'Indah', 'Besar', 'Kecil'], correct: 1 },
-      { question: 'Terjemahkan "Belajar" ke Bahasa Inggris', options: ['Play', 'Work', 'Learn', 'Sleep'], correct: 2 },
-      { question: 'Apa arti dari "Friend"?', options: ['Musuh', 'Teman', 'Keluarga', 'Guru'], correct: 1 },
-      { question: 'Pilih arti "Happy"', options: ['Sedih', 'Marah', 'Bahagia', 'Lelah'], correct: 2 },
-      { question: 'Apa arti dari "Strong"?', options: ['Lemah', 'Kuat', 'Cepat', 'Pelan'], correct: 1 },
-      { question: 'Terjemahkan "Air" ke Bahasa Inggris', options: ['Earth', 'Water', 'Fire', 'Wind'], correct: 1 },
-      { question: 'Apa arti dari "Family"?', options: ['Teman', 'Keluarga', 'Guru', 'Anak'], correct: 1 },
-      { question: 'Terjemahkan "Makanan" ke Bahasa Inggris', options: ['Drink', 'Food', 'Table', 'Bread'], correct: 1 },
-      { question: 'Apa arti "City"?', options: ['Kota', 'Desa', 'Negara', 'Benua'], correct: 0 },
-      { question: 'Apa arti dari "Cold"?', options: ['Dingin', 'Panas', 'Hangat', 'Kering'], correct: 0 }
-    ],
-
-    // 🟢 LEVEL 3 (Adjectives & Common Verbs)
-    3: [
-      { question: 'Apa arti "Magnificent"?', options: ['Sederhana', 'Luar biasa', 'Biasa', 'Jelek'], correct: 1 },
-      { question: 'Terjemahkan "Ketekunan" ke Bahasa Inggris', options: ['Laziness', 'Perseverance', 'Happiness', 'Sadness'], correct: 1 },
-      { question: 'Apa arti "Enthusiastic"?', options: ['Malas', 'Lelah', 'Antusias', 'Bosan'], correct: 2 },
-      { question: 'Pilih arti "Achievement"', options: ['Kegagalan', 'Pencapaian', 'Masalah', 'Pertanyaan'], correct: 1 },
-      { question: 'Apa arti "Smart"?', options: ['Bodoh', 'Pintar', 'Tinggi', 'Cepat'], correct: 1 },
-      { question: 'Terjemahkan "Cepat" ke Bahasa Inggris', options: ['Fast', 'Slow', 'Late', 'Small'], correct: 0 },
-      { question: 'Apa arti "Honest"?', options: ['Jujur', 'Licik', 'Pemalu', 'Sombong'], correct: 0 },
-      { question: 'Pilih arti "Brave"', options: ['Takut', 'Berani', 'Sedih', 'Lelah'], correct: 1 },
-      { question: 'Apa arti dari "Hungry"?', options: ['Lapar', 'Haus', 'Ngantuk', 'Senang'], correct: 0 },
-      { question: 'Terjemahkan "Clever" ke Bahasa Indonesia', options: ['Pintar', 'Lemah', 'Marah', 'Pemalu'], correct: 0 }
-    ],
-
-    // 🟢 LEVEL 4 (School & Study Words)
-    4: [
-      { question: 'Apa arti "Student"?', options: ['Guru', 'Siswa', 'Orang tua', 'Petani'], correct: 1 },
-      { question: 'Terjemahkan "Sekolah" ke Bahasa Inggris', options: ['Class', 'Study', 'School', 'Teacher'], correct: 2 },
-      { question: 'Apa arti "Pen" dalam Bahasa Indonesia?', options: ['Buku', 'Pulpen', 'Kertas', 'Papan tulis'], correct: 1 },
-      { question: 'Terjemahkan "Lesson" ke Bahasa Indonesia', options: ['Pelajaran', 'Sekolah', 'Guru', 'Tugas'], correct: 0 },
-      { question: 'Apa arti "Homework"?', options: ['Tugas rumah', 'Permainan', 'Pelajaran', 'Liburan'], correct: 0 },
-      { question: 'Terjemahkan "Exam" ke Bahasa Indonesia', options: ['Ulangan', 'Ujian', 'Pelajaran', 'Nilai'], correct: 1 },
-      { question: 'Apa arti dari "Subject"?', options: ['Pelajaran', 'Objek', 'Subjek', 'Kelas'], correct: 0 },
-      { question: 'Terjemahkan "Library" ke Bahasa Indonesia', options: ['Kantin', 'Perpustakaan', 'Sekolah', 'Kelas'], correct: 1 },
-      { question: 'Apa arti "Answer"?', options: ['Pertanyaan', 'Jawaban', 'Kunci', 'Ujian'], correct: 1 },
-      { question: 'Terjemahkan "Teacher" ke Bahasa Inggris', options: ['Guru', 'Student', 'Book', 'Lesson'], correct: 0 }
-    ],
-
-    // 🟢 LEVEL 5 (Time & Routine)
-    5: [
-      { question: 'Apa arti "Morning"?', options: ['Malam', 'Siang', 'Pagi', 'Sore'], correct: 2 },
-      { question: 'Terjemahkan "Night" ke Bahasa Indonesia', options: ['Siang', 'Malam', 'Pagi', 'Sore'], correct: 1 },
-      { question: 'Apa arti dari "Evening"?', options: ['Siang', 'Sore', 'Pagi', 'Malam'], correct: 1 },
-      { question: 'Terjemahkan "Jam" ke Bahasa Inggris', options: ['Clock', 'Watch', 'Time', 'Hour'], correct: 3 },
-      { question: 'Apa arti "Breakfast"?', options: ['Sarapan', 'Makan siang', 'Makan malam', 'Makan ringan'], correct: 0 },
-      { question: 'Terjemahkan "Dinner" ke Bahasa Indonesia', options: ['Sarapan', 'Makan siang', 'Makan malam', 'Makan ringan'], correct: 2 },
-      { question: 'Apa arti "Always"?', options: ['Jarang', 'Kadang', 'Selalu', 'Tidak pernah'], correct: 2 },
-      { question: 'Terjemahkan "Never" ke Bahasa Indonesia', options: ['Selalu', 'Kadang', 'Tidak pernah', 'Sering'], correct: 2 },
-      { question: 'Apa arti "Sometimes"?', options: ['Sering', 'Selalu', 'Kadang-kadang', 'Jarang'], correct: 2 },
-      { question: 'Terjemahkan "Usually" ke Bahasa Indonesia', options: ['Biasanya', 'Kadang-kadang', 'Jarang', 'Selalu'], correct: 0 }
-    ],
-
-    // 🟢 LEVEL 6 (Nature & Environment)
-    6: [
-      { question: 'Apa arti "Tree"?', options: ['Daun', 'Pohon', 'Rumput', 'Bunga'], correct: 1 },
-      { question: 'Terjemahkan "Flower" ke Bahasa Indonesia', options: ['Bunga', 'Daun', 'Akar', 'Batang'], correct: 0 },
-      { question: 'Apa arti "River"?', options: ['Gunung', 'Sungai', 'Danau', 'Hutan'], correct: 1 },
-      { question: 'Terjemahkan "Mountain" ke Bahasa Indonesia', options: ['Hutan', 'Gunung', 'Pantai', 'Sawah'], correct: 1 },
-      { question: 'Apa arti "Sky"?', options: ['Awan', 'Langit', 'Matahari', 'Bintang'], correct: 1 },
-      { question: 'Terjemahkan "Sun" ke Bahasa Indonesia', options: ['Bulan', 'Langit', 'Matahari', 'Cahaya'], correct: 2 },
-      { question: 'Apa arti "Rain"?', options: ['Salju', 'Air', 'Hujan', 'Badai'], correct: 2 },
-      { question: 'Terjemahkan "Cloud" ke Bahasa Indonesia', options: ['Hujan', 'Awan', 'Langit', 'Kabut'], correct: 1 },
-      { question: 'Apa arti "Wind"?', options: ['Angin', 'Api', 'Air', 'Tanah'], correct: 0 },
-      { question: 'Terjemahkan "Ocean" ke Bahasa Indonesia', options: ['Samudra', 'Gunung', 'Danau', 'Sungai'], correct: 0 }
-    ],
-    // 🟢 LEVEL 7 (Jobs & Occupations)
-    7: [
-      { question: 'Apa arti "Doctor"?', options: ['Perawat', 'Dokter', 'Guru', 'Petani'], correct: 1 },
-      { question: 'Terjemahkan "Nurse" ke Bahasa Indonesia', options: ['Guru', 'Perawat', 'Polisi', 'Supir'], correct: 1 },
-      { question: 'Apa arti dari "Engineer"?', options: ['Arsitek', 'Petani', 'Insinyur', 'Dokter'], correct: 2 },
-      { question: 'Terjemahkan "Teacher" ke Bahasa Indonesia', options: ['Siswa', 'Guru', 'Orang tua', 'Petani'], correct: 1 },
-      { question: 'Apa arti "Police"?', options: ['Pemadam', 'Polisi', 'Dokter', 'Guru'], correct: 1 },
-      { question: 'Terjemahkan "Farmer" ke Bahasa Indonesia', options: ['Nelayan', 'Petani', 'Tukang', 'Koki'], correct: 1 },
-      { question: 'Apa arti "Chef"?', options: ['Koki', 'Supir', 'Pelayan', 'Polisi'], correct: 0 },
-      { question: 'Terjemahkan "Driver" ke Bahasa Indonesia', options: ['Supir', 'Koki', 'Guru', 'Dokter'], correct: 0 },
-      { question: 'Apa arti dari "Singer"?', options: ['Pelukis', 'Penyanyi', 'Penulis', 'Penari'], correct: 1 },
-      { question: 'Terjemahkan "Artist" ke Bahasa Indonesia', options: ['Seniman', 'Penyanyi', 'Penulis', 'Koki'], correct: 0 }
-    ],
-
-    // 🟢 LEVEL 8 (Technology & Tools)
-    8: [
-      { question: 'Apa arti "Computer"?', options: ['Televisi', 'Komputer', 'Ponsel', 'Tablet'], correct: 1 },
-      { question: 'Terjemahkan "Keyboard" ke Bahasa Indonesia', options: ['Papan ketik', 'Layar', 'Mouse', 'Kabel'], correct: 0 },
-      { question: 'Apa arti "Mouse"?', options: ['Kucing', 'Tikus', 'Mouse komputer', 'Alat ketik'], correct: 2 },
-      { question: 'Terjemahkan "Screen" ke Bahasa Indonesia', options: ['Keyboard', 'Layar', 'Baterai', 'Kamera'], correct: 1 },
-      { question: 'Apa arti "Internet"?', options: ['Jaringan', 'Koneksi global', 'Kabel data', 'Sinyal'], correct: 1 },
-      { question: 'Terjemahkan "Website" ke Bahasa Indonesia', options: ['Situs web', 'Jaringan', 'Aplikasi', 'Email'], correct: 0 },
-      { question: 'Apa arti "File"?', options: ['Folder', 'Berkas', 'Gambar', 'Tautan'], correct: 1 },
-      { question: 'Terjemahkan "Upload" ke Bahasa Indonesia', options: ['Mengunduh', 'Mengunggah', 'Menyimpan', 'Membuka'], correct: 1 },
-      { question: 'Apa arti "Download"?', options: ['Mengunggah', 'Mengunduh', 'Menyimpan', 'Menghapus'], correct: 1 },
-      { question: 'Terjemahkan "Password" ke Bahasa Indonesia', options: ['Sandi', 'Nama pengguna', 'Kode', 'Identitas'], correct: 0 }
-    ],
-
-    // 🟢 LEVEL 9 (Emotions & Feelings)
-    9: [
-      { question: 'Apa arti "Sad"?', options: ['Sedih', 'Senang', 'Marah', 'Takut'], correct: 0 },
-      { question: 'Terjemahkan "Angry" ke Bahasa Indonesia', options: ['Senang', 'Marah', 'Takut', 'Sedih'], correct: 1 },
-      { question: 'Apa arti "Afraid"?', options: ['Berani', 'Takut', 'Bingung', 'Marah'], correct: 1 },
-      { question: 'Terjemahkan "Excited" ke Bahasa Indonesia', options: ['Gelisah', 'Bersemangat', 'Sedih', 'Lelah'], correct: 1 },
-      { question: 'Apa arti "Tired"?', options: ['Lelah', 'Senang', 'Sedih', 'Marah'], correct: 0 },
-      { question: 'Terjemahkan "Surprised" ke Bahasa Indonesia', options: ['Terkejut', 'Tenang', 'Marah', 'Sedih'], correct: 0 },
-      { question: 'Apa arti "Bored"?', options: ['Bosan', 'Senang', 'Takut', 'Lapar'], correct: 0 },
-      { question: 'Terjemahkan "Proud" ke Bahasa Indonesia', options: ['Bangga', 'Sedih', 'Marah', 'Senang'], correct: 0 },
-      { question: 'Apa arti "Confused"?', options: ['Bingung', 'Lelah', 'Senang', 'Marah'], correct: 0 },
-      { question: 'Terjemahkan "Nervous" ke Bahasa Indonesia', options: ['Gugup', 'Senang', 'Takut', 'Bosan'], correct: 0 }
-    ],
-
-    // 🟢 LEVEL 10 (Advanced Vocabulary)
-    10: [
-      { question: 'Apa arti "Generous"?', options: ['Pelit', 'Dermawan', 'Sombong', 'Pemalu'], correct: 1 },
-      { question: 'Terjemahkan "Honesty" ke Bahasa Indonesia', options: ['Kejujuran', 'Kebohongan', 'Kesabaran', 'Ketenangan'], correct: 0 },
-      { question: 'Apa arti "Courage"?', options: ['Rasa takut', 'Keberanian', 'Kemarahan', 'Kesedihan'], correct: 1 },
-      { question: 'Terjemahkan "Wisdom" ke Bahasa Indonesia', options: ['Kebijaksanaan', 'Kecerdasan', 'Kekuatan', 'Kebaikan'], correct: 0 },
-      { question: 'Apa arti "Grateful"?', options: ['Bersyukur', 'Sedih', 'Marah', 'Senang'], correct: 0 },
-      { question: 'Terjemahkan "Determination" ke Bahasa Indonesia', options: ['Kebingungan', 'Tekad', 'Keberanian', 'Kemarahan'], correct: 1 },
-      { question: 'Apa arti "Respect"?', options: ['Menghina', 'Menghormati', 'Mengingat', 'Menunggu'], correct: 1 },
-      { question: 'Terjemahkan "Kindness" ke Bahasa Indonesia', options: ['Kekasaran', 'Kebaikan', 'Kesombongan', 'Ketakutan'], correct: 1 },
-      { question: 'Apa arti "Success"?', options: ['Kegagalan', 'Kesuksesan', 'Masalah', 'Kejahatan'], correct: 1 },
-      { question: 'Terjemahkan "Knowledge" ke Bahasa Indonesia', options: ['Pengetahuan', 'Kebijaksanaan', 'Kejujuran', 'Kesabaran'], correct: 0 }
-    ]
-  }
-};
-
-
+    english: {
+        1: [
+            { question: 'Apa arti "Hello" dalam Bahasa Indonesia?', options: ['Selamat tinggal', 'Halo', 'Tolong', 'Maaf'], correct: 1 },
+            { question: 'Terjemahkan "Terima kasih" ke Bahasa Inggris', options: ['Hello', 'Thank you', 'Goodbye', 'Please'], correct: 1 },
+            { question: 'Apa arti dari "Good"?', options: ['Jelek', 'Bagus', 'Besar', 'Kecil'], correct: 1 },
+            { question: 'Pilih terjemahan "Ya" dalam Bahasa Inggris', options: ['No', 'Maybe', 'Yes', 'Can'], correct: 2 }
+        ],
+        2: [
+            { question: 'Apa arti "Beautiful"?', options: ['Jelek', 'Indah', 'Besar', 'Kecil'], correct: 1 },
+            { question: 'Terjemahkan "Belajar" ke Bahasa Inggris', options: ['Play', 'Work', 'Learn', 'Sleep'], correct: 2 },
+            { question: 'Apa arti dari "Friend"?', options: ['Musuh', 'Teman', 'Keluarga', 'Guru'], correct: 1 },
+            { question: 'Pilih arti "Happy"', options: ['Sedih', 'Marah', 'Bahagia', 'Lelah'], correct: 2 }
+        ],
+        3: [
+            { question: 'Apa arti "Magnificent"?', options: ['Sederhana', 'Luar biasa', 'Biasa', 'Jelek'], correct: 1 },
+            { question: 'Terjemahkan "Ketekunan" ke Bahasa Inggris', options: ['Laziness', 'Perseverance', 'Happiness', 'Sadness'], correct: 1 },
+            { question: 'Apa arti "Enthusiastic"?', options: ['Malas', 'Lelah', 'Antusias', 'Bosan'], correct: 2 },
+            { question: 'Pilih arti "Achievement"', options: ['Kegagalan', 'Pencapaian', 'Masalah', 'Pertanyaan'], correct: 1 }
+        ]
+    },
     japanese: {
         1: [
             { question: 'Apa arti "ありがとう"?', options: ['Halo', 'Selamat tinggal', 'Terima kasih', 'Maaf'], correct: 2 },
