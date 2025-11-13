@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LangLearn.id - Belajar Bahasa Jadi Menyenangkan</title>
+    <title>BAHASAKU.ID - Belajar Bahasa Jadi Menyenangkan</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- HEADER -->
     <header id="header">
         <div class="container">
             <div class="header-content">
                 <div class="logo-section">
                     <div class="logo-container">
-                        <img id="logo" src="https://via.placeholder.com/150/9333ea/ffffff?text=Logo" alt="Logo">
+                        <!-- Ganti logo dengan file JPG -->
+                        <img id="logo" src="logo.jpg" alt="Logo BAHASAKU.ID">
                         <input id="logo-upload" type="file" accept="image/*" style="display: none;">
                         <div class="upload-overlay">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
                         </div>
                     </div>
                     <div>
-                        <h1>LangLearn.id</h1>
+                        <h1>Bahasaku.id</h1>
                         <p class="subtitle">Belajar Bahasa Jadi Menyenangkan</p>
                     </div>
                 </div>
@@ -37,40 +39,28 @@
         </div>
     </header>
 
+    <!-- NAV -->
     <nav id="nav">
         <div class="container">
             <div class="nav-tabs">
-                <button class="nav-tab active" data-tab="home">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path><path d="M5 3v4"></path><path d="M19 17v4"></path><path d="M3 5h4"></path><path d="M17 19h4"></path></svg>
-                    Beranda
-                </button>
-                <button class="nav-tab" data-tab="flashcard">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                    Flashcard
-                </button>
-                <button class="nav-tab" data-tab="quiz">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                    Kuis
-                </button>
-                <button class="nav-tab" data-tab="game">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"></line><line x1="8" y1="9" x2="8" y2="13"></line><line x1="15" y1="12" x2="15.01" y2="12"></line><line x1="18" y1="10" x2="18.01" y2="10"></line><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"></path></svg>
-                    Game
-                </button>
-                <button class="nav-tab" data-tab="chat">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                    Chat
-                </button>
+                <button class="nav-tab active" data-tab="home">🏠 Beranda</button>
+                <button class="nav-tab" data-tab="flashcard">🗂️ Flashcard</button>
+                <button class="nav-tab" data-tab="quiz">🧠 Kuis</button>
+                <button class="nav-tab" data-tab="game">🎮 Game</button>
+                <button class="nav-tab" data-tab="chat">💬 Chat</button>
             </div>
         </div>
     </nav>
 
+    <!-- MAIN -->
     <main id="main">
         <div class="container">
+            <!-- HOME -->
             <div id="home-tab" class="tab-content active">
                 <div class="hero-banner">
                     <div class="hero-text">
-                        <h2>Selamat Datang! 🎉</h2>
-                        <p>Mulai petualangan belajar bahasa Anda hari ini</p>
+                        <h2>Selamat Datang di Bahasaku.id! 🎉</h2>
+                        <p>Mulai petualangan belajar bahasa Anda hari ini!</p>
                         <div class="hero-buttons">
                             <button class="btn btn-primary" onclick="switchTab('flashcard')">Mulai Belajar</button>
                             <button class="btn btn-secondary" onclick="switchTab('game')">Main Game</button>
@@ -80,24 +70,26 @@
 
                 <div class="section">
                     <h3>Pilih Bahasa</h3>
-                    <div id="language-grid" class="language-grid"></div>
+                    <div id="language-grid" class="language-grid">
+                        <div class="language-card">🇬🇧 Inggris</div>
+                        <div class="language-card">🇯🇵 Jepang</div>
+                        <div class="language-card">🇰🇷 Korea</div>
+                        <div class="language-card">🇫🇷 Prancis</div>
+                    </div>
                 </div>
 
                 <div class="section">
                     <h3>Fitur Unggulan</h3>
                     <div class="features-grid">
                         <div class="feature-card" onclick="switchTab('flashcard')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
                             <h4>Flashcard Multi-Level</h4>
                             <p>Belajar kosakata dari beginner hingga advanced</p>
                         </div>
                         <div class="feature-card" onclick="switchTab('game')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"></line><line x1="8" y1="9" x2="8" y2="13"></line><line x1="15" y1="12" x2="15.01" y2="12"></line><line x1="18" y1="10" x2="18.01" y2="10"></line><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"></path></svg>
                             <h4>5 Game Seru</h4>
                             <p>Belajar sambil bermain dengan game interaktif</p>
                         </div>
                         <div class="feature-card" onclick="switchTab('chat')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                             <h4>Chatbot Pintar</h4>
                             <p>Tanya jawab dan latihan percakapan real-time</p>
                         </div>
@@ -105,137 +97,53 @@
                 </div>
             </div>
 
+            <!-- FLASHCARD -->
             <div id="flashcard-tab" class="tab-content">
                 <div class="content-wrapper">
-                    <div class="flashcard-header">
-                        <div>
-                            <h2>Flashcard Kosakata</h2>
-                            <p id="card-progress">Kartu 1 dari 5</p>
-                        </div>
-                        <div id="flashcard-level-badge" class="level-badge level-1">Level 1 - Beginner</div>
-                    </div>
-                    
+                    <h2>Flashcard Kosakata</h2>
                     <div id="flashcard" class="flashcard">
                         <div id="card-front" class="card-side">
-                            <div class="card-word"></div>
-                            <p class="card-hint">Klik untuk melihat terjemahan</p>
+                            <div class="card-word">Apple</div>
+                            <p class="card-hint">Klik untuk melihat arti</p>
                         </div>
                         <div id="card-back" class="card-side" style="display: none;">
-                            <div class="card-translation"></div>
-                            <div class="card-pronunciation"></div>
-                            <p class="card-example"></p>
+                            <div class="card-translation">Apel</div>
                             <p class="card-hint">Klik untuk kembali</p>
                         </div>
                     </div>
-
-                    <div class="flashcard-buttons">
-                        <button class="btn btn-secondary" onclick="nextCard()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
-                            Kartu Berikutnya
-                        </button>
-                        <button class="btn btn-primary" onclick="markAsLearned()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            <span id="learned-btn-text">Sudah Paham (+10pts)</span>
-                        </button>
-                    </div>
-
-                    <div class="progress-container">
-                        <div class="progress-text">
-                            <span>Progress Level <span id="progress-level">1</span></span>
-                            <span><span id="learned-count">0</span> / <span id="total-cards">5</span></span>
-                        </div>
-                        <div class="progress-bar">
-                            <div id="progress-fill" class="progress-fill"></div>
-                        </div>
-                    </div>
+                    <button class="btn btn-primary" onclick="nextCard()">Kartu Berikutnya</button>
                 </div>
             </div>
 
+            <!-- QUIZ -->
             <div id="quiz-tab" class="tab-content">
                 <div class="content-wrapper">
-                    <div id="quiz-start" class="quiz-start">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                        <div id="quiz-level-badge" class="level-badge level-1">Level 1 - Beginner</div>
-                        <h2>Kuis Bahasa</h2>
-                        <p>Uji pemahaman Anda dengan soal pilihan ganda!</p>
-                        <button class="btn btn-primary btn-lg" onclick="startQuiz()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            Mulai Kuis Level <span id="quiz-start-level">1</span>
-                        </button>
-                    </div>
-
-                    <div id="quiz-question" class="quiz-question" style="display: none;">
-                        <div class="quiz-header">
-                            <span id="question-number">Pertanyaan 1 / 4</span>
-                            <div class="quiz-stats">
-                                <span id="quiz-level-badge-game" class="level-badge level-1">Level 1</span>
-                                <span class="quiz-score">Skor: <span id="quiz-score">0</span></span>
-                            </div>
-                        </div>
-                        <h3 id="question-text"></h3>
-                        <div id="options-container" class="options-container"></div>
-                        <button id="next-question-btn" class="btn btn-primary" style="display: none;" onclick="nextQuestion()">Pertanyaan Berikutnya</button>
-                    </div>
-
-                    <div id="quiz-result" class="quiz-result" style="display: none;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-                        <h2>Kuis Selesai!</h2>
-                        <div id="final-score" class="final-score">0 / 4</div>
-                        <p id="result-message"></p>
-                        <button class="btn btn-primary" onclick="resetQuiz()">Coba Lagi</button>
-                    </div>
+                    <h2>Kuis Bahasa</h2>
+                    <p>Uji kemampuanmu dengan soal pilihan ganda!</p>
+                    <button class="btn btn-primary" onclick="startQuiz()">Mulai Kuis</button>
                 </div>
             </div>
 
+            <!-- GAME -->
             <div id="game-tab" class="tab-content">
-                <div id="game-selection" class="content-wrapper">
-                    <div class="game-header">
-                        <h2>Pilih Game</h2>
-                        <div id="game-level-badge" class="level-badge level-1">Level 1 - Beginner</div>
+                <div class="content-wrapper">
+                    <h2>Pilih Game</h2>
+                    <p>Bermain sambil belajar bahasa!</p>
+                    <div id="games-grid" class="games-grid">
+                        <div class="game-card">Tebak Kata</div>
+                        <div class="game-card">Susun Huruf</div>
+                        <div class="game-card">Cocokkan Arti</div>
                     </div>
-                    <div id="games-grid" class="games-grid"></div>
-                </div>
-
-                <div id="game-play" class="content-wrapper" style="display: none;">
-                    <div class="game-play-header">
-                        <div class="game-back-section">
-                            <button class="btn btn-back" onclick="backToGameSelection()">← Kembali</button>
-                            <h3 id="game-title"></h3>
-                        </div>
-                        <div class="game-stats">
-                            <div class="game-stat time">
-                                <span>Waktu</span>
-                                <div id="game-time">60s</div>
-                            </div>
-                            <div class="game-stat score-stat">
-                                <span>Skor</span>
-                                <div id="game-score-display">0</div>
-                            </div>
-                            <div class="game-stat lives">
-                                <span>Nyawa</span>
-                                <div id="game-lives"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="game-content"></div>
                 </div>
             </div>
 
+            <!-- CHAT -->
             <div id="chat-tab" class="tab-content">
                 <div class="chat-container">
-                    <div class="chat-header">
-                        <h2>Chatbot Pintar</h2>
-                        <p>Tanya jawab tentang bahasa dan latih percakapan</p>
-                    </div>
+                    <h2>Chatbot Pintar</h2>
                     <div id="chat-messages" class="chat-messages"></div>
                     <div class="chat-input-container">
-                        <input 
-                            id="chat-input" 
-                            type="text" 
-                            placeholder="Tanyakan tentang bahasa, kosakata, atau cara membaca..."
-                            onkeypress="if(event.key === 'Enter') sendMessage()"
-                        >
+                        <input id="chat-input" type="text" placeholder="Tanyakan sesuatu..." onkeypress="if(event.key==='Enter') sendMessage()">
                         <button class="btn btn-primary" onclick="sendMessage()">Kirim</button>
                     </div>
                 </div>
@@ -243,11 +151,14 @@
         </div>
     </main>
 
+    <!-- FOOTER -->
     <footer>
         <div class="container">
-            <p class="footer-brand">LangLearn.id</p>
+            <p class="footer-brand">Bahasaku.id</p>
             <p>Belajar Bahasa Jadi Menyenangkan dan Interaktif</p>
-            <p class="footer-copyright">© 2025 LangLearn.id - Platform Pembelajaran Bahasa</p>
+            <p class="footer-copyright">
+                © 2025 Bahasaku.id - Platform Pembelajaran Bahasa
+            </p>
         </div>
     </footer>
 
