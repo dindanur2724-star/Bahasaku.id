@@ -1,43 +1,23 @@
 // State
 let state = {
-    activeTab: 'home',
     selectedLanguage: 'english',
     score: 0,
     streak: 0,
-    userLevel: 1,
-    
-    // Flashcard
+    flashcardLevel: 1,
+    quizLevel: 1,
+    gameLevel: 1,
     currentCard: 0,
     isFlipped: false,
     learnedCards: [],
-    flashcardLevel: 1,
-    
-    // Quiz
-    quizStarted: false,
+    quizScore: 0,
     currentQuestion: 0,
     selectedAnswer: null,
-    quizScore: 0,
-    showResult: false,
-    quizLevel: 1,
-    
-    // Game
-    selectedGame: null,
     gameScore: 0,
-    gameTime: 60,
-    gameStarted: false,
-    currentWord: '',
-    userInput: '',
-    gameLevel: 1,
+    gameTime: 0,
     lives: 3,
-    gameOptions: [],
-    correctAnswer: '',
-    gameTimer: null,
-    
-    // Chat
     messages: [
         { role: 'bot', text: 'Halo! Saya asisten belajar bahasa Anda. Tanyakan apa saja tentang bahasa, kosakata, atau cara membaca kata! 👋' }
-    ],
-    isTyping: false
+    ]
 };
 
 // Data
