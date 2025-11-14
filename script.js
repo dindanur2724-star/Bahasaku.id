@@ -23,14 +23,14 @@ let state = {
 // Data
 const languages = [
     { id: 'english', name: 'English', flag: '🇬🇧' },
-    { id: 'indonesian', name: 'Indonesia', flag: '🇮🇩' },
-    { id: 'japanese', name: '日本語', flag: '🇯🇵' },
-    { id: 'korean', name: '한국어', flag: '🇰🇷' },
-    { id: 'chinese', name: '中文', flag: '🇨🇳' },
-    { id: 'malay', name: 'Melayu', flag: '🇲🇾' },
+    { id: 'indonesia', name: 'Indonesia', flag: '🇮🇩' },
+    { id: 'japan', name: '日本語', flag: '🇯🇵' },
+    { id: 'korea', name: '한국어', flag: '🇰🇷' },
+    { id: 'china', name: '中文', flag: '🇨🇳' },
+    { id: 'malaysia', name: 'Melayu', flag: '🇲🇾' },
     { id: 'singapore', name: 'Singlish', flag: '🇸🇬' },
-    { id: 'spanish', name: 'Español', flag: '🇪🇸' },
-    { id: 'french', name: 'Français', flag: '🇫🇷' }
+    { id: 'spain', name: 'Español', flag: '🇪🇸' },
+    { id: 'france', name: 'Français', flag: '🇫🇷' }
 ];
 
 const flashcardData = {
