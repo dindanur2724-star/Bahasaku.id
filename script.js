@@ -54,6 +54,7 @@ const languages = [
 ];
 
 const flashcardData = {
+const vocabulary = {
     english: {
         1: [
             { word: 'Hello', translation: 'Halo', pronunciation: 'hə-ˈlō', example: 'Hello, how are you?' },
@@ -92,124 +93,638 @@ const flashcardData = {
             { word: 'Unprecedented', translation: 'Belum pernah terjadi', pronunciation: 'ʌnˈpres.ɪ.den.tɪd', example: 'Unprecedented success!' }
         ]
     },
-    japanese: {
+
+    // ===============================
+    // INDONESIA
+    // ===============================
+    indonesia: {
         1: [
-            { word: 'こんにちは', translation: 'Halo', pronunciation: 'kon-ni-chi-wa', example: 'こんにちは、元気ですか？' },
-            { word: 'ありがとう', translation: 'Terima kasih', pronunciation: 'a-ri-ga-to-u', example: 'ありがとうございます' },
-            { word: 'はい', translation: 'Ya', pronunciation: 'hai', example: 'はい、そうです' },
-            { word: 'いいえ', translation: 'Tidak', pronunciation: 'i-i-e', example: 'いいえ、違います' },
-            { word: 'おはよう', translation: 'Selamat pagi', pronunciation: 'o-ha-yo-u', example: 'おはようございます' },
-            { word: 'さようなら', translation: 'Selamat tinggal', pronunciation: 'sa-yo-u-na-ra', example: 'さようなら、また明日' },
-            { word: 'おやすみ', translation: 'Selamat tidur', pronunciation: 'o-ya-su-mi', example: 'おやすみなさい' },
-            { word: 'ごめんなさい', translation: 'Maaf', pronunciation: 'go-me-n-na-sai', example: 'ごめんなさい' },
-            { word: 'どういたしまして', translation: 'Sama-sama', pronunciation: 'do-u-i-ta-shi-ma-shi-te', example: 'どういたしまして' },
-            { word: '愛', translation: 'Cinta', pronunciation: 'ai', example: '愛してる' }
+            { word: 'Halo', translation: 'Hello', pronunciation: 'ha-lo', example: 'Halo, apa kabar?' },
+            { word: 'Terima kasih', translation: 'Thank you', pronunciation: 'te-ri-ma ka-sih', example: 'Terima kasih banyak.' },
+            { word: 'Bagus', translation: 'Good', pronunciation: 'ba-gus', example: 'Itu bagus sekali.' },
+            { word: 'Ya', translation: 'Yes', pronunciation: 'ya', example: 'Ya, benar.' },
+            { word: 'Tidak', translation: 'No', pronunciation: 'ti-dak', example: 'Tidak, terima kasih.' },
+            { word: 'Tolong', translation: 'Please', pronunciation: 'to-long', example: 'Tolong bantu saya.' },
+            { word: 'Selamat datang', translation: 'Welcome', pronunciation: 'se-la-mat da-tang', example: 'Selamat datang di rumahku.' },
+            { word: 'Selamat tinggal', translation: 'Goodbye', pronunciation: 'se-la-mat ting-gal', example: 'Selamat tinggal, sampai jumpa.' },
+            { word: 'Maaf', translation: 'Sorry', pronunciation: 'ma-af', example: 'Maaf saya terlambat.' },
+            { word: 'Cinta', translation: 'Love', pronunciation: 'cin-ta', example: 'Aku cinta kamu.' }
         ],
         2: [
-            { word: '美しい', translation: 'Indah', pronunciation: 'u-tsu-ku-shi-i', example: '美しい景色' },
-            { word: '友達', translation: 'Teman', pronunciation: 'to-mo-da-chi', example: '彼は私の友達です' },
-            { word: '勉強', translation: 'Belajar', pronunciation: 'ben-kyou', example: '毎日勉強します' },
-            { word: '幸せ', translation: 'Bahagia', pronunciation: 'shi-a-wa-se', example: '幸せな気持ち' },
-            { word: '大切', translation: 'Penting', pronunciation: 'tai-se-tsu', example: '大切な友達' },
-            { word: '楽しい', translation: 'Menyenangkan', pronunciation: 'ta-no-shi-i', example: '楽しい時間' },
-            { word: '元気', translation: 'Semangat', pronunciation: 'gen-ki', example: '元気ですか？' },
-            { word: '頑張る', translation: 'Berusaha keras', pronunciation: 'gan-ba-ru', example: '頑張ってください' },
-            { word: '夢', translation: 'Mimpi', pronunciation: 'yu-me', example: '夢を追いかける' },
-            { word: '希望', translation: 'Harapan', pronunciation: 'ki-bou', example: '希望を持つ' }
+            { word: 'Indah', translation: 'Beautiful', pronunciation: 'in-dah', example: 'Hari ini sangat indah.' },
+            { word: 'Teman', translation: 'Friend', pronunciation: 'te-man', example: 'Dia teman baikku.' },
+            { word: 'Belajar', translation: 'Learn', pronunciation: 'be-la-jar', example: 'Saya belajar setiap hari.' },
+            { word: 'Bahagia', translation: 'Happy', pronunciation: 'ba-ha-gi-a', example: 'Saya merasa bahagia.' },
+            { word: 'Penting', translation: 'Important', pronunciation: 'pen-ting', example: 'Ini sangat penting.' },
+            { word: 'Menakjubkan', translation: 'Wonderful', pronunciation: 'me-nak-jub-kan', example: 'Tempat ini menakjubkan.' },
+            { word: 'Pengetahuan', translation: 'Knowledge', pronunciation: 'pe-na-hu-an', example: 'Pengetahuan adalah kekuatan.' },
+            { word: 'Perjalanan', translation: 'Journey', pronunciation: 'per-ja-la-nan', example: 'Hidup adalah perjalanan.' },
+            { word: 'Kesuksesan', translation: 'Success', pronunciation: 'ke-suk-se-san', example: 'Kesuksesan butuh usaha.' },
+            { word: 'Mimpi', translation: 'Dream', pronunciation: 'mim-pi', example: 'Kejar mimpimu.' }
         ],
         3: [
-            { word: '素晴らしい', translation: 'Luar biasa', pronunciation: 'su-ba-ra-shi-i', example: '素晴らしい経験' },
-            { word: '感動的', translation: 'Mengharukan', pronunciation: 'kan-dou-te-ki', example: '感動的な映画' },
-            { word: '挑戦', translation: 'Tantangan', pronunciation: 'chou-sen', example: '新しい挑戦' },
-            { word: '努力', translation: 'Usaha', pronunciation: 'do-ryo-ku', example: '努力が大切' },
-            { word: '成功', translation: 'Sukses', pronunciation: 'sei-kou', example: '成功への道' },
-            { word: '情熱', translation: 'Gairah', pronunciation: 'jou-ne-tsu', example: '情熱を持って' },
-            { word: '完璧', translation: 'Sempurna', pronunciation: 'kan-pe-ki', example: '完璧な計画' },
-            { word: '不思議', translation: 'Ajaib', pronunciation: 'fu-shi-gi', example: '不思議な出来事' },
-            { word: '驚異的', translation: 'Menakjubkan', pronunciation: 'kyou-i-te-ki', example: '驚異的な能力' },
-            { word: '革新的', translation: 'Inovatif', pronunciation: 'ka-ku-shin-te-ki', example: '革新的なアイデア' }
+            { word: 'Luar biasa', translation: 'Magnificent', pronunciation: 'lu-ar bi-a-sa', example: 'Pemandangan ini luar biasa.' },
+            { word: 'Antusias', translation: 'Enthusiastic', pronunciation: 'an-tu-si-as', example: 'Dia sangat antusias.' },
+            { word: 'Pencapaian', translation: 'Achievement', pronunciation: 'pen-ca-pai-an', example: 'Ini pencapaian besar.' },
+            { word: 'Ketekunan', translation: 'Perseverance', pronunciation: 'ke-te-ku-nan', example: 'Ketekunan membawa hasil.' },
+            { word: 'Istimewa', translation: 'Extraordinary', pronunciation: 'is-ti-me-wa', example: 'Hasilnya istimewa.' },
+            { word: 'Tekad', translation: 'Determination', pronunciation: 'te-kad', example: 'Tekadnya kuat.' },
+            { word: 'Filosofis', translation: 'Philosophical', pronunciation: 'fi-lo-so-fis', example: 'Pembahasan filosofis.' },
+            { word: 'Mengesankan', translation: 'Remarkable', pronunciation: 'meng-es-kan', example: 'Pekerjaannya mengesankan.' },
+            { word: 'Canggih', translation: 'Sophisticated', pronunciation: 'cang-gih', example: 'Teknologinya canggih.' },
+            { word: 'Belum pernah terjadi', translation: 'Unprecedented', pronunciation: 'be-lum pe-nah ter-ja-di', example: 'Ini belum pernah terjadi.' }
+        ]
+    },
+
+    // =====================================================
+    // KOREA (한국어)
+    // =====================================================
+    korea: {
+        1: [
+            { word: '안녕 (Annyeong)', translation: 'Hello', pronunciation: 'an-nyong', example: '안녕! 잘 지내?' },
+            { word: '감사합니다 (Gamsahamnida)', translation: 'Thank you', pronunciation: 'gam-sa-ham-ni-da', example: '정말 감사합니다!' },
+            { word: '좋다 (Jota)', translation: 'Good', pronunciation: 'jo-ta', example: '이거 좋다!' },
+            { word: '네 (Ne)', translation: 'Yes', pronunciation: 'ne', example: '네, 맞아요.' },
+            { word: '아니요 (Aniyo)', translation: 'No', pronunciation: 'a-ni-yo', example: '아니요, 괜찮아요.' },
+            { word: '제발 (Jebal)', translation: 'Please', pronunciation: 'je-bal', example: '제발 도와주세요.' },
+            { word: '어서오세요 (Eoseo-oseyo)', translation: 'Welcome', pronunciation: 'eo-seo-o-se-yo', example: '우리 집에 어서오세요!' },
+            { word: '안녕히 가세요 (Annyeonghi gaseyo)', translation: 'Goodbye', pronunciation: 'an-nyong-hi ga-se-yo', example: '안녕히 가세요!' },
+            { word: '미안해 (Mianhae)', translation: 'Sorry', pronunciation: 'mi-an-hae', example: '미안해, 늦었어.' },
+            { word: '사랑 (Sarang)', translation: 'Love', pronunciation: 'sa-rang', example: '너를 사랑해.' }
+        ],
+        2: [
+            { word: '아름답다 (Areumdapda)', translation: 'Beautiful', pronunciation: 'a-reum-dap-da', example: '정말 아름답다!' },
+            { word: '친구 (Chingu)', translation: 'Friend', pronunciation: 'chin-gu', example: '그녀는 내 친구야.' },
+            { word: '배우다 (Baeuda)', translation: 'Learn', pronunciation: 'bae-u-da', example: '나는 한국어를 배우고 있어.' },
+            { word: '행복하다 (Haengbokhada)', translation: 'Happy', pronunciation: 'haeng-bok-ha-da', example: '오늘 너무 행복해!' },
+            { word: '중요하다 (Jungyohada)', translation: 'Important', pronunciation: 'jung-yo-ha-da', example: '이건 정말 중요해.' },
+            { word: '멋지다 (Meotjida)', translation: 'Wonderful', pronunciation: 'meot-ji-da', example: '정말 멋지다!' },
+            { word: '지식 (Jisik)', translation: 'Knowledge', pronunciation: 'ji-sik', example: '지식은 힘이다.' },
+            { word: '여행 (Yeohaeng)', translation: 'Journey', pronunciation: 'yeo-haeng', example: '인생은 여행이다.' },
+            { word: '성공 (Seonggong)', translation: 'Success', pronunciation: 'seong-gong', example: '성공은 노력에서 온다.' },
+            { word: '꿈 (Kkum)', translation: 'Dream', pronunciation: 'kkum', example: '꿈을 따라가라!' }
+        ],
+        3: [
+            { word: '웅장하다 (Ungjanghada)', translation: 'Magnificent', pronunciation: 'ung-jang-ha-da', example: '웅장한 풍경이다.' },
+            { word: '열정적이다 (Yeoljungjeogida)', translation: 'Enthusiastic', pronunciation: 'yeol-jeong-jeo-gi-da', example: '그녀는 정말 열정적이야!' },
+            { word: '업적 (Eopjeok)', translation: 'Achievement', pronunciation: 'eop-jeok', example: '큰 업적을 이루었다.' },
+            { word: '인내 (Innae)', translation: 'Perseverance', pronunciation: 'in-nae', example: '성공엔 인내가 필요하다.' },
+            { word: '비범하다 (Bibeomhada)', translation: 'Extraordinary', pronunciation: 'bi-beom-ha-da', example: '비범한 재능이다.' },
+            { word: '결단력 (Gyeoldanryeok)', translation: 'Determination', pronunciation: 'gyeol-dan-ryeok', example: '강한 결단력이다.' },
+            { word: '철학적 (Cheolhakjeok)', translation: 'Philosophical', pronunciation: 'cheol-hak-jeok', example: '철학적 토론을 했다.' },
+            { word: '놀랍다 (Nollaapda)', translation: 'Remarkable', pronunciation: 'nol-lap-da', example: '정말 놀랍다!' },
+            { word: '정교하다 (Jeonggyohada)', translation: 'Sophisticated', pronunciation: 'jeong-gyo-ha-da', example: '정교한 기술이다.' },
+            { word: '전례 없다 (Jeollye eopda)', translation: 'Unprecedented', pronunciation: 'jeol-rye eop-da', example: '전례 없는 성공이다.' }
+        ]
+    },
+
+    // =====================================================
+    // CHINESE (Mandarin)
+    // =====================================================
+    china: {
+        1: [
+            { word: '你好 (Nǐ hǎo)', translation: 'Hello', pronunciation: 'ni hao', example: '你好，你好吗？' },
+            { word: '谢谢 (Xièxiè)', translation: 'Thank you', pronunciation: 'shie-shie', example: '谢谢你的帮助。' },
+            { word: '好 (Hǎo)', translation: 'Good', pronunciation: 'hao', example: '很好！' },
+            { word: '是 (Shì)', translation: 'Yes', pronunciation: 'shi', example: '是的，我同意。' },
+            { word: '不 (Bù)', translation: 'No', pronunciation: 'bu', example: '不，谢谢。' },
+            { word: '请 (Qǐng)', translation: 'Please', pronunciation: 'ching', example: '请帮帮我。' },
+            { word: '欢迎 (Huānyíng)', translation: 'Welcome', pronunciation: 'huan-ying', example: '欢迎来到我家。' },
+            { word: '再见 (Zàijiàn)', translation: 'Goodbye', pronunciation: 'zai-jian', example: '再见，明天见！' },
+            { word: '对不起 (Duìbuqǐ)', translation: 'Sorry', pronunciation: 'dwei-bu-chi', example: '对不起，我迟到了。' },
+            { word: '爱 (Ài)', translation: 'Love', pronunciation: 'ai', example: '我爱你。' }
+        ],
+        2: [
+            { word: '美丽 (Měilì)', translation: 'Beautiful', pronunciation: 'mei-li', example: '多么美丽的一天！' },
+            { word: '朋友 (Péngyǒu)', translation: 'Friend', pronunciation: 'peng-yo', example: '他是我最好的朋友。' },
+            { word: '学习 (Xuéxí)', translation: 'Learn', pronunciation: 'shweh-shee', example: '我每天学习中文。' },
+            { word: '快乐 (Kuàilè)', translation: 'Happy', pronunciation: 'kwai-le', example: '我今天很快乐！' },
+            { word: '重要 (Zhòngyào)', translation: 'Important', pronunciation: 'jong-yao', example: '这非常重要。' },
+            { word: '精彩 (Jīngcǎi)', translation: 'Wonderful', pronunciation: 'jing-tsai', example: '精彩的表演！' },
+            { word: '知识 (Zhīshi)', translation: 'Knowledge', pronunciation: 'jir-shi', example: '知识就是力量。' },
+            { word: '旅程 (Lǚchéng)', translation: 'Journey', pronunciation: 'lyu-cheng', example: '生活是一段旅程。' },
+            { word: '成功 (Chénggōng)', translation: 'Success', pronunciation: 'cheng-gong', example: '成功需要努力。' },
+            { word: '梦想 (Mèngxiǎng)', translation: 'Dream', pronunciation: 'mung-syang', example: '追随你的梦想！' }
+        ],
+        3: [
+            { word: '壮丽 (Zhuànglì)', translation: 'Magnificent', pronunciation: 'jwang-li', example: '壮丽的景色。' },
+            { word: '热情 (Rèqíng)', translation: 'Enthusiastic', pronunciation: 'ruh-ching', example: '她非常热情。' },
+            { word: '成就 (Chéngjiù)', translation: 'Achievement', pronunciation: 'cheng-jyo', example: '伟大的成就。' },
+            { word: '毅力 (Yìlì)', translation: 'Perseverance', pronunciation: 'yi-li', example: '成功需要毅力。' },
+            { word: '非凡 (Fēifán)', translation: 'Extraordinary', pronunciation: 'fei-fan', example: '非凡的表现。' },
+            { word: '决心 (Juéxīn)', translation: 'Determination', pronunciation: 'jyweh-sin', example: '他的决心令人敬佩。' },
+            { word: '哲学的 (Zhéxué de)', translation: 'Philosophical', pronunciation: 'jer-shweh de', example: '一次哲学的讨论。' },
+            { word: '显著 (Xiǎnzhù)', translation: 'Remarkable', pronunciation: 'syen-joo', example: '显著的进步。' },
+            { word: '复杂 (Fùzá)', translation: 'Sophisticated', pronunciation: 'foo-dza', example: '复杂的技术。' },
+            { word: '前所未有 (Qiánsuǒ wèiyǒu)', translation: 'Unprecedented', pronunciation: 'chyensuowei-yo', example: '前所未有的成功。' }
+        ]
+    },
+
+    // =====================================================
+    // MALAYSIA
+    // =====================================================
+    malaysia: {
+        1: [
+            { word: 'Helo', translation: 'Hello', pronunciation: 'he-lo', example: 'Helo, apa khabar?' },
+            { word: 'Terima kasih', translation: 'Thank you', pronunciation: 'te-ri-ma ka-sih', example: 'Terima kasih banyak.' },
+            { word: 'Bagus', translation: 'Good', pronunciation: 'ba-gus', example: 'Itu sangat bagus.' },
+            { word: 'Ya', translation: 'Yes', pronunciation: 'ya', example: 'Ya, betul.' },
+            { word: 'Tidak', translation: 'No', pronunciation: 'ti-dak', example: 'Tidak, terima kasih.' },
+            { word: 'Tolong', translation: 'Please', pronunciation: 'to-long', example: 'Tolong bantu saya.' },
+            { word: 'Selamat datang', translation: 'Welcome', pronunciation: 'se-la-mat da-tang', example: 'Selamat datang ke rumah saya.' },
+            { word: 'Selamat tinggal', translation: 'Goodbye', pronunciation: 'se-la-mat ting-gal', example: 'Selamat tinggal!' },
+            { word: 'Maaf', translation: 'Sorry', pronunciation: 'ma-af', example: 'Maaf kerana lewat.' },
+            { word: 'Cinta', translation: 'Love', pronunciation: 'cin-ta', example: 'Saya cinta awak.' }
+        ],
+        2: [
+            { word: 'Indah', translation: 'Beautiful', pronunciation: 'in-dah', example: 'Pemandangan ini sangat indah.' },
+            { word: 'Kawan', translation: 'Friend', pronunciation: 'ka-wan', example: 'Dia kawan baik saya.' },
+            { word: 'Belajar', translation: 'Learn', pronunciation: 'be-la-jar', example: 'Saya belajar setiap hari.' },
+            { word: 'Bahagia', translation: 'Happy', pronunciation: 'ba-ha-gi-a', example: 'Saya berasa bahagia.' },
+            { word: 'Penting', translation: 'Important', pronunciation: 'pen-ting', example: 'Ini sangat penting.' },
+            { word: 'Hebat', translation: 'Wonderful', pronunciation: 'he-bat', example: 'Itu memang hebat!' },
+            { word: 'Ilmu', translation: 'Knowledge', pronunciation: 'il-mu', example: 'Ilmu adalah kuasa.' },
+            { word: 'Perjalanan', translation: 'Journey', pronunciation: 'per-ja-la-nan', example: 'Hidup adalah perjalanan.' },
+            { word: 'Kejayaan', translation: 'Success', pronunciation: 'ke-ja-ya-an', example: 'Kejayaan perlukan usaha.' },
+            { word: 'Impian', translation: 'Dream', pronunciation: 'im-pi-an', example: 'Kejar impian anda.' }
+        ],
+        3: [
+            { word: 'Mengagumkan', translation: 'Magnificent', pronunciation: 'meng-a-gum-kan', example: 'Pemandangannya mengagumkan.' },
+            { word: 'Bersemangat', translation: 'Enthusiastic', pronunciation: 'ber-se-ma-ngat', example: 'Dia sangat bersemangat.' },
+            { word: 'Pencapaian', translation: 'Achievement', pronunciation: 'pen-ca-pa-ian', example: 'Ini satu pencapaian besar.' },
+            { word: 'Ketabahan', translation: 'Perseverance', pronunciation: 'ke-ta-ba-han', example: 'Ketabahan membawa kejayaan.' },
+            { word: 'Luar biasa', translation: 'Extraordinary', pronunciation: 'lu-ar bi-a-sa', example: 'Ini luar biasa!' },
+            { word: 'Tekad', translation: 'Determination', pronunciation: 'te-kad', example: 'Dia ada tekad yang kuat.' },
+            { word: 'Falsafah', translation: 'Philosophical', pronunciation: 'fal-sa-fah', example: 'Perbincangan falsafah.' },
+            { word: 'Mengagumkan', translation: 'Remarkable', pronunciation: 'meng-a-gum-kan', example: 'Pencapaian itu mengagumkan.' },
+            { word: 'Canggih', translation: 'Sophisticated', pronunciation: 'cang-gih', example: 'Teknologinya sangat canggih.' },
+            { word: 'Belum pernah berlaku', translation: 'Unprecedented', pronunciation: 'be-lum per-nah ber-la-ku', example: 'Ini belum pernah berlaku.' }
+        ]
+    },
+
+    // =====================================================
+    // SINGAPORE (Singapore English)
+    // =====================================================
+    singapore: {
+        1: [
+            { word: 'Hello lah', translation: 'Hello', pronunciation: 'he-lo la', example: 'Hello lah, how are you?' },
+            { word: 'Thank you', translation: 'Terima kasih', pronunciation: 'teng-kiu', example: 'Thank you ah!' },
+            { word: 'Good', translation: 'Bagus', pronunciation: 'gud', example: 'Very good lah!' },
+            { word: 'Yes', translation: 'Ya', pronunciation: 'yes', example: 'Yes can!' },
+            { word: 'No', translation: 'Tidak', pronunciation: 'noh', example: 'No cannot.' },
+            { word: 'Please', translation: 'Tolong', pronunciation: 'plees', example: 'Please help me can?' },
+            { word: 'Welcome', translation: 'Selamat datang', pronunciation: 'wel-kum', example: 'Welcome to Singapore!' },
+            { word: 'Bye', translation: 'Selamat tinggal', pronunciation: 'bai', example: 'Bye, see you lah!' },
+            { word: 'Sorry ah', translation: 'Maaf', pronunciation: 'so-ri ah', example: 'Sorry ah, my mistake.' },
+            { word: 'Love', translation: 'Cinta', pronunciation: 'lav', example: 'I love Singapore food lah!' }
+        ],
+        2: [
+            { word: 'Beautiful', translation: 'Indah', pronunciation: 'byu-ti-ful', example: 'Singapore night view very beautiful.' },
+            { word: 'Friend', translation: 'Teman', pronunciation: 'fren', example: 'He is my good friend lah.' },
+            { word: 'Learn', translation: 'Belajar', pronunciation: 'lern', example: 'I learn new things every day.' },
+            { word: 'Happy', translation: 'Bahagia', pronunciation: 'ha-pi', example: 'I feel very happy today.' },
+            { word: 'Important', translation: 'Penting', pronunciation: 'im-por-tent', example: 'This is very important lah.' },
+            { word: 'Wonderful', translation: 'Menakjubkan', pronunciation: 'won-der-ful', example: 'What a wonderful surprise!' },
+            { word: 'Knowledge', translation: 'Pengetahuan', pronunciation: 'nol-lej', example: 'Knowledge is power, lah!' },
+            { word: 'Journey', translation: 'Perjalanan', pronunciation: 'jer-ni', example: 'Life is a journey.' },
+            { word: 'Success', translation: 'Kesuksesan', pronunciation: 'sak-ses', example: 'Success needs effort.' },
+            { word: 'Dream', translation: 'Mimpi', pronunciation: 'drim', example: 'Chase your dreams lah!' }
+        ],
+        3: [
+            { word: 'Magnificent', translation: 'Luar biasa', pronunciation: 'mag-ni-fi-cent', example: 'The view is magnificent.' },
+            { word: 'Enthusiastic', translation: 'Antusias', pronunciation: 'en-thu-si-as-tik', example: 'She is very enthusiastic.' },
+            { word: 'Achievement', translation: 'Pencapaian', pronunciation: 'a-chiv-ment', example: 'A great achievement.' },
+            { word: 'Perseverance', translation: 'Ketekunan', pronunciation: 'per-se-ver-ens', example: 'Perseverance brings success.' },
+            { word: 'Extraordinary', translation: 'Luar biasa', pronunciation: 'ex-tra-or-di-na-ri', example: 'Extraordinary performance!' },
+            { word: 'Determination', translation: 'Tekad', pronunciation: 'di-ter-mi-ne-shen', example: 'Strong determination is needed.' },
+            { word: 'Philosophical', translation: 'Filosofis', pronunciation: 'fi-lo-so-fi-cal', example: 'A philosophical talk.' },
+            { word: 'Remarkable', translation: 'Mengesankan', pronunciation: 'ri-mar-ka-bel', example: 'Remarkable progress.' },
+            { word: 'Sophisticated', translation: 'Canggih', pronunciation: 'so-fi-sti-ke-tid', example: 'Sophisticated system.' },
+            { word: 'Unprecedented', translation: 'Belum pernah terjadi', pronunciation: 'an-pre-si-den-ted', example: 'Unprecedented growth.' }
+        ]
+    },
+
+    // =====================================================
+    // SPANISH (Español)
+    // =====================================================
+    spanish: {
+        1: [
+            { word: 'Hola', translation: 'Hello', pronunciation: 'o-la', example: 'Hola, ¿cómo estás?' },
+            { word: 'Gracias', translation: 'Thank you', pronunciation: 'gra-sias', example: '¡Muchas gracias!' },
+            { word: 'Bueno', translation: 'Good', pronunciation: 'bwe-no', example: 'Esto es bueno.' },
+            { word: 'Sí', translation: 'Yes', pronunciation: 'si', example: 'Sí, estoy de acuerdo.' },
+            { word: 'No', translation: 'Tidak', pronunciation: 'no', example: 'No, gracias.' },
+            { word: 'Por favor', translation: 'Please', pronunciation: 'por fa-bor', example: 'Por favor, ayúdame.' },
+            { word: 'Bienvenido', translation: 'Welcome', pronunciation: 'byen-ve-ni-do', example: 'Bienvenido a mi casa.' },
+            { word: 'Adiós', translation: 'Goodbye', pronunciation: 'a-dios', example: 'Adiós, nos vemos.' },
+            { word: 'Lo siento', translation: 'Sorry', pronunciation: 'lo syen-to', example: 'Lo siento por llegar tarde.' },
+            { word: 'Amor', translation: 'Love', pronunciation: 'a-mor', example: '¡Te amo!' }
+        ],
+        2: [
+            { word: 'Hermoso', translation: 'Beautiful', pronunciation: 'er-mo-so', example: '¡Qué día tan hermoso!' },
+            { word: 'Amigo', translation: 'Friend', pronunciation: 'a-mi-go', example: 'Él es mi mejor amigo.' },
+            { word: 'Aprender', translation: 'Learn', pronunciation: 'a-pren-der', example: 'Aprendo español cada día.' },
+            { word: 'Feliz', translation: 'Happy', pronunciation: 'fe-lis', example: 'Estoy muy feliz hoy.' },
+            { word: 'Importante', translation: 'Important', pronunciation: 'im-por-tan-te', example: 'Esto es muy importante.' },
+            { word: 'Maravilloso', translation: 'Wonderful', pronunciation: 'ma-ra-vi-yo-so', example: '¡Es maravilloso!' },
+            { word: 'Conocimiento', translation: 'Knowledge', pronunciation: 'ko-no-si-myen-to', example: 'El conocimiento es poder.' },
+            { word: 'Viaje', translation: 'Journey', pronunciation: 'bya-he', example: 'La vida es un viaje.' },
+            { word: 'Éxito', translation: 'Success', pronunciation: 'ek-si-to', example: 'El éxito requiere trabajo duro.' },
+            { word: 'Sueño', translation: 'Dream', pronunciation: 'swe-nyo', example: 'Sigue tus sueños.' }
+        ],
+        3: [
+            { word: 'Magnífico', translation: 'Magnificent', pronunciation: 'mag-ni-fi-co', example: '¡Una vista magnífica!' },
+            { word: 'Entusiasta', translation: 'Enthusiastic', pronunciation: 'en-tu-sias-ta', example: 'Ella estaba muy entusiasta.' },
+            { word: 'Logro', translation: 'Achievement', pronunciation: 'lo-gro', example: 'Un gran logro.' },
+            { word: 'Perseverancia', translation: 'Perseverance', pronunciation: 'per-se-ve-ran-sia', example: 'El éxito necesita perseverancia.' },
+            { word: 'Extraordinario', translation: 'Extraordinary', pronunciation: 'ex-tra-or-di-na-rio', example: 'Un rendimiento extraordinario.' },
+            { word: 'Determinación', translation: 'Determination', pronunciation: 'de-ter-mi-na-sion', example: 'Su determinación es inspiradora.' },
+            { word: 'Filosófico', translation: 'Philosophical', pronunciation: 'fi-lo-so-fi-co', example: 'Una conversación filosófica.' },
+            { word: 'Notable', translation: 'Remarkable', pronunciation: 'no-ta-ble', example: 'Un progreso notable.' },
+            { word: 'Sofisticado', translation: 'Sophisticated', pronunciation: 'so-fis-ti-ka-do', example: 'Tecnología sofisticada.' },
+            { word: 'Sin precedentes', translation: 'Unprecedented', pronunciation: 'sin pre-ce-den-tes', example: 'Un éxito sin precedentes.' }
+        ]
+    },
+
+    // =====================================================
+    // FRENCH (Français)
+    // =====================================================
+    french: {
+        1: [
+            { word: 'Bonjour', translation: 'Hello', pronunciation: 'bon-jour', example: 'Bonjour, comment ça va ?' },
+            { word: 'Merci', translation: 'Thank you', pronunciation: 'mer-si', example: 'Merci beaucoup !' },
+            { word: 'Bon', translation: 'Good', pronunciation: 'bon', example: 'C’est très bon.' },
+            { word: 'Oui', translation: 'Yes', pronunciation: 'wi', example: 'Oui, je suis d’accord.' },
+            { word: 'Non', translation: 'No', pronunciation: 'non', example: 'Non, merci.' },
+            { word: 'S’il vous plaît', translation: 'Please', pronunciation: 'sil vu ple', example: 'S’il vous plaît, aidez-moi.' },
+            { word: 'Bienvenue', translation: 'Welcome', pronunciation: 'byan-ve-nu', example: 'Bienvenue chez moi.' },
+            { word: 'Au revoir', translation: 'Goodbye', pronunciation: 'o rev-war', example: 'Au revoir, à bientôt.' },
+            { word: 'Pardon', translation: 'Sorry', pronunciation: 'par-don', example: 'Pardon pour le retard.' },
+            { word: 'Amour', translation: 'Love', pronunciation: 'a-mur', example: 'Je t’aime.' }
+        ],
+        2: [
+            { word: 'Magnifique', translation: 'Beautiful', pronunciation: 'mag-ni-fik', example: 'Quelle journée magnifique !' },
+            { word: 'Ami', translation: 'Friend', pronunciation: 'a-mi', example: 'Il est mon meilleur ami.' },
+            { word: 'Apprendre', translation: 'Learn', pronunciation: 'a-pran-dre', example: 'J’apprends le français.' },
+            { word: 'Heureux', translation: 'Happy', pronunciation: 'o-reu', example: 'Je suis très heureux.' },
+            { word: 'Important', translation: 'Important', pronunciation: 'am-por-tan', example: 'C’est très important.' },
+            { word: 'Merveilleux', translation: 'Wonderful', pronunciation: 'mer-vey-eu', example: 'C’est merveilleux !' },
+            { word: 'Connaissance', translation: 'Knowledge', pronunciation: 'ko-nes-ans', example: 'La connaissance est le pouvoir.' },
+            { word: 'Voyage', translation: 'Journey', pronunciation: 'vwa-yaj', example: 'La vie est un voyage.' },
+            { word: 'Succès', translation: 'Success', pronunciation: 'suk-se', example: 'Le succès demande du travail.' },
+            { word: 'Rêve', translation: 'Dream', pronunciation: 'rev', example: 'Suis tes rêves.' }
+        ],
+        3: [
+            { word: 'Splendide', translation: 'Magnificent', pronunciation: 'splon-did', example: 'Une vue splendide !' },
+            { word: 'Enthousiaste', translation: 'Enthusiastic', pronunciation: 'an-tu-zias-t', example: 'Elle est très enthousiaste.' },
+            { word: 'Accomplissement', translation: 'Achievement', pronunciation: 'a-kom-plis-man', example: 'Un grand accomplissement.' },
+            { word: 'Persévérance', translation: 'Perseverance', pronunciation: 'per-se-ve-rans', example: 'La persévérance mène au succès.' },
+            { word: 'Extraordinaire', translation: 'Extraordinary', pronunciation: 'ex-tra-or-di-ner', example: 'Une performance extraordinaire.' },
+            { word: 'Détermination', translation: 'Determination', pronunciation: 'de-ter-mi-na-sion', example: 'Sa détermination est inspirante.' },
+            { word: 'Philosophique', translation: 'Philosophical', pronunciation: 'fi-lo-zo-fik', example: 'Une discussion philosophique.' },
+            { word: 'Remarquable', translation: 'Remarkable', pronunciation: 're-mar-ka-ble', example: 'Un progrès remarquable.' },
+            { word: 'Sophistiqué', translation: 'Sophisticated', pronunciation: 'so-fis-ti-ke', example: 'Un système sophistiqué.' },
+            { word: 'Sans précédent', translation: 'Unprecedented', pronunciation: 'son pre-ce-don', example: 'Un succès sans précédent.' }
         ]
     }
 };
+}
 
 const quizData = {
     english: {
         1: [
-            { question: 'Apa arti "Hello" dalam Bahasa Indonesia?', options: ['Selamat tinggal', 'Halo', 'Tolong', 'Maaf'], correct: 1 },
-            { question: 'Terjemahkan "Terima kasih" ke Bahasa Inggris', options: ['Hello', 'Thank you', 'Goodbye', 'Please'], correct: 1 },
-            { question: 'Apa arti dari "Good"?', options: ['Jelek', 'Bagus', 'Besar', 'Kecil'], correct: 1 },
-            { question: 'Pilih terjemahan "Ya" dalam Bahasa Inggris', options: ['No', 'Maybe', 'Yes', 'Can'], correct: 2 },
-            { question: 'Apa arti "Please"?', options: ['Maaf', 'Tolong', 'Terima kasih', 'Ya'], correct: 1 },
-            { question: 'Terjemahkan "Selamat datang"', options: ['Goodbye', 'Welcome', 'Hello', 'Sorry'], correct: 1 },
-            { question: 'Apa bahasa Inggris dari "Selamat tinggal"?', options: ['Hello', 'Welcome', 'Goodbye', 'Thanks'], correct: 2 },
-            { question: 'Pilih arti "Sorry"', options: ['Senang', 'Maaf', 'Bagus', 'Tolong'], correct: 1 },
-            { question: 'Apa arti "Love"?', options: ['Benci', 'Suka', 'Cinta', 'Teman'], correct: 2 },
-            { question: 'Terjemahkan "Tidak" ke Bahasa Inggris', options: ['Yes', 'No', 'Maybe', 'Never'], correct: 1 }
+            { word: 'Hello', translation: 'Halo', pronunciation: 'hə-ˈlō', example: 'Hello, how are you?' },
+            { word: 'Thank you', translation: 'Terima kasih', pronunciation: 'θæŋk juː', example: 'Thank you very much!' },
+            { word: 'Good', translation: 'Bagus', pronunciation: 'ɡʊd', example: 'This is good!' },
+            { word: 'Yes', translation: 'Ya', pronunciation: 'jes', example: 'Yes, I agree.' },
+            { word: 'No', translation: 'Tidak', pronunciation: 'noʊ', example: 'No, thank you.' },
+            { word: 'Please', translation: 'Tolong', pronunciation: 'pliːz', example: 'Please help me.' },
+            { word: 'Welcome', translation: 'Selamat datang', pronunciation: 'ˈwel.kəm', example: 'Welcome to my home!' },
+            { word: 'Goodbye', translation: 'Selamat tinggal', pronunciation: 'ɡʊdˈbaɪ', example: 'Goodbye, see you!' },
+            { word: 'Sorry', translation: 'Maaf', pronunciation: 'ˈsɒr.i', example: 'Sorry for being late.' },
+            { word: 'Love', translation: 'Cinta', pronunciation: 'lʌv', example: 'I love you!' }
         ],
         2: [
-            { question: 'Apa arti "Beautiful"?', options: ['Jelek', 'Indah', 'Besar', 'Kecil'], correct: 1 },
-            { question: 'Terjemahkan "Belajar" ke Bahasa Inggris', options: ['Play', 'Work', 'Learn', 'Sleep'], correct: 2 },
-            { question: 'Apa arti dari "Friend"?', options: ['Musuh', 'Teman', 'Keluarga', 'Guru'], correct: 1 },
-            { question: 'Pilih arti "Happy"', options: ['Sedih', 'Marah', 'Bahagia', 'Lelah'], correct: 2 },
-            { question: 'Apa arti "Important"?', options: ['Biasa', 'Penting', 'Kecil', 'Besar'], correct: 1 },
-            { question: 'Terjemahkan "Menakjubkan"', options: ['Boring', 'Wonderful', 'Terrible', 'Simple'], correct: 1 },
-            { question: 'Apa arti "Knowledge"?', options: ['Kebodohan', 'Pengetahuan', 'Pengalaman', 'Pekerjaan'], correct: 1 },
-            { question: 'Pilih arti "Journey"', options: ['Tujuan', 'Rumah', 'Perjalanan', 'Kendaraan'], correct: 2 },
-            { question: 'Apa arti "Success"?', options: ['Kegagalan', 'Kesuksesan', 'Masalah', 'Keberuntungan'], correct: 1 },
-            { question: 'Terjemahkan "Mimpi"', options: ['Reality', 'Dream', 'Sleep', 'Night'], correct: 1 }
+            { word: 'Beautiful', translation: 'Indah', pronunciation: 'ˈbjuː.tɪ.fəl', example: 'What a beautiful day!' },
+            { word: 'Friend', translation: 'Teman', pronunciation: 'frend', example: 'She is my best friend.' },
+            { word: 'Learn', translation: 'Belajar', pronunciation: 'lɜːrn', example: 'I learn English every day.' },
+            { word: 'Happy', translation: 'Bahagia', pronunciation: 'ˈhæp.i', example: 'I am so happy today!' },
+            { word: 'Important', translation: 'Penting', pronunciation: 'ɪmˈpɔːr.tənt', example: 'This is very important.' },
+            { word: 'Wonderful', translation: 'Menakjubkan', pronunciation: 'ˈwʌn.də.fəl', example: 'What a wonderful surprise!' },
+            { word: 'Knowledge', translation: 'Pengetahuan', pronunciation: 'ˈnɒl.ɪdʒ', example: 'Knowledge is power.' },
+            { word: 'Journey', translation: 'Perjalanan', pronunciation: 'ˈdʒɜː.ni', example: 'Life is a journey.' },
+            { word: 'Success', translation: 'Kesuksesan', pronunciation: 'səkˈses', example: 'Success requires hard work.' },
+            { word: 'Dream', translation: 'Mimpi', pronunciation: 'driːm', example: 'Follow your dreams!' }
         ],
         3: [
-            { question: 'Apa arti "Magnificent"?', options: ['Sederhana', 'Luar biasa', 'Biasa', 'Jelek'], correct: 1 },
-            { question: 'Terjemahkan "Ketekunan" ke Bahasa Inggris', options: ['Laziness', 'Perseverance', 'Happiness', 'Sadness'], correct: 1 },
-            { question: 'Apa arti "Enthusiastic"?', options: ['Malas', 'Lelah', 'Antusias', 'Bosan'], correct: 2 },
-            { question: 'Pilih arti "Achievement"', options: ['Kegagalan', 'Pencapaian', 'Masalah', 'Pertanyaan'], correct: 1 },
-            { question: 'Apa arti "Extraordinary"?', options: ['Biasa', 'Luar biasa', 'Sederhana', 'Normal'], correct: 1 },
-            { question: 'Terjemahkan "Tekad"', options: ['Doubt', 'Fear', 'Determination', 'Confusion'], correct: 2 },
-            { question: 'Apa arti "Philosophical"?', options: ['Praktis', 'Filosofis', 'Sederhana', 'Konkret'], correct: 1 },
-            { question: 'Pilih arti "Remarkable"', options: ['Biasa saja', 'Luar biasa', 'Jelek', 'Membosankan'], correct: 1 },
-            { question: 'Apa arti "Sophisticated"?', options: ['Sederhana', 'Kuno', 'Canggih', 'Rusak'], correct: 2 },
-            { question: 'Terjemahkan "Belum pernah terjadi"', options: ['Common', 'Unprecedented', 'Usual', 'Regular'], correct: 1 }
+            { word: 'Magnificent', translation: 'Luar biasa', pronunciation: 'mæɡˈnɪf.ɪ.sənt', example: 'A magnificent view!' },
+            { word: 'Enthusiastic', translation: 'Antusias', pronunciation: 'ɪnˌθuː.ziˈæs.tɪk', example: 'She was enthusiastic!' },
+            { word: 'Achievement', translation: 'Pencapaian', pronunciation: 'əˈtʃiːv.mənt', example: 'Great achievement.' },
+            { word: 'Perseverance', translation: 'Ketekunan', pronunciation: 'ˌpɜː.sɪˈvɪə.rəns', example: 'Success needs perseverance.' },
+            { word: 'Extraordinary', translation: 'Luar biasa', pronunciation: 'ɪkˈstrɔːr.dɪ.ner.i', example: 'Extraordinary performance!' },
+            { word: 'Determination', translation: 'Tekad', pronunciation: 'dɪˌtɜː.mɪˈneɪ.ʃən', example: 'His determination is inspiring.' },
+            { word: 'Philosophical', translation: 'Filosofis', pronunciation: 'ˌfɪl.əˈsɒf.ɪ.kəl', example: 'A philosophical discussion.' },
+            { word: 'Remarkable', translation: 'Luar biasa', pronunciation: 'rɪˈmɑː.kə.bəl', example: 'Remarkable progress!' },
+            { word: 'Sophisticated', translation: 'Canggih', pronunciation: 'səˈfɪs.tɪ.keɪ.tɪd', example: 'Sophisticated technology.' },
+            { word: 'Unprecedented', translation: 'Belum pernah terjadi', pronunciation: 'ʌnˈpres.ɪ.den.tɪd', example: 'Unprecedented success!' }
         ]
     },
-    japanese: {
+
+    // ===============================
+    // INDONESIA
+    // ===============================
+    indonesia: {
         1: [
-            { question: 'Apa arti "ありがとう"?', options: ['Halo', 'Selamat tinggal', 'Terima kasih', 'Maaf'], correct: 2 },
-            { question: 'Pilih terjemahan "はい"', options: ['Tidak', 'Ya', 'Mungkin', 'Tolong'], correct: 1 },
-            { question: 'Apa bahasa Jepang dari "Halo"?', options: ['さようなら', 'こんにちは', 'おやすみ', 'ありがとう'], correct: 1 },
-            { question: 'Apa arti "いいえ"?', options: ['Ya', 'Tolong', 'Tidak', 'Maaf'], correct: 2 },
-            { question: 'Terjemahkan "おはよう"', options: ['Selamat malam', 'Selamat siang', 'Selamat tinggal', 'Selamat pagi'], correct: 3 },
-            { question: 'Apa arti "さようなら"?', options: ['Halo', 'Terima kasih', 'Selamat tinggal', 'Maaf'], correct: 2 },
-            { question: 'Pilih arti "おやすみ"', options: ['Selamat pagi', 'Selamat siang', 'Selamat tidur', 'Selamat datang'], correct: 2 },
-            { question: 'Apa arti "ごめんなさい"?', options: ['Terima kasih', 'Maaf', 'Tolong', 'Ya'], correct: 1 },
-            { question: 'Terjemahkan "どういたしまして"', options: ['Terima kasih', 'Sama-sama', 'Halo', 'Maaf'], correct: 1 },
-            { question: 'Apa arti "愛"?', options: ['Benci', 'Suka', 'Cinta', 'Teman'], correct: 2 }
+            { word: 'Halo', translation: 'Hello', pronunciation: 'ha-lo', example: 'Halo, apa kabar?' },
+            { word: 'Terima kasih', translation: 'Thank you', pronunciation: 'te-ri-ma ka-sih', example: 'Terima kasih banyak.' },
+            { word: 'Bagus', translation: 'Good', pronunciation: 'ba-gus', example: 'Itu bagus sekali.' },
+            { word: 'Ya', translation: 'Yes', pronunciation: 'ya', example: 'Ya, benar.' },
+            { word: 'Tidak', translation: 'No', pronunciation: 'ti-dak', example: 'Tidak, terima kasih.' },
+            { word: 'Tolong', translation: 'Please', pronunciation: 'to-long', example: 'Tolong bantu saya.' },
+            { word: 'Selamat datang', translation: 'Welcome', pronunciation: 'se-la-mat da-tang', example: 'Selamat datang di rumahku.' },
+            { word: 'Selamat tinggal', translation: 'Goodbye', pronunciation: 'se-la-mat ting-gal', example: 'Selamat tinggal, sampai jumpa.' },
+            { word: 'Maaf', translation: 'Sorry', pronunciation: 'ma-af', example: 'Maaf saya terlambat.' },
+            { word: 'Cinta', translation: 'Love', pronunciation: 'cin-ta', example: 'Aku cinta kamu.' }
         ],
         2: [
-            { question: 'Apa arti "勉強"?', options: ['Bermain', 'Bekerja', 'Belajar', 'Tidur'], correct: 2 },
-            { question: 'Pilih arti "美しい"', options: ['Jelek', 'Besar', 'Indah', 'Kecil'], correct: 2 },
-            { question: 'Terjemahkan "友達"', options: ['Musuh', 'Keluarga', 'Teman', 'Guru'], correct: 2 },
-            { question: 'Apa arti "幸せ"?', options: ['Sedih', 'Marah', 'Bahagia', 'Takut'], correct: 2 },
-            { question: 'Pilih arti "大切"', options: ['Tidak penting', 'Penting', 'Besar', 'Kecil'], correct: 1 },
-            { question: 'Apa arti "楽しい"?', options: ['Membosankan', 'Sedih', 'Menyenangkan', 'Susah'], correct: 2 },
-            { question: 'Terjemahkan "元気"', options: ['Lelah', 'Sakit', 'Semangat', 'Lemah'], correct: 2 },
-            { question: 'Apa arti "頑張る"?', options: ['Menyerah', 'Berusaha keras', 'Berhenti', 'Istirahat'], correct: 1 },
-            { question: 'Pilih arti "夢"', options: ['Kenyataan', 'Mimpi', 'Tidur', 'Malam'], correct: 1 },
-            { question: 'Apa arti "希望"?', options: ['Putus asa', 'Harapan', 'Ketakutan', 'Kesedihan'], correct: 1 }
+            { word: 'Indah', translation: 'Beautiful', pronunciation: 'in-dah', example: 'Hari ini sangat indah.' },
+            { word: 'Teman', translation: 'Friend', pronunciation: 'te-man', example: 'Dia teman baikku.' },
+            { word: 'Belajar', translation: 'Learn', pronunciation: 'be-la-jar', example: 'Saya belajar setiap hari.' },
+            { word: 'Bahagia', translation: 'Happy', pronunciation: 'ba-ha-gi-a', example: 'Saya merasa bahagia.' },
+            { word: 'Penting', translation: 'Important', pronunciation: 'pen-ting', example: 'Ini sangat penting.' },
+            { word: 'Menakjubkan', translation: 'Wonderful', pronunciation: 'me-nak-jub-kan', example: 'Tempat ini menakjubkan.' },
+            { word: 'Pengetahuan', translation: 'Knowledge', pronunciation: 'pe-na-hu-an', example: 'Pengetahuan adalah kekuatan.' },
+            { word: 'Perjalanan', translation: 'Journey', pronunciation: 'per-ja-la-nan', example: 'Hidup adalah perjalanan.' },
+            { word: 'Kesuksesan', translation: 'Success', pronunciation: 'ke-suk-se-san', example: 'Kesuksesan butuh usaha.' },
+            { word: 'Mimpi', translation: 'Dream', pronunciation: 'mim-pi', example: 'Kejar mimpimu.' }
         ],
         3: [
-            { question: 'Apa arti "素晴らしい"?', options: ['Biasa', 'Jelek', 'Luar biasa', 'Sederhana'], correct: 2 },
-            { question: 'Pilih arti "努力"', options: ['Kemalasan', 'Usaha', 'Kegagalan', 'Keberuntungan'], correct: 1 },
-            { question: 'Apa arti "感動的"?', options: ['Membosankan', 'Mengharukan', 'Biasa', 'Menyeramkan'], correct: 1 },
-            { question: 'Terjemahkan "挑戦"', options: ['Menyerah', 'Tantangan', 'Kegagalan', 'Kemalasan'], correct: 1 },
-            { question: 'Apa arti "成功"?', options: ['Kegagalan', 'Sukses', 'Masalah', 'Keraguan'], correct: 1 },
-            { question: 'Pilih arti "情熱"', options: ['Kemalasan', 'Kebosanan', 'Gairah', 'Ketakutan'], correct: 2 },
-            { question: 'Apa arti "完璧"?', options: ['Cacat', 'Rusak', 'Sempurna', 'Buruk'], correct: 2 },
-            { question: 'Terjemahkan "不思議"', options: ['Biasa', 'Normal', 'Ajaib', 'Sederhana'], correct: 2 },
-            { question: 'Apa arti "驚異的"?', options: ['Biasa', 'Menakjubkan', 'Membosankan', 'Sederhana'], correct: 1 },
-            { question: 'Pilih arti "革新的"', options: ['Kuno', 'Tradisional', 'Inovatif', 'Usang'], correct: 2 }
+            { word: 'Luar biasa', translation: 'Magnificent', pronunciation: 'lu-ar bi-a-sa', example: 'Pemandangan ini luar biasa.' },
+            { word: 'Antusias', translation: 'Enthusiastic', pronunciation: 'an-tu-si-as', example: 'Dia sangat antusias.' },
+            { word: 'Pencapaian', translation: 'Achievement', pronunciation: 'pen-ca-pai-an', example: 'Ini pencapaian besar.' },
+            { word: 'Ketekunan', translation: 'Perseverance', pronunciation: 'ke-te-ku-nan', example: 'Ketekunan membawa hasil.' },
+            { word: 'Istimewa', translation: 'Extraordinary', pronunciation: 'is-ti-me-wa', example: 'Hasilnya istimewa.' },
+            { word: 'Tekad', translation: 'Determination', pronunciation: 'te-kad', example: 'Tekadnya kuat.' },
+            { word: 'Filosofis', translation: 'Philosophical', pronunciation: 'fi-lo-so-fis', example: 'Pembahasan filosofis.' },
+            { word: 'Mengesankan', translation: 'Remarkable', pronunciation: 'meng-es-kan', example: 'Pekerjaannya mengesankan.' },
+            { word: 'Canggih', translation: 'Sophisticated', pronunciation: 'cang-gih', example: 'Teknologinya canggih.' },
+            { word: 'Belum pernah terjadi', translation: 'Unprecedented', pronunciation: 'be-lum pe-nah ter-ja-di', example: 'Ini belum pernah terjadi.' }
+        ]
+    },
+
+    // =====================================================
+    // KOREA (한국어)
+    // =====================================================
+    korea: {
+        1: [
+            { word: '안녕 (Annyeong)', translation: 'Hello', pronunciation: 'an-nyong', example: '안녕! 잘 지내?' },
+            { word: '감사합니다 (Gamsahamnida)', translation: 'Thank you', pronunciation: 'gam-sa-ham-ni-da', example: '정말 감사합니다!' },
+            { word: '좋다 (Jota)', translation: 'Good', pronunciation: 'jo-ta', example: '이거 좋다!' },
+            { word: '네 (Ne)', translation: 'Yes', pronunciation: 'ne', example: '네, 맞아요.' },
+            { word: '아니요 (Aniyo)', translation: 'No', pronunciation: 'a-ni-yo', example: '아니요, 괜찮아요.' },
+            { word: '제발 (Jebal)', translation: 'Please', pronunciation: 'je-bal', example: '제발 도와주세요.' },
+            { word: '어서오세요 (Eoseo-oseyo)', translation: 'Welcome', pronunciation: 'eo-seo-o-se-yo', example: '우리 집에 어서오세요!' },
+            { word: '안녕히 가세요 (Annyeonghi gaseyo)', translation: 'Goodbye', pronunciation: 'an-nyong-hi ga-se-yo', example: '안녕히 가세요!' },
+            { word: '미안해 (Mianhae)', translation: 'Sorry', pronunciation: 'mi-an-hae', example: '미안해, 늦었어.' },
+            { word: '사랑 (Sarang)', translation: 'Love', pronunciation: 'sa-rang', example: '너를 사랑해.' }
+        ],
+        2: [
+            { word: '아름답다 (Areumdapda)', translation: 'Beautiful', pronunciation: 'a-reum-dap-da', example: '정말 아름답다!' },
+            { word: '친구 (Chingu)', translation: 'Friend', pronunciation: 'chin-gu', example: '그녀는 내 친구야.' },
+            { word: '배우다 (Baeuda)', translation: 'Learn', pronunciation: 'bae-u-da', example: '나는 한국어를 배우고 있어.' },
+            { word: '행복하다 (Haengbokhada)', translation: 'Happy', pronunciation: 'haeng-bok-ha-da', example: '오늘 너무 행복해!' },
+            { word: '중요하다 (Jungyohada)', translation: 'Important', pronunciation: 'jung-yo-ha-da', example: '이건 정말 중요해.' },
+            { word: '멋지다 (Meotjida)', translation: 'Wonderful', pronunciation: 'meot-ji-da', example: '정말 멋지다!' },
+            { word: '지식 (Jisik)', translation: 'Knowledge', pronunciation: 'ji-sik', example: '지식은 힘이다.' },
+            { word: '여행 (Yeohaeng)', translation: 'Journey', pronunciation: 'yeo-haeng', example: '인생은 여행이다.' },
+            { word: '성공 (Seonggong)', translation: 'Success', pronunciation: 'seong-gong', example: '성공은 노력에서 온다.' },
+            { word: '꿈 (Kkum)', translation: 'Dream', pronunciation: 'kkum', example: '꿈을 따라가라!' }
+        ],
+        3: [
+            { word: '웅장하다 (Ungjanghada)', translation: 'Magnificent', pronunciation: 'ung-jang-ha-da', example: '웅장한 풍경이다.' },
+            { word: '열정적이다 (Yeoljungjeogida)', translation: 'Enthusiastic', pronunciation: 'yeol-jeong-jeo-gi-da', example: '그녀는 정말 열정적이야!' },
+            { word: '업적 (Eopjeok)', translation: 'Achievement', pronunciation: 'eop-jeok', example: '큰 업적을 이루었다.' },
+            { word: '인내 (Innae)', translation: 'Perseverance', pronunciation: 'in-nae', example: '성공엔 인내가 필요하다.' },
+            { word: '비범하다 (Bibeomhada)', translation: 'Extraordinary', pronunciation: 'bi-beom-ha-da', example: '비범한 재능이다.' },
+            { word: '결단력 (Gyeoldanryeok)', translation: 'Determination', pronunciation: 'gyeol-dan-ryeok', example: '강한 결단력이다.' },
+            { word: '철학적 (Cheolhakjeok)', translation: 'Philosophical', pronunciation: 'cheol-hak-jeok', example: '철학적 토론을 했다.' },
+            { word: '놀랍다 (Nollaapda)', translation: 'Remarkable', pronunciation: 'nol-lap-da', example: '정말 놀랍다!' },
+            { word: '정교하다 (Jeonggyohada)', translation: 'Sophisticated', pronunciation: 'jeong-gyo-ha-da', example: '정교한 기술이다.' },
+            { word: '전례 없다 (Jeollye eopda)', translation: 'Unprecedented', pronunciation: 'jeol-rye eop-da', example: '전례 없는 성공이다.' }
+        ]
+    },
+
+    // =====================================================
+    // CHINESE (Mandarin)
+    // =====================================================
+    china: {
+        1: [
+            { word: '你好 (Nǐ hǎo)', translation: 'Hello', pronunciation: 'ni hao', example: '你好，你好吗？' },
+            { word: '谢谢 (Xièxiè)', translation: 'Thank you', pronunciation: 'shie-shie', example: '谢谢你的帮助。' },
+            { word: '好 (Hǎo)', translation: 'Good', pronunciation: 'hao', example: '很好！' },
+            { word: '是 (Shì)', translation: 'Yes', pronunciation: 'shi', example: '是的，我同意。' },
+            { word: '不 (Bù)', translation: 'No', pronunciation: 'bu', example: '不，谢谢。' },
+            { word: '请 (Qǐng)', translation: 'Please', pronunciation: 'ching', example: '请帮帮我。' },
+            { word: '欢迎 (Huānyíng)', translation: 'Welcome', pronunciation: 'huan-ying', example: '欢迎来到我家。' },
+            { word: '再见 (Zàijiàn)', translation: 'Goodbye', pronunciation: 'zai-jian', example: '再见，明天见！' },
+            { word: '对不起 (Duìbuqǐ)', translation: 'Sorry', pronunciation: 'dwei-bu-chi', example: '对不起，我迟到了。' },
+            { word: '爱 (Ài)', translation: 'Love', pronunciation: 'ai', example: '我爱你。' }
+        ],
+        2: [
+            { word: '美丽 (Měilì)', translation: 'Beautiful', pronunciation: 'mei-li', example: '多么美丽的一天！' },
+            { word: '朋友 (Péngyǒu)', translation: 'Friend', pronunciation: 'peng-yo', example: '他是我最好的朋友。' },
+            { word: '学习 (Xuéxí)', translation: 'Learn', pronunciation: 'shweh-shee', example: '我每天学习中文。' },
+            { word: '快乐 (Kuàilè)', translation: 'Happy', pronunciation: 'kwai-le', example: '我今天很快乐！' },
+            { word: '重要 (Zhòngyào)', translation: 'Important', pronunciation: 'jong-yao', example: '这非常重要。' },
+            { word: '精彩 (Jīngcǎi)', translation: 'Wonderful', pronunciation: 'jing-tsai', example: '精彩的表演！' },
+            { word: '知识 (Zhīshi)', translation: 'Knowledge', pronunciation: 'jir-shi', example: '知识就是力量。' },
+            { word: '旅程 (Lǚchéng)', translation: 'Journey', pronunciation: 'lyu-cheng', example: '生活是一段旅程。' },
+            { word: '成功 (Chénggōng)', translation: 'Success', pronunciation: 'cheng-gong', example: '成功需要努力。' },
+            { word: '梦想 (Mèngxiǎng)', translation: 'Dream', pronunciation: 'mung-syang', example: '追随你的梦想！' }
+        ],
+        3: [
+            { word: '壮丽 (Zhuànglì)', translation: 'Magnificent', pronunciation: 'jwang-li', example: '壮丽的景色。' },
+            { word: '热情 (Rèqíng)', translation: 'Enthusiastic', pronunciation: 'ruh-ching', example: '她非常热情。' },
+            { word: '成就 (Chéngjiù)', translation: 'Achievement', pronunciation: 'cheng-jyo', example: '伟大的成就。' },
+            { word: '毅力 (Yìlì)', translation: 'Perseverance', pronunciation: 'yi-li', example: '成功需要毅力。' },
+            { word: '非凡 (Fēifán)', translation: 'Extraordinary', pronunciation: 'fei-fan', example: '非凡的表现。' },
+            { word: '决心 (Juéxīn)', translation: 'Determination', pronunciation: 'jyweh-sin', example: '他的决心令人敬佩。' },
+            { word: '哲学的 (Zhéxué de)', translation: 'Philosophical', pronunciation: 'jer-shweh de', example: '一次哲学的讨论。' },
+            { word: '显著 (Xiǎnzhù)', translation: 'Remarkable', pronunciation: 'syen-joo', example: '显著的进步。' },
+            { word: '复杂 (Fùzá)', translation: 'Sophisticated', pronunciation: 'foo-dza', example: '复杂的技术。' },
+            { word: '前所未有 (Qiánsuǒ wèiyǒu)', translation: 'Unprecedented', pronunciation: 'chyensuowei-yo', example: '前所未有的成功。' }
+        ]
+    },
+
+    // =====================================================
+    // MALAYSIA
+    // =====================================================
+    malaysia: {
+        1: [
+            { word: 'Helo', translation: 'Hello', pronunciation: 'he-lo', example: 'Helo, apa khabar?' },
+            { word: 'Terima kasih', translation: 'Thank you', pronunciation: 'te-ri-ma ka-sih', example: 'Terima kasih banyak.' },
+            { word: 'Bagus', translation: 'Good', pronunciation: 'ba-gus', example: 'Itu sangat bagus.' },
+            { word: 'Ya', translation: 'Yes', pronunciation: 'ya', example: 'Ya, betul.' },
+            { word: 'Tidak', translation: 'No', pronunciation: 'ti-dak', example: 'Tidak, terima kasih.' },
+            { word: 'Tolong', translation: 'Please', pronunciation: 'to-long', example: 'Tolong bantu saya.' },
+            { word: 'Selamat datang', translation: 'Welcome', pronunciation: 'se-la-mat da-tang', example: 'Selamat datang ke rumah saya.' },
+            { word: 'Selamat tinggal', translation: 'Goodbye', pronunciation: 'se-la-mat ting-gal', example: 'Selamat tinggal!' },
+            { word: 'Maaf', translation: 'Sorry', pronunciation: 'ma-af', example: 'Maaf kerana lewat.' },
+            { word: 'Cinta', translation: 'Love', pronunciation: 'cin-ta', example: 'Saya cinta awak.' }
+        ],
+        2: [
+            { word: 'Indah', translation: 'Beautiful', pronunciation: 'in-dah', example: 'Pemandangan ini sangat indah.' },
+            { word: 'Kawan', translation: 'Friend', pronunciation: 'ka-wan', example: 'Dia kawan baik saya.' },
+            { word: 'Belajar', translation: 'Learn', pronunciation: 'be-la-jar', example: 'Saya belajar setiap hari.' },
+            { word: 'Bahagia', translation: 'Happy', pronunciation: 'ba-ha-gi-a', example: 'Saya berasa bahagia.' },
+            { word: 'Penting', translation: 'Important', pronunciation: 'pen-ting', example: 'Ini sangat penting.' },
+            { word: 'Hebat', translation: 'Wonderful', pronunciation: 'he-bat', example: 'Itu memang hebat!' },
+            { word: 'Ilmu', translation: 'Knowledge', pronunciation: 'il-mu', example: 'Ilmu adalah kuasa.' },
+            { word: 'Perjalanan', translation: 'Journey', pronunciation: 'per-ja-la-nan', example: 'Hidup adalah perjalanan.' },
+            { word: 'Kejayaan', translation: 'Success', pronunciation: 'ke-ja-ya-an', example: 'Kejayaan perlukan usaha.' },
+            { word: 'Impian', translation: 'Dream', pronunciation: 'im-pi-an', example: 'Kejar impian anda.' }
+        ],
+        3: [
+            { word: 'Mengagumkan', translation: 'Magnificent', pronunciation: 'meng-a-gum-kan', example: 'Pemandangannya mengagumkan.' },
+            { word: 'Bersemangat', translation: 'Enthusiastic', pronunciation: 'ber-se-ma-ngat', example: 'Dia sangat bersemangat.' },
+            { word: 'Pencapaian', translation: 'Achievement', pronunciation: 'pen-ca-pa-ian', example: 'Ini satu pencapaian besar.' },
+            { word: 'Ketabahan', translation: 'Perseverance', pronunciation: 'ke-ta-ba-han', example: 'Ketabahan membawa kejayaan.' },
+            { word: 'Luar biasa', translation: 'Extraordinary', pronunciation: 'lu-ar bi-a-sa', example: 'Ini luar biasa!' },
+            { word: 'Tekad', translation: 'Determination', pronunciation: 'te-kad', example: 'Dia ada tekad yang kuat.' },
+            { word: 'Falsafah', translation: 'Philosophical', pronunciation: 'fal-sa-fah', example: 'Perbincangan falsafah.' },
+            { word: 'Mengagumkan', translation: 'Remarkable', pronunciation: 'meng-a-gum-kan', example: 'Pencapaian itu mengagumkan.' },
+            { word: 'Canggih', translation: 'Sophisticated', pronunciation: 'cang-gih', example: 'Teknologinya sangat canggih.' },
+            { word: 'Belum pernah berlaku', translation: 'Unprecedented', pronunciation: 'be-lum per-nah ber-la-ku', example: 'Ini belum pernah berlaku.' }
+        ]
+    },
+
+    // =====================================================
+    // SINGAPORE (Singapore English)
+    // =====================================================
+    singapore: {
+        1: [
+            { word: 'Hello lah', translation: 'Hello', pronunciation: 'he-lo la', example: 'Hello lah, how are you?' },
+            { word: 'Thank you', translation: 'Terima kasih', pronunciation: 'teng-kiu', example: 'Thank you ah!' },
+            { word: 'Good', translation: 'Bagus', pronunciation: 'gud', example: 'Very good lah!' },
+            { word: 'Yes', translation: 'Ya', pronunciation: 'yes', example: 'Yes can!' },
+            { word: 'No', translation: 'Tidak', pronunciation: 'noh', example: 'No cannot.' },
+            { word: 'Please', translation: 'Tolong', pronunciation: 'plees', example: 'Please help me can?' },
+            { word: 'Welcome', translation: 'Selamat datang', pronunciation: 'wel-kum', example: 'Welcome to Singapore!' },
+            { word: 'Bye', translation: 'Selamat tinggal', pronunciation: 'bai', example: 'Bye, see you lah!' },
+            { word: 'Sorry ah', translation: 'Maaf', pronunciation: 'so-ri ah', example: 'Sorry ah, my mistake.' },
+            { word: 'Love', translation: 'Cinta', pronunciation: 'lav', example: 'I love Singapore food lah!' }
+        ],
+        2: [
+            { word: 'Beautiful', translation: 'Indah', pronunciation: 'byu-ti-ful', example: 'Singapore night view very beautiful.' },
+            { word: 'Friend', translation: 'Teman', pronunciation: 'fren', example: 'He is my good friend lah.' },
+            { word: 'Learn', translation: 'Belajar', pronunciation: 'lern', example: 'I learn new things every day.' },
+            { word: 'Happy', translation: 'Bahagia', pronunciation: 'ha-pi', example: 'I feel very happy today.' },
+            { word: 'Important', translation: 'Penting', pronunciation: 'im-por-tent', example: 'This is very important lah.' },
+            { word: 'Wonderful', translation: 'Menakjubkan', pronunciation: 'won-der-ful', example: 'What a wonderful surprise!' },
+            { word: 'Knowledge', translation: 'Pengetahuan', pronunciation: 'nol-lej', example: 'Knowledge is power, lah!' },
+            { word: 'Journey', translation: 'Perjalanan', pronunciation: 'jer-ni', example: 'Life is a journey.' },
+            { word: 'Success', translation: 'Kesuksesan', pronunciation: 'sak-ses', example: 'Success needs effort.' },
+            { word: 'Dream', translation: 'Mimpi', pronunciation: 'drim', example: 'Chase your dreams lah!' }
+        ],
+        3: [
+            { word: 'Magnificent', translation: 'Luar biasa', pronunciation: 'mag-ni-fi-cent', example: 'The view is magnificent.' },
+            { word: 'Enthusiastic', translation: 'Antusias', pronunciation: 'en-thu-si-as-tik', example: 'She is very enthusiastic.' },
+            { word: 'Achievement', translation: 'Pencapaian', pronunciation: 'a-chiv-ment', example: 'A great achievement.' },
+            { word: 'Perseverance', translation: 'Ketekunan', pronunciation: 'per-se-ver-ens', example: 'Perseverance brings success.' },
+            { word: 'Extraordinary', translation: 'Luar biasa', pronunciation: 'ex-tra-or-di-na-ri', example: 'Extraordinary performance!' },
+            { word: 'Determination', translation: 'Tekad', pronunciation: 'di-ter-mi-ne-shen', example: 'Strong determination is needed.' },
+            { word: 'Philosophical', translation: 'Filosofis', pronunciation: 'fi-lo-so-fi-cal', example: 'A philosophical talk.' },
+            { word: 'Remarkable', translation: 'Mengesankan', pronunciation: 'ri-mar-ka-bel', example: 'Remarkable progress.' },
+            { word: 'Sophisticated', translation: 'Canggih', pronunciation: 'so-fi-sti-ke-tid', example: 'Sophisticated system.' },
+            { word: 'Unprecedented', translation: 'Belum pernah terjadi', pronunciation: 'an-pre-si-den-ted', example: 'Unprecedented growth.' }
+        ]
+    },
+
+    // =====================================================
+    // SPANISH (Español)
+    // =====================================================
+    spanish: {
+        1: [
+            { word: 'Hola', translation: 'Hello', pronunciation: 'o-la', example: 'Hola, ¿cómo estás?' },
+            { word: 'Gracias', translation: 'Thank you', pronunciation: 'gra-sias', example: '¡Muchas gracias!' },
+            { word: 'Bueno', translation: 'Good', pronunciation: 'bwe-no', example: 'Esto es bueno.' },
+            { word: 'Sí', translation: 'Yes', pronunciation: 'si', example: 'Sí, estoy de acuerdo.' },
+            { word: 'No', translation: 'Tidak', pronunciation: 'no', example: 'No, gracias.' },
+            { word: 'Por favor', translation: 'Please', pronunciation: 'por fa-bor', example: 'Por favor, ayúdame.' },
+            { word: 'Bienvenido', translation: 'Welcome', pronunciation: 'byen-ve-ni-do', example: 'Bienvenido a mi casa.' },
+            { word: 'Adiós', translation: 'Goodbye', pronunciation: 'a-dios', example: 'Adiós, nos vemos.' },
+            { word: 'Lo siento', translation: 'Sorry', pronunciation: 'lo syen-to', example: 'Lo siento por llegar tarde.' },
+            { word: 'Amor', translation: 'Love', pronunciation: 'a-mor', example: '¡Te amo!' }
+        ],
+        2: [
+            { word: 'Hermoso', translation: 'Beautiful', pronunciation: 'er-mo-so', example: '¡Qué día tan hermoso!' },
+            { word: 'Amigo', translation: 'Friend', pronunciation: 'a-mi-go', example: 'Él es mi mejor amigo.' },
+            { word: 'Aprender', translation: 'Learn', pronunciation: 'a-pren-der', example: 'Aprendo español cada día.' },
+            { word: 'Feliz', translation: 'Happy', pronunciation: 'fe-lis', example: 'Estoy muy feliz hoy.' },
+            { word: 'Importante', translation: 'Important', pronunciation: 'im-por-tan-te', example: 'Esto es muy importante.' },
+            { word: 'Maravilloso', translation: 'Wonderful', pronunciation: 'ma-ra-vi-yo-so', example: '¡Es maravilloso!' },
+            { word: 'Conocimiento', translation: 'Knowledge', pronunciation: 'ko-no-si-myen-to', example: 'El conocimiento es poder.' },
+            { word: 'Viaje', translation: 'Journey', pronunciation: 'bya-he', example: 'La vida es un viaje.' },
+            { word: 'Éxito', translation: 'Success', pronunciation: 'ek-si-to', example: 'El éxito requiere trabajo duro.' },
+            { word: 'Sueño', translation: 'Dream', pronunciation: 'swe-nyo', example: 'Sigue tus sueños.' }
+        ],
+        3: [
+            { word: 'Magnífico', translation: 'Magnificent', pronunciation: 'mag-ni-fi-co', example: '¡Una vista magnífica!' },
+            { word: 'Entusiasta', translation: 'Enthusiastic', pronunciation: 'en-tu-sias-ta', example: 'Ella estaba muy entusiasta.' },
+            { word: 'Logro', translation: 'Achievement', pronunciation: 'lo-gro', example: 'Un gran logro.' },
+            { word: 'Perseverancia', translation: 'Perseverance', pronunciation: 'per-se-ve-ran-sia', example: 'El éxito necesita perseverancia.' },
+            { word: 'Extraordinario', translation: 'Extraordinary', pronunciation: 'ex-tra-or-di-na-rio', example: 'Un rendimiento extraordinario.' },
+            { word: 'Determinación', translation: 'Determination', pronunciation: 'de-ter-mi-na-sion', example: 'Su determinación es inspiradora.' },
+            { word: 'Filosófico', translation: 'Philosophical', pronunciation: 'fi-lo-so-fi-co', example: 'Una conversación filosófica.' },
+            { word: 'Notable', translation: 'Remarkable', pronunciation: 'no-ta-ble', example: 'Un progreso notable.' },
+            { word: 'Sofisticado', translation: 'Sophisticated', pronunciation: 'so-fis-ti-ka-do', example: 'Tecnología sofisticada.' },
+            { word: 'Sin precedentes', translation: 'Unprecedented', pronunciation: 'sin pre-ce-den-tes', example: 'Un éxito sin precedentes.' }
+        ]
+    },
+
+    // =====================================================
+    // FRENCH (Français)
+    // =====================================================
+    french: {
+        1: [
+            { word: 'Bonjour', translation: 'Hello', pronunciation: 'bon-jour', example: 'Bonjour, comment ça va ?' },
+            { word: 'Merci', translation: 'Thank you', pronunciation: 'mer-si', example: 'Merci beaucoup !' },
+            { word: 'Bon', translation: 'Good', pronunciation: 'bon', example: 'C’est très bon.' },
+            { word: 'Oui', translation: 'Yes', pronunciation: 'wi', example: 'Oui, je suis d’accord.' },
+            { word: 'Non', translation: 'No', pronunciation: 'non', example: 'Non, merci.' },
+            { word: 'S’il vous plaît', translation: 'Please', pronunciation: 'sil vu ple', example: 'S’il vous plaît, aidez-moi.' },
+            { word: 'Bienvenue', translation: 'Welcome', pronunciation: 'byan-ve-nu', example: 'Bienvenue chez moi.' },
+            { word: 'Au revoir', translation: 'Goodbye', pronunciation: 'o rev-war', example: 'Au revoir, à bientôt.' },
+            { word: 'Pardon', translation: 'Sorry', pronunciation: 'par-don', example: 'Pardon pour le retard.' },
+            { word: 'Amour', translation: 'Love', pronunciation: 'a-mur', example: 'Je t’aime.' }
+        ],
+        2: [
+            { word: 'Magnifique', translation: 'Beautiful', pronunciation: 'mag-ni-fik', example: 'Quelle journée magnifique !' },
+            { word: 'Ami', translation: 'Friend', pronunciation: 'a-mi', example: 'Il est mon meilleur ami.' },
+            { word: 'Apprendre', translation: 'Learn', pronunciation: 'a-pran-dre', example: 'J’apprends le français.' },
+            { word: 'Heureux', translation: 'Happy', pronunciation: 'o-reu', example: 'Je suis très heureux.' },
+            { word: 'Important', translation: 'Important', pronunciation: 'am-por-tan', example: 'C’est très important.' },
+            { word: 'Merveilleux', translation: 'Wonderful', pronunciation: 'mer-vey-eu', example: 'C’est merveilleux !' },
+            { word: 'Connaissance', translation: 'Knowledge', pronunciation: 'ko-nes-ans', example: 'La connaissance est le pouvoir.' },
+            { word: 'Voyage', translation: 'Journey', pronunciation: 'vwa-yaj', example: 'La vie est un voyage.' },
+            { word: 'Succès', translation: 'Success', pronunciation: 'suk-se', example: 'Le succès demande du travail.' },
+            { word: 'Rêve', translation: 'Dream', pronunciation: 'rev', example: 'Suis tes rêves.' }
+        ],
+        3: [
+            { word: 'Splendide', translation: 'Magnificent', pronunciation: 'splon-did', example: 'Une vue splendide !' },
+            { word: 'Enthousiaste', translation: 'Enthusiastic', pronunciation: 'an-tu-zias-t', example: 'Elle est très enthousiaste.' },
+            { word: 'Accomplissement', translation: 'Achievement', pronunciation: 'a-kom-plis-man', example: 'Un grand accomplissement.' },
+            { word: 'Persévérance', translation: 'Perseverance', pronunciation: 'per-se-ve-rans', example: 'La persévérance mène au succès.' },
+            { word: 'Extraordinaire', translation: 'Extraordinary', pronunciation: 'ex-tra-or-di-ner', example: 'Une performance extraordinaire.' },
+            { word: 'Détermination', translation: 'Determination', pronunciation: 'de-ter-mi-na-sion', example: 'Sa détermination est inspirante.' },
+            { word: 'Philosophique', translation: 'Philosophical', pronunciation: 'fi-lo-zo-fik', example: 'Une discussion philosophique.' },
+            { word: 'Remarquable', translation: 'Remarkable', pronunciation: 're-mar-ka-ble', example: 'Un progrès remarquable.' },
+            { word: 'Sophistiqué', translation: 'Sophisticated', pronunciation: 'so-fis-ti-ke', example: 'Un système sophistiqué.' },
+            { word: 'Sans précédent', translation: 'Unprecedented', pronunciation: 'son pre-ce-don', example: 'Un succès sans précédent.' }
         ]
     }
 };
+
 
 const games = [
     { 
