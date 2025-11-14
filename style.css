@@ -1,3 +1,8 @@
+/* ========================================
+   SINAUBASA - Complete CSS Stylesheet
+   ======================================== */
+
+/* Reset & Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -16,7 +21,9 @@ body {
     padding: 0 1rem;
 }
 
-/* Header */
+/* ========================================
+   HEADER
+   ======================================== */
 #header {
     background: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -124,7 +131,9 @@ body {
     font-weight: 600;
 }
 
-/* Navigation */
+/* ========================================
+   NAVIGATION
+   ======================================== */
 #nav {
     background: white;
     border-bottom: 1px solid #e5e7eb;
@@ -137,6 +146,19 @@ body {
     display: flex;
     gap: 0.25rem;
     overflow-x: auto;
+}
+
+.nav-tabs::-webkit-scrollbar {
+    height: 3px;
+}
+
+.nav-tabs::-webkit-scrollbar-track {
+    background: #f3f4f6;
+}
+
+.nav-tabs::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 1.5px;
 }
 
 .nav-tab {
@@ -156,16 +178,21 @@ body {
 
 .nav-tab:hover {
     color: #9333ea;
+    background: #faf5ff;
 }
 
 .nav-tab.active {
     color: #9333ea;
     border-bottom-color: #9333ea;
+    background: #faf5ff;
 }
 
-/* Main Content */
+/* ========================================
+   MAIN CONTENT
+   ======================================== */
 #main {
     padding: 2rem 0;
+    min-height: calc(100vh - 300px);
 }
 
 .tab-content {
@@ -174,17 +201,47 @@ body {
 
 .tab-content.active {
     display: block;
+    animation: fadeIn 0.3s ease;
 }
 
-/* Hero Banner */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   HERO BANNER
+   ======================================== */
 .hero-banner {
-    background: linear-gradient(to right, #9333ea, #db2777);
+    background: linear-gradient(135deg, #9333ea 0%, #db2777 100%);
     border-radius: 1rem;
-    padding: 2rem;
+    padding: 2.5rem;
     color: white;
     margin-bottom: 2rem;
     position: relative;
     overflow: hidden;
+}
+
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+}
+
+.hero-text {
+    position: relative;
+    z-index: 1;
 }
 
 .hero-text h2 {
@@ -195,16 +252,20 @@ body {
 
 .hero-text p {
     color: #e9d5ff;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .hero-buttons {
     display: flex;
     gap: 0.75rem;
+    flex-wrap: wrap;
 }
 
+/* ========================================
+   BUTTONS
+   ======================================== */
 .btn {
-    padding: 0.5rem 1.5rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
     font-weight: 600;
     cursor: pointer;
@@ -217,12 +278,13 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(to right, #9333ea, #db2777);
+    background: linear-gradient(135deg, #9333ea 0%, #db2777 100%);
     color: white;
 }
 
 .btn-primary:hover {
-    background: linear-gradient(to right, #7e22ce, #be185d);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(147, 51, 234, 0.4);
 }
 
 .btn-secondary {
@@ -232,6 +294,7 @@ body {
 
 .btn-secondary:hover {
     background: #9333ea;
+    transform: translateY(-2px);
 }
 
 .btn-back {
@@ -248,18 +311,23 @@ body {
     font-size: 1.125rem;
 }
 
-/* Sections */
+/* ========================================
+   SECTIONS
+   ======================================== */
 .section {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .section h3 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
+    color: #1f2937;
 }
 
-/* Language Grid */
+/* ========================================
+   LANGUAGE GRID
+   ======================================== */
 .language-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -277,12 +345,15 @@ body {
 }
 
 .language-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 .language-card.active {
     border-color: #9333ea;
     background: #faf5ff;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(147, 51, 234, 0.2);
 }
 
 .language-card .flag {
@@ -293,9 +364,12 @@ body {
 .language-card h4 {
     font-weight: bold;
     font-size: 0.875rem;
+    color: #374151;
 }
 
-/* Features Grid */
+/* ========================================
+   FEATURES GRID
+   ======================================== */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -304,8 +378,8 @@ body {
 
 .feature-card {
     background: white;
-    padding: 1.5rem;
-    border-radius: 0.75rem;
+    padding: 2rem;
+    border-radius: 1rem;
     border: 2px solid #f3f4f6;
     cursor: pointer;
     transition: all 0.3s;
@@ -313,6 +387,8 @@ body {
 
 .feature-card:hover {
     border-color: #9333ea;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(147, 51, 234, 0.15);
 }
 
 .feature-card svg {
@@ -322,37 +398,47 @@ body {
 
 .feature-card h4 {
     font-weight: bold;
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     margin-bottom: 0.5rem;
+    color: #1f2937;
 }
 
 .feature-card p {
     color: #6b7280;
     font-size: 0.875rem;
+    line-height: 1.5;
 }
 
-/* Content Wrapper */
+/* ========================================
+   CONTENT WRAPPER
+   ======================================== */
 .content-wrapper {
     max-width: 672px;
     margin: 0 auto;
 }
 
-/* Flashcard */
+/* ========================================
+   FLASHCARD
+   ======================================== */
 .flashcard-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .flashcard-header h2 {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
+    color: #1f2937;
 }
 
 .flashcard-header p {
     color: #6b7280;
+    font-size: 0.875rem;
 }
 
 .level-badge {
@@ -360,24 +446,25 @@ body {
     border-radius: 0.5rem;
     color: white;
     font-weight: 600;
+    font-size: 0.875rem;
 }
 
 .level-1 {
-    background: #22c55e;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
 }
 
 .level-2 {
-    background: #eab308;
+    background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
 }
 
 .level-3 {
-    background: #ef4444;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
 }
 
 .flashcard {
     background: white;
     border-radius: 1rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     padding: 3rem;
     margin-bottom: 1.5rem;
     min-height: 400px;
@@ -385,11 +472,12 @@ body {
     flex-direction: column;
     justify-content: center;
     cursor: pointer;
-    transition: box-shadow 0.3s;
+    transition: all 0.3s;
 }
 
 .flashcard:hover {
     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    transform: translateY(-5px);
 }
 
 .card-side {
@@ -401,6 +489,7 @@ body {
     font-weight: bold;
     color: #9333ea;
     margin-bottom: 1rem;
+    line-height: 1.2;
 }
 
 .card-translation {
@@ -424,11 +513,13 @@ body {
     color: #6b7280;
     font-size: 1.125rem;
     margin-bottom: 1rem;
+    font-style: italic;
 }
 
 .card-hint {
     color: #9ca3af;
     font-style: italic;
+    font-size: 0.875rem;
 }
 
 .flashcard-buttons {
@@ -443,40 +534,45 @@ body {
     padding: 1rem;
 }
 
-/* Progress */
+/* ========================================
+   PROGRESS
+   ======================================== */
 .progress-container {
-    background: #faf5ff;
+    background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
     border-radius: 0.75rem;
-    padding: 1rem;
+    padding: 1.25rem;
 }
 
 .progress-text {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     font-size: 0.875rem;
     color: #7c3aed;
+    font-weight: 600;
 }
 
 .progress-bar {
     background: #e9d5ff;
     border-radius: 9999px;
-    height: 0.5rem;
+    height: 0.75rem;
     overflow: hidden;
 }
 
 .progress-fill {
-    background: #9333ea;
+    background: linear-gradient(90deg, #9333ea 0%, #db2777 100%);
     height: 100%;
     border-radius: 9999px;
-    transition: width 0.3s;
+    transition: width 0.5s ease;
 }
 
-/* Quiz */
+/* ========================================
+   QUIZ
+   ======================================== */
 .quiz-start, .quiz-result {
     background: white;
     border-radius: 1rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     padding: 3rem;
     text-align: center;
 }
@@ -490,17 +586,19 @@ body {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1rem;
+    color: #1f2937;
 }
 
 .quiz-start p, .quiz-result p {
     color: #6b7280;
     margin-bottom: 2rem;
+    line-height: 1.6;
 }
 
 .quiz-question {
     background: white;
     border-radius: 1rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     padding: 2rem;
 }
 
@@ -520,7 +618,7 @@ body {
     bottom: -2px;
     left: 0;
     height: 2px;
-    background: linear-gradient(to right, #9333ea, #db2777);
+    background: linear-gradient(90deg, #9333ea 0%, #db2777 100%);
     animation: progressBar 0.5s ease forwards;
 }
 
@@ -536,6 +634,7 @@ body {
 #question-number {
     font-size: 0.875rem;
     color: #6b7280;
+    font-weight: 600;
 }
 
 .quiz-stats {
@@ -554,6 +653,8 @@ body {
     font-size: 1.25rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
+    color: #1f2937;
+    line-height: 1.5;
 }
 
 .options-container {
@@ -565,7 +666,7 @@ body {
 
 .option-btn {
     width: 100%;
-    padding: 1rem;
+    padding: 1.25rem;
     border-radius: 0.75rem;
     font-weight: 600;
     text-align: left;
@@ -619,7 +720,7 @@ body {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.05);
+        transform: scale(1.02);
     }
 }
 
@@ -636,13 +737,18 @@ body {
 }
 
 .final-score {
-    font-size: 3.75rem;
+    font-size: 4rem;
     font-weight: bold;
-    color: #9333ea;
+    background: linear-gradient(135deg, #9333ea 0%, #db2777 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 1rem;
 }
 
-/* Games */
+/* ========================================
+   GAMES
+   ======================================== */
 .game-header {
     text-align: center;
     margin-bottom: 2rem;
@@ -651,7 +757,8 @@ body {
 .game-header h2 {
     font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    color: #1f2937;
 }
 
 .games-grid {
@@ -663,14 +770,15 @@ body {
 .game-card {
     background: white;
     border-radius: 1rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     padding: 1.5rem;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: all 0.3s;
 }
 
 .game-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 .game-icon {
@@ -693,12 +801,14 @@ body {
     font-weight: bold;
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
+    color: #1f2937;
 }
 
 .game-card p {
     color: #6b7280;
     font-size: 0.875rem;
     margin-bottom: 1rem;
+    line-height: 1.5;
 }
 
 .game-time {
@@ -727,21 +837,26 @@ body {
 .game-back-section h3 {
     font-weight: bold;
     font-size: 1.5rem;
+    color: #1f2937;
 }
 
 .game-stats {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .game-stat {
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
+    min-width: 80px;
 }
 
 .game-stat span {
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     display: block;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
 }
 
 .game-stat div {
@@ -778,12 +893,12 @@ body {
 #game-content {
     background: white;
     border-radius: 1rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     padding: 2rem;
 }
 
 .game-word-display {
-    background: linear-gradient(to right, #fef3c7, #fed7aa);
+    background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
     border-radius: 0.75rem;
     padding: 3rem;
     margin-bottom: 1.5rem;
@@ -792,8 +907,9 @@ body {
 
 .game-word-display p {
     font-size: 0.875rem;
-    color: #6b7280;
+    color: #92400e;
     margin-bottom: 1rem;
+    font-weight: 500;
 }
 
 .game-word {
@@ -804,16 +920,18 @@ body {
 
 .game-input {
     width: 100%;
-    padding: 1rem;
+    padding: 1.25rem;
     border: 2px solid #fed7aa;
     border-radius: 0.75rem;
     font-size: 1.125rem;
     margin-bottom: 1rem;
+    transition: all 0.3s;
 }
 
 .game-input:focus {
     outline: none;
     border-color: #f97316;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
 }
 
 .game-options {
@@ -834,85 +952,292 @@ body {
 }
 
 .game-option-btn:hover {
-    transform: scale(1.05);
+    transform: translateY(-3px);
     border-color: #9333ea;
+    box-shadow: 0 5px 15px rgba(147, 51, 234, 0.2);
 }
 
-/* Chat */
+/* ========================================
+   CHAT STYLES
+   ======================================== */
 .chat-container {
-    max-width: 672px;
+    max-width: 900px;
     margin: 0 auto;
     background: white;
     border-radius: 1rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 250px);
+    max-height: 700px;
 }
 
 .chat-header {
-    background: linear-gradient(to right, #3b82f6, #9333ea);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding: 1.5rem;
 }
 
-.chat-header h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+.chat-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.chat-header p {
-    color: #dbeafe;
+.chat-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.bot-avatar {
+    width: 50px;
+    height: 50px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.chat-header h2 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.bot-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #e0e7ff;
+    font-size: 0.875rem;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.chat-header-right {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: white;
+}
+
+.btn-icon:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.1);
 }
 
 .chat-messages {
-    height: 500px;
+    flex: 1;
     overflow-y: auto;
     padding: 1.5rem;
-    background: #f9fafb;
+    background: linear-gradient(to bottom, #f8fafc, #f1f5f9);
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+.welcome-message {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.welcome-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.welcome-message h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.welcome-message p {
+    color: #64748b;
+    margin-bottom: 1rem;
+}
+
+.quick-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.topic-chip {
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
 .message {
     display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    animation: messageSlide 0.3s ease;
+}
+
+@keyframes messageSlide {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .message.user {
-    justify-content: flex-end;
+    flex-direction: row-reverse;
 }
 
-.message.bot {
-    justify-content: flex-start;
+.message-avatar {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.message.user .message-avatar {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.message-bubble {
+    max-width: 70%;
+    min-width: 100px;
 }
 
 .message-content {
-    max-width: 80%;
-    padding: 1rem;
+    padding: 1rem 1.25rem;
     border-radius: 1rem;
-}
-
-.message.user .message-content {
-    background: linear-gradient(to right, #9333ea, #db2777);
-    color: white;
+    line-height: 1.6;
+    word-wrap: break-word;
 }
 
 .message.bot .message-content {
     background: white;
-    border: 2px solid #e5e7eb;
+    color: #1e293b;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.message.user .message-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.message-content strong {
+    font-weight: 700;
+}
+
+.message-content em {
+    font-style: italic;
+}
+
+.message-content a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.message.user .message-bubble {
+    text-align: right;
+}
+
+.message-time {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    margin-top: 0.25rem;
+    padding: 0 0.25rem;
+}
+
+.message.user .message-time {
+    color: rgba(255,255,255,0.7);
+}
+
+.typing-message {
+    animation: messageSlide 0.3s ease;
 }
 
 .typing-indicator {
     display: flex;
     gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    background: white;
+    border-radius: 1rem;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .typing-dot {
     width: 8px;
     height: 8px;
-    background: #9ca3af;
+    background: #94a3b8;
     border-radius: 50%;
-    animation: typing 1.4s infinite;
+    animation: typingBounce 1.4s infinite;
 }
 
 .typing-dot:nth-child(2) {
@@ -923,7 +1248,7 @@ body {
     animation-delay: 0.4s;
 }
 
-@keyframes typing {
+@keyframes typingBounce {
     0%, 60%, 100% {
         transform: translateY(0);
     }
@@ -932,28 +1257,111 @@ body {
     }
 }
 
-.chat-input-container {
-    padding: 1.5rem;
-    background: white;
-    border-top: 2px solid #f3f4f6;
+.quick-questions {
     display: flex;
     gap: 0.75rem;
+    padding: 1rem;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+    overflow-x: auto;
+}
+
+.quick-questions::-webkit-scrollbar {
+    height: 4px;
+}
+
+.quick-questions::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+.quick-questions::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 2px;
+}
+
+.quick-btn {
+    padding: 0.625rem 1rem;
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border: 1px solid #e2e8f0;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.quick-btn:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.chat-input-container {
+    padding: 1.25rem;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
 }
 
 #chat-input {
     flex: 1;
-    padding: 1rem;
-    border: 2px solid #e5e7eb;
-    border-radius: 0.75rem;
-    font-size: 1rem;
+    padding: 0.875rem 1.25rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 2rem;
+    font-size: 0.9375rem;
+    background: #f8fafc;
+    transition: all 0.3s;
 }
 
 #chat-input:focus {
     outline: none;
-    border-color: #9333ea;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-/* Footer */
+#chat-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-send {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-send:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-send:active {
+    transform: scale(0.95);
+}
+
+.btn-send svg {
+    color: white;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
 footer {
     background: white;
     border-top: 1px solid #e5e7eb;
@@ -964,21 +1372,43 @@ footer {
 }
 
 .footer-brand {
-    font-weight: 600;
-    color: #9333ea;
+    font-weight: 700;
+    font-size: 1.125rem;
+    background: linear-gradient(135deg, #9333ea 0%, #db2777 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 0.5rem;
 }
 
 footer p {
     font-size: 0.875rem;
+    line-height: 1.6;
 }
 
 .footer-copyright {
     font-size: 0.75rem;
     margin-top: 1rem;
+    color: #9ca3af;
 }
 
-/* Responsive */
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .content-wrapper {
+        max-width: 100%;
+    }
+    
+    .game-stats {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
     .header-content {
         flex-direction: column;
@@ -996,12 +1426,35 @@ footer p {
     
     .hero-buttons {
         flex-direction: column;
+        width: 100%;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
     }
     
     .flashcard-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
+    }
+    
+    .flashcard {
+        padding: 2rem;
+        min-height: 350px;
+    }
+    
+    .card-word {
+        font-size: 2.5rem;
+    }
+    
+    .card-translation {
+        font-size: 1.75rem;
+    }
+    
+    .flashcard-buttons {
+        flex-direction: column;
     }
     
     .game-play-header {
@@ -1016,4 +1469,212 @@ footer p {
     .game-options {
         grid-template-columns: 1fr;
     }
+    
+    .game-word {
+        font-size: 2rem;
+    }
+    
+    .chat-container {
+        height: calc(100vh - 200px);
+        border-radius: 0;
+        max-height: none;
+    }
+    
+    .message-bubble {
+        max-width: 85%;
+    }
+    
+    .quick-questions {
+        padding: 0.75rem;
+    }
+    
+    .quick-btn {
+        font-size: 0.8125rem;
+        padding: 0.5rem 0.875rem;
+    }
+    
+    .chat-header {
+        padding: 1rem;
+    }
+    
+    .bot-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 1.25rem;
+    }
+    
+    .chat-header h2 {
+        font-size: 1.125rem;
+    }
+    
+    .section h3 {
+        font-size: 1.25rem;
+    }
+    
+    .language-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .games-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .final-score {
+        font-size: 3rem;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+    
+    #main {
+        padding: 1rem 0;
+    }
+    
+    .hero-banner {
+        padding: 1.5rem;
+    }
+    
+    .hero-text h2 {
+        font-size: 1.25rem;
+    }
+    
+    .logo-section h1 {
+        font-size: 1.25rem;
+    }
+    
+    .nav-tab {
+        padding: 0.875rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .card-word {
+        font-size: 2rem;
+    }
+    
+    .card-translation {
+        font-size: 1.5rem;
+    }
+    
+    .flashcard {
+        padding: 1.5rem;
+        min-height: 300px;
+    }
+    
+    .quiz-start, .quiz-result {
+        padding: 2rem;
+    }
+    
+    .quiz-start h2, .quiz-result h2 {
+        font-size: 1.5rem;
+    }
+    
+    #question-text {
+        font-size: 1.125rem;
+    }
+    
+    .option-btn {
+        padding: 1rem;
+    }
+    
+    .game-word {
+        font-size: 1.75rem;
+    }
+    
+    .game-word-display {
+        padding: 2rem;
+    }
+    
+    .chat-input-container {
+        padding: 1rem;
+    }
+    
+    #chat-input {
+        font-size: 0.875rem;
+        padding: 0.75rem 1rem;
+    }
+    
+    .btn-send {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #9333ea 0%, #db2777 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.shadow-lg {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.shadow-xl {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* ========================================
+   LOADING ANIMATIONS
+   ======================================== */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    border: 3px solid #f3f4f6;
+    border-top: 3px solid #9333ea;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+@media print {
+    header, nav, footer, .hero-banner, .nav-tabs {
+        display: none;
+    }
+    
+    .tab-content {
+        display: block !important;
+    }
+    
+    body {
+        background: white;
+    }
+}
+
+/* ========================================
+   DARK MODE SUPPORT (Optional)
+   ======================================== */
+@media (prefers-color-scheme: dark) {
+    /* Dark mode styles can be added here if needed */
 }
