@@ -706,45 +706,18 @@ const quizData = {
 };
 
 
+// Games Data
 const games = [
-    { 
-        id: 'speed-typing', 
-        name: 'Speed Typing', 
-        color: 'linear-gradient(to right, #eab308, #f97316)',
-        description: 'Ketik kata secepat mungkin!',
-        maxTime: 60
-    },
-    { 
-        id: 'word-match', 
-        name: 'Word Match', 
-        color: 'linear-gradient(to right, #3b82f6, #06b6d4)',
-        description: 'Cocokkan kata dengan artinya!',
-        maxTime: 90
-    },
-    { 
-        id: 'guess-word', 
-        name: 'Guess the Word', 
-        color: 'linear-gradient(to right, #9333ea, #ec4899)',
-        description: 'Tebak kata dari terjemahannya!',
-        maxTime: 120
-    },
-    { 
-        id: 'reverse-translate', 
-        name: 'Reverse Translate', 
-        color: 'linear-gradient(to right, #22c55e, #14b8a6)',
-        description: 'Terjemahkan Indonesia ke bahasa asing!',
-        maxTime: 90
-    },
-    { 
-        id: 'rapid-fire', 
-        name: 'Rapid Fire', 
-        color: 'linear-gradient(to right, #ef4444, #ec4899)',
-        description: 'Jawab cepat sebanyak mungkin!',
-        maxTime: 45
-    }
+    { id: 'speed-typing', name: 'Speed Typing', color: 'linear-gradient(to right, #eab308, #f97316)', description: 'Ketik kata secepat mungkin!', maxTime: 60 },
+    { id: 'word-match', name: 'Word Match', color: 'linear-gradient(to right, #3b82f6, #06b6d4)', description: 'Cocokkan kata dengan artinya!', maxTime: 90 },
+    { id: 'guess-word', name: 'Guess the Word', color: 'linear-gradient(to right, #9333ea, #ec4899)', description: 'Tebak kata dari terjemahannya!', maxTime: 120 },
+    { id: 'reverse-translate', name: 'Reverse Translate', color: 'linear-gradient(to right, #22c55e, #14b8a6)', description: 'Terjemahkan Indonesia ke bahasa asing!', maxTime: 90 },
+    { id: 'rapid-fire', name: 'Rapid Fire', color: 'linear-gradient(to right, #ef4444, #ec4899)', description: 'Jawab cepat sebanyak mungkin!', maxTime: 45 }
 ];
 
-// Initialize
+// ========================================
+// INITIALIZATION
+// ========================================
 document.addEventListener('DOMContentLoaded', () => {
     initializeApp();
 });
@@ -754,7 +727,7 @@ function initializeApp() {
     renderGamesGrid();
     setupEventListeners();
     updateFlashcard();
-    renderChatMessages();
+    initializeChat();
 }
 
 function setupEventListeners() {
@@ -766,19 +739,28 @@ function setupEventListeners() {
     });
     
     // Logo upload
-    document.getElementById('logo').addEventListener('click', () => {
-        document.getElementById('logo-upload').click();
-    });
+    const logo = document.getElementById('logo');
+    const logoUpload = document.getElementById('logo-upload');
     
-    document.getElementById('logo-upload').addEventListener('change', handleLogoUpload);
+    if (logo && logoUpload) {
+        logo.addEventListener('click', () => {
+            logoUpload.click();
+        });
+        
+        logoUpload.addEventListener('change', handleLogoUpload);
+    }
     
     // Flashcard
-    document.getElementById('flashcard').addEventListener('click', flipCard);
+    const flashcard = document.getElementById('flashcard');
+    if (flashcard) {
+        flashcard.addEventListener('click', flipCard);
+    }
 }
 
+// ========================================
+// NAVIGATION
+// ========================================
 function switchTab(tabName) {
-    state.activeTab = tabName;
-    
     // Update nav tabs
     document.querySelectorAll('.nav-tab').forEach(tab => {
         tab.classList.toggle('active', tab.dataset.tab === tabName);
@@ -788,9 +770,16 @@ function switchTab(tabName) {
     document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
     });
-    document.getElementById(`${tabName}-tab`).classList.add('active');
+    
+    const targetTab = document.getElementById(`${tabName}-tab`);
+    if (targetTab) {
+        targetTab.classList.add('active');
+    }
 }
 
+// ========================================
+// LOGO UPLOAD
+// ========================================
 function handleLogoUpload(e) {
     const file = e.target.files[0];
     if (file && file.type.startsWith('image/')) {
@@ -802,6 +791,9 @@ function handleLogoUpload(e) {
     }
 }
 
+// ========================================
+// SCORE MANAGEMENT
+// ========================================
 function updateScore(points) {
     state.score += points;
     document.getElementById('score').textContent = state.score;
@@ -812,9 +804,13 @@ function updateStreak() {
     document.getElementById('streak').textContent = state.streak;
 }
 
-// Language Grid
+// ========================================
+// LANGUAGE SELECTION
+// ========================================
 function renderLanguageGrid() {
     const grid = document.getElementById('language-grid');
+    if (!grid) return;
+    
     grid.innerHTML = languages.map(lang => `
         <div class="language-card ${lang.id === state.selectedLanguage ? 'active' : ''}" 
              onclick="selectLanguage('${lang.id}')">
@@ -832,22 +828,39 @@ function selectLanguage(langId) {
     updateFlashcard();
 }
 
-// Flashcard
+// ========================================
+// FLASHCARD FUNCTIONS
+// ========================================
 function updateFlashcard() {
-    const cards = flashcardData[state.selectedLanguage]?.[state.flashcardLevel];
-    if (!cards) return;
+    const cards = vocabulary[state.selectedLanguage]?.[state.flashcardLevel];
+    if (!cards || cards.length === 0) return;
     
     const card = cards[state.currentCard];
-    document.querySelector('.card-word').textContent = card.word;
-    document.querySelector('.card-translation').textContent = card.translation;
-    document.querySelector('.card-pronunciation').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-        ${card.pronunciation}
-    `;
-    document.querySelector('.card-example').textContent = card.example;
     
-    document.getElementById('card-progress').textContent = `Kartu ${state.currentCard + 1} dari ${cards.length}`;
-    document.getElementById('learned-btn-text').textContent = `Sudah Paham (+${state.flashcardLevel * 10}pts)`;
+    const cardWord = document.querySelector('.card-word');
+    const cardTranslation = document.querySelector('.card-translation');
+    const cardPronunciation = document.querySelector('.card-pronunciation');
+    const cardExample = document.querySelector('.card-example');
+    
+    if (cardWord) cardWord.textContent = card.word;
+    if (cardTranslation) cardTranslation.textContent = card.translation;
+    if (cardPronunciation) {
+        cardPronunciation.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            ${card.pronunciation}
+        `;
+    }
+    if (cardExample) cardExample.textContent = card.example;
+    
+    const cardProgress = document.getElementById('card-progress');
+    if (cardProgress) {
+        cardProgress.textContent = `Kartu ${state.currentCard + 1} dari ${cards.length}`;
+    }
+    
+    const learnedBtn = document.getElementById('learned-btn-text');
+    if (learnedBtn) {
+        learnedBtn.textContent = `Sudah Paham (+${state.flashcardLevel * 10}pts)`;
+    }
     
     updateLevelBadge('flashcard-level-badge', state.flashcardLevel);
     updateProgress();
@@ -855,16 +868,30 @@ function updateFlashcard() {
 
 function flipCard() {
     state.isFlipped = !state.isFlipped;
-    document.getElementById('card-front').style.display = state.isFlipped ? 'none' : 'block';
-    document.getElementById('card-back').style.display = state.isFlipped ? 'block' : 'none';
+    const cardFront = document.getElementById('card-front');
+    const cardBack = document.getElementById('card-back');
+    
+    if (cardFront && cardBack) {
+        cardFront.style.display = state.isFlipped ? 'none' : 'block';
+        cardBack.style.display = state.isFlipped ? 'block' : 'none';
+    }
 }
 
 function nextCard() {
-    const cards = flashcardData[state.selectedLanguage]?.[state.flashcardLevel];
+    const cards = vocabulary[state.selectedLanguage]?.[state.flashcardLevel];
+    if (!cards) return;
+    
     state.isFlipped = false;
     state.currentCard = (state.currentCard + 1) % cards.length;
-    document.getElementById('card-front').style.display = 'block';
-    document.getElementById('card-back').style.display = 'none';
+    
+    const cardFront = document.getElementById('card-front');
+    const cardBack = document.getElementById('card-back');
+    
+    if (cardFront && cardBack) {
+        cardFront.style.display = 'block';
+        cardBack.style.display = 'none';
+    }
+    
     updateFlashcard();
 }
 
@@ -874,10 +901,10 @@ function markAsLearned() {
         updateScore(state.flashcardLevel * 10);
         updateStreak();
         
-        const cards = flashcardData[state.selectedLanguage]?.[state.flashcardLevel];
-        if (state.learnedCards.length >= cards.length && state.flashcardLevel < 3) {
+        const cards = vocabulary[state.selectedLanguage]?.[state.flashcardLevel];
+        if (cards && state.learnedCards.length >= cards.length && state.flashcardLevel < 3) {
             setTimeout(() => {
-                alert(`Selamat! Anda naik ke Level ${state.flashcardLevel + 1}! 🎉`);
+                alert(`🎉 Selamat! Anda naik ke Level ${state.flashcardLevel + 1}! 🎉`);
                 state.flashcardLevel++;
                 state.learnedCards = [];
                 state.currentCard = 0;
@@ -889,64 +916,95 @@ function markAsLearned() {
 }
 
 function updateProgress() {
-    const cards = flashcardData[state.selectedLanguage]?.[state.flashcardLevel];
+    const cards = vocabulary[state.selectedLanguage]?.[state.flashcardLevel];
+    if (!cards) return;
+    
     const progress = (state.learnedCards.length / cards.length) * 100;
     
-    document.getElementById('progress-level').textContent = state.flashcardLevel;
-    document.getElementById('learned-count').textContent = state.learnedCards.length;
-    document.getElementById('total-cards').textContent = cards.length;
-    document.getElementById('progress-fill').style.width = `${progress}%`;
+    const progressLevel = document.getElementById('progress-level');
+    const learnedCount = document.getElementById('learned-count');
+    const totalCards = document.getElementById('total-cards');
+    const progressFill = document.getElementById('progress-fill');
+    
+    if (progressLevel) progressLevel.textContent = state.flashcardLevel;
+    if (learnedCount) learnedCount.textContent = state.learnedCards.length;
+    if (totalCards) totalCards.textContent = cards.length;
+    if (progressFill) progressFill.style.width = `${progress}%`;
 }
 
 function updateLevelBadge(elementId, level) {
     const element = document.getElementById(elementId);
+    if (!element) return;
+    
     const names = { 1: 'Beginner', 2: 'Intermediate', 3: 'Advanced' };
     element.textContent = `Level ${level} - ${names[level]}`;
     element.className = `level-badge level-${level}`;
 }
 
-// Quiz
+// ========================================
+// QUIZ FUNCTIONS
+// ========================================
 function startQuiz() {
-    state.quizStarted = true;
     state.currentQuestion = 0;
     state.quizScore = 0;
-    state.showResult = false;
     state.selectedAnswer = null;
     
-    document.getElementById('quiz-start').style.display = 'none';
-    document.getElementById('quiz-question').style.display = 'block';
+    const quizStart = document.getElementById('quiz-start');
+    const quizQuestion = document.getElementById('quiz-question');
+    
+    if (quizStart) quizStart.style.display = 'none';
+    if (quizQuestion) quizQuestion.style.display = 'block';
     
     renderQuestion();
 }
 
 function renderQuestion() {
-    const questions = quizData[state.selectedLanguage]?.[state.quizLevel];
-    const question = questions[state.currentQuestion];
-    const progress = ((state.currentQuestion + 1) / questions.length) * 100;
+    const questions = vocabulary[state.selectedLanguage]?.[state.quizLevel];
+    if (!questions || questions.length === 0) return;
     
-    document.getElementById('question-number').textContent = 
-        `Pertanyaan ${state.currentQuestion + 1} / ${questions.length}`;
-    document.getElementById('quiz-score').textContent = state.quizScore;
-    document.getElementById('question-text').textContent = question.question;
+    // Generate quiz question
+    const allCards = questions;
+    const correctCard = allCards[Math.floor(Math.random() * allCards.length)];
     
-    // Update progress bar
-    const quizHeader = document.querySelector('.quiz-header');
-    quizHeader.style.setProperty('--progress-width', `${progress}%`);
+    // Get wrong options
+    const wrongOptions = allCards
+        .filter(c => c.translation !== correctCard.translation)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3)
+        .map(c => c.translation);
+    
+    const options = [correctCard.translation, ...wrongOptions].sort(() => 0.5 - Math.random());
+    
+    // Store correct answer
+    state.currentQuizQuestion = {
+        word: correctCard.word,
+        correct: options.indexOf(correctCard.translation),
+        options: options
+    };
+    
+    const questionNumber = document.getElementById('question-number');
+    const quizScore = document.getElementById('quiz-score');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    
+    if (questionNumber) questionNumber.textContent = `Pertanyaan ${state.currentQuestion + 1} / 4`;
+    if (quizScore) quizScore.textContent = state.quizScore;
+    if (questionText) questionText.textContent = `Apa arti dari "${correctCard.word}"?`;
+    
+    if (optionsContainer) {
+        optionsContainer.innerHTML = options.map((option, index) => `
+            <button class="option-btn" onclick="selectAnswer(${index})">${option}</button>
+        `).join('');
+    }
     
     updateLevelBadge('quiz-level-badge-game', state.quizLevel);
-    
-    const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = question.options.map((option, index) => `
-        <button class="option-btn" onclick="selectAnswer(${index})">${option}</button>
-    `).join('');
 }
 
 function selectAnswer(index) {
     if (state.selectedAnswer !== null) return;
     
     state.selectedAnswer = index;
-    const questions = quizData[state.selectedLanguage]?.[state.quizLevel];
-    const question = questions[state.currentQuestion];
+    const question = state.currentQuizQuestion;
     const isCorrect = question.correct === index;
     
     const buttons = document.querySelectorAll('.option-btn');
@@ -954,36 +1012,32 @@ function selectAnswer(index) {
         btn.disabled = true;
         if (i === question.correct) {
             btn.classList.add('correct');
-            if (isCorrect) {
-                // Efek partisipal untuk jawaban benar
-                btn.innerHTML += ' ✨';
-            }
         } else if (i === index && !isCorrect) {
             btn.classList.add('wrong');
-            btn.innerHTML += ' ❌';
         }
     });
     
     if (isCorrect) {
         state.quizScore++;
         updateScore(state.quizLevel * 20);
-        // Efek suara atau animasi bisa ditambahkan di sini
-        setTimeout(() => {
-            document.getElementById('quiz-score').textContent = state.quizScore;
-        }, 200);
+        const quizScoreEl = document.getElementById('quiz-score');
+        if (quizScoreEl) {
+            setTimeout(() => {
+                quizScoreEl.textContent = state.quizScore;
+            }, 200);
+        }
     }
     
-    document.getElementById('quiz-score').textContent = state.quizScore;
-    document.getElementById('next-question-btn').style.display = 'block';
+    const nextBtn = document.getElementById('next-question-btn');
+    if (nextBtn) nextBtn.style.display = 'block';
 }
 
 function nextQuestion() {
-    const questions = quizData[state.selectedLanguage]?.[state.quizLevel];
-    
-    if (state.currentQuestion < questions.length - 1) {
+    if (state.currentQuestion < 3) {
         state.currentQuestion++;
         state.selectedAnswer = null;
-        document.getElementById('next-question-btn').style.display = 'none';
+        const nextBtn = document.getElementById('next-question-btn');
+        if (nextBtn) nextBtn.style.display = 'none';
         renderQuestion();
     } else {
         showQuizResult();
@@ -991,64 +1045,63 @@ function nextQuestion() {
 }
 
 function showQuizResult() {
-    const questions = quizData[state.selectedLanguage]?.[state.quizLevel];
-    const percentage = (state.quizScore / questions.length) * 100;
+    const quizQuestion = document.getElementById('quiz-question');
+    const quizResult = document.getElementById('quiz-result');
     
-    document.getElementById('quiz-question').style.display = 'none';
-    document.getElementById('quiz-result').style.display = 'block';
+    if (quizQuestion) quizQuestion.style.display = 'none';
+    if (quizResult) quizResult.style.display = 'block';
     
-    document.getElementById('final-score').textContent = 
-        `${state.quizScore} / ${questions.length}`;
+    const finalScore = document.getElementById('final-score');
+    const resultMessage = document.getElementById('result-message');
     
+    if (finalScore) finalScore.textContent = `${state.quizScore} / 4`;
+    
+    const percentage = (state.quizScore / 4) * 100;
     let message = '';
     let shouldLevelUp = false;
     
     if (percentage === 100) {
         message = '🎉 SEMPURNA! Anda Master Level Ini! 🏆';
         shouldLevelUp = true;
-    } else if (percentage >= 80) {
+    } else if (percentage >= 75) {
         message = '⭐ LUAR BIASA! Anda Menguasai Materi! 🚀';
         shouldLevelUp = true;
-    } else if (percentage >= 60) {
-        message = '👍 BAGUS! Sudah Cukup Baik! 💪';
-        shouldLevelUp = true;
-    } else if (percentage >= 40) {
-        message = '📚 TERUS BELAJAR! Hampir Sampai! 🔥';
+    } else if (percentage >= 50) {
+        message = '👍 BAGUS! Terus Berlatih! 💪';
     } else {
         message = '💪 JANGAN MENYERAH! Coba Lagi! 🌟';
     }
     
-    document.getElementById('result-message').textContent = message;
+    if (resultMessage) resultMessage.textContent = message;
     
-    // Auto level up jika score >= 60% dan masih ada level berikutnya
     if (shouldLevelUp && state.quizLevel < 3) {
         setTimeout(() => {
             state.quizLevel++;
-            const confetti = `
-                🎊 SELAMAT! NAIK KE LEVEL ${state.quizLevel}! 🎊
-                
-                ${state.quizLevel === 2 ? '🌟 Kini Anda Intermediate!' : '🏆 Kini Anda Advanced!'}
-                
-                Siap tantangan yang lebih seru?
-            `;
-            alert(confetti);
+            alert(`🎊 SELAMAT! NAIK KE LEVEL ${state.quizLevel}! 🎊`);
         }, 1000);
     }
 }
 
 function resetQuiz() {
-    state.quizStarted = false;
-    state.showResult = false;
+    const quizResult = document.getElementById('quiz-result');
+    const quizStart = document.getElementById('quiz-start');
     
-    document.getElementById('quiz-result').style.display = 'none';
-    document.getElementById('quiz-start').style.display = 'block';
-    document.getElementById('quiz-start-level').textContent = state.quizLevel;
+    if (quizResult) quizResult.style.display = 'none';
+    if (quizStart) quizStart.style.display = 'block';
+    
+    const quizStartLevel = document.getElementById('quiz-start-level');
+    if (quizStartLevel) quizStartLevel.textContent = state.quizLevel;
+    
     updateLevelBadge('quiz-level-badge', state.quizLevel);
 }
 
-// Games
+// ========================================
+// GAMES FUNCTIONS
+// ========================================
 function renderGamesGrid() {
     const grid = document.getElementById('games-grid');
+    if (!grid) return;
+    
     grid.innerHTML = games.map(game => `
         <div class="game-card" onclick="startGame('${game.id}')">
             <div class="game-icon" style="background: ${game.color}">
@@ -1079,16 +1132,20 @@ function getGameIcon(gameId) {
 
 function startGame(gameId) {
     state.selectedGame = gameId;
-    state.gameStarted = true;
     const game = games.find(g => g.id === gameId);
+    if (!game) return;
+    
     state.gameTime = game.maxTime;
     state.gameScore = 0;
-    state.userInput = '';
     state.lives = 3;
     
-    document.getElementById('game-selection').style.display = 'none';
-    document.getElementById('game-play').style.display = 'block';
-    document.getElementById('game-title').textContent = game.name;
+    const gameSelection = document.getElementById('game-selection');
+    const gamePlay = document.getElementById('game-play');
+    const gameTitle = document.getElementById('game-title');
+    
+    if (gameSelection) gameSelection.style.display = 'none';
+    if (gamePlay) gamePlay.style.display = 'block';
+    if (gameTitle) gameTitle.textContent = game.name;
     
     updateGameStats();
     startGameTimer();
@@ -1100,7 +1157,8 @@ function startGameTimer() {
     
     state.gameTimer = setInterval(() => {
         state.gameTime--;
-        document.getElementById('game-time').textContent = `${state.gameTime}s`;
+        const gameTimeEl = document.getElementById('game-time');
+        if (gameTimeEl) gameTimeEl.textContent = `${state.gameTime}s`;
         
         if (state.gameTime <= 0) {
             endGame();
@@ -1109,21 +1167,28 @@ function startGameTimer() {
 }
 
 function updateGameStats() {
-    document.getElementById('game-time').textContent = `${state.gameTime}s`;
-    document.getElementById('game-score-display').textContent = state.gameScore;
+    const gameTime = document.getElementById('game-time');
+    const gameScoreDisplay = document.getElementById('game-score-display');
+    const gameLives = document.getElementById('game-lives');
     
-    const livesContainer = document.getElementById('game-lives');
-    livesContainer.innerHTML = Array(state.lives).fill('').map(() => `
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-    `).join('');
+    if (gameTime) gameTime.textContent = `${state.gameTime}s`;
+    if (gameScoreDisplay) gameScoreDisplay.textContent = state.gameScore;
+    
+    if (gameLives) {
+        gameLives.innerHTML = Array(state.lives).fill('').map(() => `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        `).join('');
+    }
 }
 
 function renderGameContent() {
     const content = document.getElementById('game-content');
+    if (!content) return;
     
     if (state.selectedGame === 'speed-typing') {
-        const cards = flashcardData[state.selectedLanguage]?.[state.gameLevel] || 
-                     flashcardData[state.selectedLanguage]?.[1];
+        const cards = vocabulary[state.selectedLanguage]?.[state.gameLevel] || vocabulary[state.selectedLanguage]?.[1];
+        if (!cards) return;
+        
         const randomCard = cards[Math.floor(Math.random() * cards.length)];
         state.currentWord = randomCard.word;
         
@@ -1136,17 +1201,21 @@ function renderGameContent() {
             <button class="btn btn-primary" style="width: 100%;" onclick="checkWord()">Cek Jawaban</button>
         `;
         
-        document.getElementById('game-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') checkWord();
-        });
+        const gameInput = document.getElementById('game-input');
+        if (gameInput) {
+            gameInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') checkWord();
+            });
+        }
     } else {
         generateGameQuestion();
     }
 }
 
 function generateGameQuestion() {
-    const cards = flashcardData[state.selectedLanguage]?.[state.gameLevel] || 
-                 flashcardData[state.selectedLanguage]?.[1];
+    const cards = vocabulary[state.selectedLanguage]?.[state.gameLevel] || vocabulary[state.selectedLanguage]?.[1];
+    if (!cards) return;
+    
     const randomCard = cards[Math.floor(Math.random() * cards.length)];
     
     if (state.selectedGame === 'reverse-translate') {
@@ -1174,6 +1243,8 @@ function generateGameQuestion() {
     }
     
     const content = document.getElementById('game-content');
+    if (!content) return;
+    
     content.innerHTML = `
         <div class="game-word-display" style="background: linear-gradient(to right, #ddd6fe, #fbcfe8);">
             <p>${state.selectedGame === 'reverse-translate' ? 'Pilih terjemahan dalam bahasa asing:' : 'Pilih terjemahan yang benar:'}</p>
@@ -1181,7 +1252,9 @@ function generateGameQuestion() {
         </div>
         <div class="game-options">
             ${state.gameOptions.map(option => `
-                <button class="game-option-btn" onclick="checkGameAnswer('${option}')">${option}</button>
+                <button class="game-option-btn" onclick="checkGameAnswer('${option.replace(/'/g, "\\'")}')">
+                    ${option}
+                </button>
             `).join('')}
         </div>
     `;
@@ -1189,6 +1262,8 @@ function generateGameQuestion() {
 
 function checkWord() {
     const input = document.getElementById('game-input');
+    if (!input) return;
+    
     const userAnswer = input.value.toLowerCase().trim();
     const correctAnswer = state.currentWord.toLowerCase().trim();
     
@@ -1227,9 +1302,8 @@ function checkGameAnswer(answer) {
 
 function endGame() {
     if (state.gameTimer) clearInterval(state.gameTimer);
-    state.gameStarted = false;
     
-    const requiredScore = 7; // Perlu 7 dari 10 untuk naik level
+    const requiredScore = 7;
     let message = `🎮 GAME SELESAI! 🎮\n\nSkor Anda: ${state.gameScore}\n\n`;
     
     if (state.gameScore >= requiredScore && state.gameLevel < 3) {
@@ -1251,25 +1325,48 @@ function endGame() {
 function backToGameSelection() {
     if (state.gameTimer) clearInterval(state.gameTimer);
     state.selectedGame = null;
-    state.gameStarted = false;
     
-    document.getElementById('game-play').style.display = 'none';
-    document.getElementById('game-selection').style.display = 'block';
+    const gamePlay = document.getElementById('game-play');
+    const gameSelection = document.getElementById('game-selection');
+    
+    if (gamePlay) gamePlay.style.display = 'none';
+    if (gameSelection) gameSelection.style.display = 'block';
+    
     updateLevelBadge('game-level-badge', state.gameLevel);
 }
 
-// Chat
+// ========================================
+// CHAT FUNCTIONS
+// ========================================
+function initializeChat() {
+    state.messages = [
+        { role: 'bot', text: 'Halo! Saya asisten belajar bahasa Anda. Tanyakan apa saja tentang bahasa, kosakata, atau cara membaca kata! 👋' }
+    ];
+    renderChatMessages();
+}
+
 function renderChatMessages() {
     const container = document.getElementById('chat-messages');
-    container.innerHTML = state.messages.map(msg => `
+    if (!container) return;
+    
+    const welcomeMsg = container.querySelector('.welcome-message');
+    if (state.messages.length > 1 && welcomeMsg) {
+        welcomeMsg.style.display = 'none';
+    }
+    
+    const messagesHTML = state.messages.map(msg => `
         <div class="message ${msg.role}">
             <div class="message-content">${msg.text}</div>
         </div>
     `).join('');
     
+    if (welcomeMsg) {
+        welcomeMsg.insertAdjacentHTML('afterend', messagesHTML);
+    }
+    
     if (state.isTyping) {
         container.innerHTML += `
-            <div class="message bot">
+            <div class="message bot typing-message">
                 <div class="message-content">
                     <div class="typing-indicator">
                         <div class="typing-dot"></div>
@@ -1286,8 +1383,9 @@ function renderChatMessages() {
 
 function sendMessage() {
     const input = document.getElementById('chat-input');
-    const message = input.value.trim();
+    if (!input) return;
     
+    const message = input.value.trim();
     if (!message) return;
     
     state.messages.push({ role: 'user', text: message });
@@ -1313,8 +1411,6 @@ function generateBotResponse(userMessage) {
             return 'Kata "hello" dibaca: hə-ˈlō (he-LO) dengan penekanan pada suku kata kedua. 🔊';
         } else if (lowerMessage.includes('beautiful')) {
             return 'Kata "beautiful" dibaca: ˈbjuː.tɪ.fəl (BYOO-ti-ful) dengan 3 suku kata. 🔊';
-        } else if (lowerMessage.includes('こんにちは')) {
-            return '"こんにちは" dibaca: kon-ni-chi-wa. Sapaan formal dalam bahasa Jepang. 🔊';
         } else {
             return 'Untuk mengetahui cara membaca, tanyakan: "Bagaimana cara membaca [kata]?" 😊';
         }
@@ -1328,21 +1424,58 @@ function generateBotResponse(userMessage) {
         } else {
             return 'Tanyakan: "Apa arti [kata]?" dan saya akan jelaskan! 📚';
         }
-    } else if (lowerMessage.includes('tips') || lowerMessage.includes('cara belajar')) {
-        return 'Tips: 1) Konsisten 15-30 menit/hari, 2) Praktik dengan native speaker, 3) Tonton film dengan subtitle, 4) Gunakan flashcard, 5) Jangan takut salah! 💪';
+    } else if (lowerMessage.includes('tips') || lowerMessage.includes('cara belajar') || lowerMessage.includes('menghafal')) {
+        return 'Tips belajar bahasa: 1) Konsisten 15-30 menit/hari, 2) Praktik dengan native speaker, 3) Tonton film dengan subtitle, 4) Gunakan flashcard, 5) Jangan takut salah! 💪';
     } else if (lowerMessage.includes('level')) {
-        return `Anda di Level ${state.userLevel}! Terus berlatih untuk naik level. Keep going! 🎯`;
-    } else if (lowerMessage.includes('halo') || lowerMessage.includes('hi')) {
-        return 'Halo! Senang berbincang! Apa yang ingin dipelajari hari ini? 😊';
-    } else if (lowerMessage.includes('terima kasih') || lowerMessage.includes('thanks')) {
-        return 'Sama-sama! Senang membantu. Tanya lagi kapan saja! 🌟';
+        return `Anda sedang belajar dengan baik! Terus berlatih untuk naik level. Keep going! 🎯`;
+    } else if (lowerMessage.includes('halo') || lowerMessage.includes('hi') || lowerMessage.includes('hai')) {
+        return 'Halo! Senang berbincang dengan Anda! Apa yang ingin dipelajari hari ini? 😊';
+    } else if (lowerMessage.includes('terima kasih') || lowerMessage.includes('thanks') || lowerMessage.includes('makasih')) {
+        return 'Sama-sama! Senang bisa membantu. Tanya lagi kapan saja! 🌟';
+    } else if (lowerMessage.includes('grammar') || lowerMessage.includes('tata bahasa')) {
+        return 'Grammar penting untuk struktur kalimat yang benar. Mau belajar tentang tenses, word order, atau parts of speech? 📖';
     } else {
         const responses = [
             'Pertanyaan menarik! Tanyakan lebih spesifik: "Apa arti X?" atau "Bagaimana cara membaca Y?" 🤔',
             'Saya siap membantu! Tanyakan arti kata, cara baca, tips belajar, atau grammar. 📖',
             'Bagus! Terus semangat! Jika ada yang sulit, jangan ragu bertanya! 💡',
-            'Excellent! Belajar bahasa itu journey menyenangkan. Keep practicing! 🚀'
+            'Excellent! Belajar bahasa itu journey yang menyenangkan. Keep practicing! 🚀'
         ];
         return responses[Math.floor(Math.random() * responses.length)];
     }
 }
+
+function askQuickQuestion(question) {
+    const input = document.getElementById('chat-input');
+    if (input) {
+        input.value = question;
+        sendMessage();
+    }
+}
+
+function clearChat() {
+    if (confirm('Hapus semua percakapan?')) {
+        state.messages = [];
+        initializeChat();
+    }
+}
+
+// ========================================
+// MAKE FUNCTIONS GLOBAL
+// ========================================
+window.switchTab = switchTab;
+window.selectLanguage = selectLanguage;
+window.flipCard = flipCard;
+window.nextCard = nextCard;
+window.markAsLearned = markAsLearned;
+window.startQuiz = startQuiz;
+window.selectAnswer = selectAnswer;
+window.nextQuestion = nextQuestion;
+window.resetQuiz = resetQuiz;
+window.startGame = startGame;
+window.checkWord = checkWord;
+window.checkGameAnswer = checkGameAnswer;
+window.backToGameSelection = backToGameSelection;
+window.sendMessage = sendMessage;
+window.askQuickQuestion = askQuickQuestion;
+window.clearChat = clearChat;
