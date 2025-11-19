@@ -1,5 +1,4 @@
-// State
-let state = {
+const state = {
     selectedLanguage: 'english',
     score: 0,
     streak: 0,
@@ -15,10 +14,15 @@ let state = {
     gameScore: 0,
     gameTime: 0,
     lives: 3,
-    messages: [
-        { role: 'bot', text: 'Halo! Saya asisten belajar bahasa Anda. Tanyakan apa saja tentang bahasa, kosakata, atau cara membaca kata! 👋' }
-    ]
+    isTyping: false,
+    messages: [],
+    gameTimer: null,
+    currentQuizQuestion: null,
+    currentWord: '',
+    correctAnswer: '',
+    gameOptions: []
 };
+
 
 // Data
 const languages = [
