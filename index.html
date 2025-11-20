@@ -56,10 +56,6 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"></line><line x1="8" y1="9" x2="8" y2="13"></line><line x1="15" y1="12" x2="15.01" y2="12"></line><line x1="18" y1="10" x2="18.01" y2="10"></line><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"></path></svg>
                     Game
                 </button>
-                <button class="nav-tab" data-tab="chat">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                    Chat
-                </button>
             </div>
         </div>
     </nav>
@@ -96,10 +92,10 @@
                             <h4>5 Game Seru</h4>
                             <p>Belajar sambil bermain dengan game interaktif</p>
                         </div>
-                        <div class="feature-card" onclick="switchTab('chat')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                            <h4>Chatbot Pintar</h4>
-                            <p>Tanya jawab dan latihan percakapan real-time</p>
+                        <div class="feature-card" onclick="switchTab('quiz')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                            <h4>Kuis Multi-Level</h4>
+                            <p>Uji kemampuan dengan soal-soal menarik</p>
                         </div>
                     </div>
                 </div>
@@ -221,31 +217,12 @@
                     <div id="game-content"></div>
                 </div>
             </div>
-
-            <div id="chat-tab" class="tab-content">
-                <div class="chat-container">
-                    <div class="chat-header">
-                        <h2>Chatbot Pintar</h2>
-                        <p>Tanya jawab tentang bahasa dan latih percakapan</p>
-                    </div>
-                    <div id="chat-messages" class="chat-messages"></div>
-                    <div class="chat-input-container">
-                        <input 
-                            id="chat-input" 
-                            type="text" 
-                            placeholder="Tanyakan tentang bahasa, kosakata, atau cara membaca..."
-                            onkeypress="if(event.key === 'Enter') sendMessage()"
-                        >
-                        <button class="btn btn-primary" onclick="sendMessage()">Kirim</button>
-                    </div>
-                </div>
-            </div>
         </div>
     </main>
 
     <footer>
         <div class="container">
-            <p class="footer-brand">LangLearn.id</p>
+            <p class="footer-brand">Sinaubasa</p>
             <p>Belajar Bahasa Jadi Menyenangkan dan Interaktif</p>
             <p class="footer-copyright">© 2025 LangLearn.id - Platform Pembelajaran Bahasa</p>
         </div>
